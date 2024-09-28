@@ -1,0 +1,5 @@
+const navigation = [
+  {
+    title: "Explore",
+  },
+];

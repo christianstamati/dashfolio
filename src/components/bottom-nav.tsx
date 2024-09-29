@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { NavData } from "@/lib/types";
 import TextIcon from "@/components/text-icon";
 
-function NavItemList(props: { navItems: NavData[]; pathname?: string }) {
+function NavLinks(props: { navItems: NavData[]; pathname?: string }) {
   return (
     <>
       {props.navItems.map((item, index) => (
@@ -44,18 +44,19 @@ function BottomNav() {
   const [viewMore, setViewMore] = useState(false);
   const mobileItems = useMemo(() => navigation.slice(0, 4), []);
   const moreItems = useMemo(() => navigation.slice(4), []);
-  const pathname = usePathname(); // Hook to get the current path
+  const pathname = usePathname();
   return (
-    <div className="fixed bottom-0 left-0 right-0">
+    <div className="fixed bottom-0 left-0 right-0 lg:hidden">
       <div className="z-50 flex justify-center bg-background">
         {/*Mobile navigation*/}
         <nav className="grid grid-cols-5 gap-4 py-2 md:hidden">
-          <NavItemList navItems={mobileItems} pathname={pathname} />
+          <NavLinks navItems={mobileItems} pathname={pathname} />
           <MoreButton viewMore={viewMore} setViewMore={setViewMore} />
         </nav>
+
         {/*Tablet navigation*/}
         <nav className="hidden gap-8 py-2 md:flex">
-          <NavItemList navItems={navigation} pathname={pathname} />
+          <NavLinks navItems={navigation} pathname={pathname} />
         </nav>
       </div>
 
@@ -63,7 +64,7 @@ function BottomNav() {
       <nav
         className={` ${viewMore ? "block" : "hidden"} absolute -top-3 left-1/2 flex -translate-x-1/2 -translate-y-full gap-2 rounded-md bg-background p-1.5 md:hidden`}
       >
-        <NavItemList navItems={moreItems} pathname={pathname} />
+        <NavLinks navItems={moreItems} pathname={pathname} />
       </nav>
 
       {/*Overlay*/}

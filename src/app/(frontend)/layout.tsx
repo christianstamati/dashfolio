@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { geistMono, geistSans } from "@/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
+import BottomNav from "@/components/bottom-nav";
 
 export const metadata: Metadata = {
   title:
@@ -30,6 +31,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <BottomNav />
         </ThemeProvider>
       </body>
     </html>

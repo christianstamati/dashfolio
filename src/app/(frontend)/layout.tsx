@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { geistMono, geistSans } from "@/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 import BottomNav from "@/components/bottom-nav";
+import SideNav from "@/components/side-nav";
 
 export const metadata: Metadata = {
   title:
@@ -22,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex h-svh antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -30,7 +31,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SideNav />
+          <div className="h-full w-full overflow-auto">{children}</div>
           <BottomNav />
         </ThemeProvider>
       </body>

@@ -6,6 +6,8 @@ import { Ellipsis, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { NavData } from "@/lib/types";
 import TextIcon from "@/components/text-icon";
+import Overlay from "@/components/overlay";
+import { motion } from "framer-motion";
 
 function NavLinks(props: { navItems: NavData[]; pathname?: string }) {
   return (
@@ -29,7 +31,7 @@ function MoreButton({
   return (
     <button
       onClick={() => setViewMore((prevState) => !prevState)}
-      aria-expanded={viewMore} // Accessibility improvement
+      aria-expanded={viewMore}
       className={`flex w-fit cursor-pointer flex-col items-center rounded-md p-1.5 text-foreground`}
     >
       <div className="relative mb-1">
@@ -61,16 +63,22 @@ function BottomNav() {
       </div>
 
       {/*Mobile more items*/}
-      <nav
-        className={` ${viewMore ? "block" : "hidden"} absolute -top-3 left-1/2 flex -translate-x-1/2 -translate-y-full gap-2 rounded-md bg-background p-1.5 md:hidden`}
-      >
-        <NavLinks navItems={moreItems} pathname={pathname} />
-      </nav>
+      <div className="absolute -top-3 left-1/2 -z-10 flex -translate-x-1/2 -translate-y-full md:hidden">
+        <motion.nav
+          initial={{ y: 150, opacity: 0 }} // Start off-screen and transparent
+          animate={{ y: viewMore ? 0 : 150, opacity: viewMore ? 1 : 0 }} // Slide in/out and fade in/out
+          transition={{ ease: "easeInOut", duration: 0.3 }} // Adjust duration and easing as needed
+          className={`flex gap-2 rounded-md bg-background p-1.5`}
+        >
+          <NavLinks navItems={moreItems} pathname={pathname} />
+        </motion.nav>
+      </div>
 
-      {/*Overlay*/}
-      {viewMore && (
-        <div className="fixed bottom-0 left-0 right-0 top-0 -z-10 bg-black opacity-50 md:hidden" />
-      )}
+      <Overlay
+        onClick={() => setViewMore(false)}
+        className="-z-20 md:hidden"
+        isVisible={viewMore}
+      />
     </div>
   );
 }

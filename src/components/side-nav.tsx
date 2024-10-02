@@ -1,6 +1,6 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -50,7 +50,7 @@ function SideNav() {
   const [expand, setExpand] = useState(false);
 
   return (
-    <div className="hidden lg:block">
+    <div className="hidden flex-col lg:flex">
       <div
         className={cn("relative flex justify-center p-4", {
           "pb-5 pt-6": expand,
@@ -91,6 +91,12 @@ function SideNav() {
           />
         ))}
       </nav>
+      <div className="h-full" />
+      <div className="p-4">
+        <div className="rounded-md p-2.5 ring-1">
+          <Search size={20} />
+        </div>
+      </div>
     </div>
   );
 }

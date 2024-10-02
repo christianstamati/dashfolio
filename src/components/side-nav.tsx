@@ -93,8 +93,16 @@ function SideNav() {
       </nav>
       <div className="h-full" />
       <div className="p-4">
-        <div className="rounded-md p-2.5 ring-1">
+        <div
+          className={cn(
+            "flex w-fit items-center justify-center gap-2 rounded-md p-2.5 text-sm ring-1 ring-black",
+            { "w-full": expand },
+            { "bg-primary text-primary-foreground": false },
+          )}
+        >
           <Search size={20} />
+          {expand && <span className="w-full">Search</span>}
+          {expand && <span className="aspect-square rounded-sm px-1.5">S</span>}
         </div>
       </div>
     </div>

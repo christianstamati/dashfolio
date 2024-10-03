@@ -29,15 +29,24 @@ function NavItem({
     <Link href={href}>
       <div
         className={cn(
-          "flex w-fit items-center justify-center gap-2 rounded-md p-2.5 text-sm",
+          "flex w-fit items-center justify-center gap-2 rounded-lg p-2.5 text-sm text-neutral-500",
           { "w-full": expand },
-          { "bg-primary text-primary-foreground": selected },
+          {
+            "bg-primary/90 text-primary-foreground": selected,
+          },
         )}
       >
         <LucideIcon iconName={icon} size={20} />
         {expand && <span className="w-full">{label}</span>}
         {expand && (
-          <span className="aspect-square rounded-sm px-1.5">{shortcut}</span>
+          <span
+            className={cn(
+              `aspect-square rounded-sm px-1.5 ring-1 ring-neutral-100`,
+              { "b-red-500 ring-1 ring-neutral-600": selected },
+            )}
+          >
+            {shortcut}
+          </span>
         )}
       </div>
     </Link>
@@ -50,7 +59,7 @@ function SideNav() {
   const [expand, setExpand] = useState(false);
 
   return (
-    <div className="hidden flex-col lg:flex">
+    <div className="hidden flex-col border-r-[0.01rem] bg-neutral-50 lg:flex">
       <div
         className={cn("relative flex justify-center p-4", {
           "pb-5 pt-6": expand,
@@ -66,12 +75,12 @@ function SideNav() {
           })}
         >
           <h3 className="font-semibold">Christian Stamati</h3>
-          <span>Software Developer</span>
+          <span className="text-primary/60">Software Developer</span>
         </div>
         <Button
           onClick={() => setExpand((prevState) => !prevState)}
           className={cn(
-            "absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full",
+            "absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-[0.01rem] text-neutral-500",
             { "-right-3 h-6 w-6": expand },
           )}
           variant={"secondary"}
@@ -95,14 +104,22 @@ function SideNav() {
       <div className="p-4">
         <div
           className={cn(
-            "flex w-fit items-center justify-center gap-2 rounded-md p-2.5 text-sm ring-1 ring-black",
+            "flex w-fit items-center justify-center gap-2 rounded-md p-2.5 text-sm ring-1 ring-neutral-300",
             { "w-full": expand },
             { "bg-primary text-primary-foreground": false },
           )}
         >
           <Search size={20} />
           {expand && <span className="w-full">Search</span>}
-          {expand && <span className="aspect-square rounded-sm px-1.5">S</span>}
+          {expand && (
+            <span
+              className={cn(
+                `aspect-square rounded-sm px-1.5 ring-1 ring-neutral-100`,
+              )}
+            >
+              S
+            </span>
+          )}
         </div>
       </div>
     </div>

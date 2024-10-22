@@ -3,3 +3,5 @@ export type NavData = {
   icon: string;
   href: string;
 };
+
+export type Locale = "en" | "it";

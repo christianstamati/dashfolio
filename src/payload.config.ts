@@ -1,16 +1,22 @@
 // storage-adapter-import-placeholder
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
+import { mongooseAdapter } from "@payloadcms/db-mongodb";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import path from "path";
+import { buildConfig } from "payload";
+import { fileURLToPath } from "url";
+import sharp from "sharp";
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Users } from "./collections/Users";
+import { Media } from "./collections/Media";
+import { it } from "@payloadcms/translations/languages/it";
+import { en } from "@payloadcms/translations/languages/en";
+import { env } from "@/env/server";
+import { s3Storage } from "@payloadcms/storage-s3";
+import { i18nConfig } from "@/i18n/i18n.config";
+import { Fruits } from "@/collections/Fruits";
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
@@ -19,17 +25,37 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  localization: {
+    locales: i18nConfig.locales,
+    defaultLocale: i18nConfig.defaultLocale,
+  },
+  i18n: {
+    supportedLanguages: { en, it },
+    fallbackLanguage: "en",
+  },
+  collections: [Users, Media, Fruits],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: env.PAYLOAD_SECRET || "",
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: env.DATABASE_URI,
   }),
   sharp,
   plugins: [
-    // storage-adapter-placeholder
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: env.AWS_BUCKET_NAME,
+      config: {
+        credentials: {
+          accessKeyId: env.AWS_ACCESS_TOKEN,
+          secretAccessKey: env.AWS_SECRET_TOKEN,
+        },
+        region: env.AWS_BUCKET_REGION,
+      },
+    }),
   ],
-})
+});

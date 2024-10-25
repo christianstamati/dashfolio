@@ -1,4 +1,10 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, Field } from "payload";
+
+export const MyUploadField: Field = {
+  // ...
+  type: "upload",
+  relationTo: "media",
+};
 
 export const Fruits: CollectionConfig = {
   slug: "fruits",

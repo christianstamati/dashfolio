@@ -21,8 +21,8 @@ importers:
         specifier: 3.0.0-beta.116
         version: 3.0.0-beta.116(4vqibqruwzyiowjr5isv2g5rru)
       '@payloadcms/storage-s3':
-        specifier: 3.0.0-beta.29
-        version: 3.0.0-beta.29(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))
+        specifier: 3.0.0-beta.116
+        version: 3.0.0-beta.116(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))
       '@payloadcms/translations':
         specifier: 3.0.0-beta.116
         version: 3.0.0-beta.116
@@ -986,16 +986,16 @@ packages:
       next: ^15.0.0-canary.173
       payload: 3.0.0-beta.116
 
-  '@payloadcms/plugin-cloud-storage@3.0.0-beta.29':
-    resolution: {integrity: sha512-3Wo1B7xdt4LwxWjOtDV+yp66Y6yb54lYP6l3rbbqkYUKQkqCqhm9AhOHilafO98rrfQxA2V/n7BE4KnQkJBUTA==}
+  '@payloadcms/plugin-cloud-storage@3.0.0-beta.116':
+    resolution: {integrity: sha512-m0spoe7ivFgTM8+ag+jQLUQ70M5MkLzX/crFZXUGRmJBnOGOwLUQMPPUw3927M18NlQGk876WQms5sYOScF/+g==}
     peerDependencies:
-      '@aws-sdk/client-s3': ^3.525.0
-      '@aws-sdk/lib-storage': ^3.525.0
+      '@aws-sdk/client-s3': ^3.614.0
+      '@aws-sdk/lib-storage': ^3.614.0
       '@azure/abort-controller': ^1.0.0
       '@azure/storage-blob': ^12.11.0
       '@google-cloud/storage': ^7.7.0
       '@vercel/blob': ^0.22.3
-      payload: 3.0.0-beta.29
+      payload: 3.0.0-beta.116
     peerDependenciesMeta:
       '@aws-sdk/client-s3':
         optional: true
@@ -1037,11 +1037,11 @@ packages:
       react: ^19.0.0 || ^19.0.0-rc-3edc000d-20240926
       react-dom: ^19.0.0 || ^19.0.0-rc-3edc000d-20240926
 
-  '@payloadcms/storage-s3@3.0.0-beta.29':
-    resolution: {integrity: sha512-d5kTDBE68VxDyLHmWAFBlxwoNrAYb62h986WzT8wTriU1iAQTdQpQ8uR7NbsWE6UbHmbBweKfBWH0/qHiM6qjQ==}
-    engines: {node: '>=18.20.2'}
+  '@payloadcms/storage-s3@3.0.0-beta.116':
+    resolution: {integrity: sha512-bVwALkBJVbDSz6Qs38AmX+iAU8WUjOc03O13r+E3/7JDoFEmu4oJNSto5FYF7ynjKyNxfE25QsXILFaXn1HHdg==}
+    engines: {node: ^18.20.2 || >=20.9.0}
     peerDependencies:
-      payload: 3.0.0-beta.29
+      payload: 3.0.0-beta.116
 
   '@payloadcms/translations@3.0.0-beta.116':
     resolution: {integrity: sha512-pnxXLn6hF0lDdaO5QHxONi36+LA7w2s7cG60dHJ1pv+athTisueFDpylIuk26FtjXg5E8PXgPRUdQBgPx0WS5w==}
@@ -5473,7 +5473,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@payloadcms/plugin-cloud-storage@3.0.0-beta.29(@aws-sdk/client-s3@3.676.0)(@aws-sdk/lib-storage@3.676.0(@aws-sdk/client-s3@3.676.0))(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))':
+  '@payloadcms/plugin-cloud-storage@3.0.0-beta.116(@aws-sdk/client-s3@3.676.0)(@aws-sdk/lib-storage@3.676.0(@aws-sdk/client-s3@3.676.0))(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))':
     dependencies:
       find-node-modules: 2.1.3
       payload: 3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2)
@@ -5533,11 +5533,11 @@ snapshots:
       - supports-color
       - typescript
 
-  '@payloadcms/storage-s3@3.0.0-beta.29(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))':
+  '@payloadcms/storage-s3@3.0.0-beta.116(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))':
     dependencies:
       '@aws-sdk/client-s3': 3.676.0
       '@aws-sdk/lib-storage': 3.676.0(@aws-sdk/client-s3@3.676.0)
-      '@payloadcms/plugin-cloud-storage': 3.0.0-beta.29(@aws-sdk/client-s3@3.676.0)(@aws-sdk/lib-storage@3.676.0(@aws-sdk/client-s3@3.676.0))(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))
+      '@payloadcms/plugin-cloud-storage': 3.0.0-beta.116(@aws-sdk/client-s3@3.676.0)(@aws-sdk/lib-storage@3.676.0(@aws-sdk/client-s3@3.676.0))(payload@3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2))
       payload: 3.0.0-beta.116(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.2)
     transitivePeerDependencies:
       - '@azure/abort-controller'

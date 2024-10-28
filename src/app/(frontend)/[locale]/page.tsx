@@ -26,7 +26,7 @@ export default async function Home({
       <div>
         <div className="pb-2 text-xl font-bold">Fruit (Api)</div>
         {fruits.docs.map((doc, index) => (
-          <div key={index}>{doc.id}</div>
+          <div key={index}>{doc.name}</div>
         ))}
       </div>
     </div>

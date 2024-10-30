@@ -13,7 +13,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    fruits: Fruit;
+    pages: Page;
+    tests: Test;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,13 +84,49 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "fruits".
+ * via the `definition` "pages".
  */
-export interface Fruit {
+export interface Page {
   id: string;
-  name: string;
+  title: string;
+  title3: string;
+  title2: string;
+  meta: {
+    title1: string;
+  };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tests".
+ */
+export interface Test {
+  id: string;
+  title: string;
+  slider?:
+    | {
+        title?: string | null;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  layout?: QuoteBlock[] | null;
+  enableCoolStuff?: boolean | null;
+  trackingCode: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock".
+ */
+export interface QuoteBlock {
+  quoteHeader: string;
+  quoteText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Quote';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -107,8 +144,12 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'fruits';
-        value: string | Fruit;
+        relationTo: 'pages';
+        value: string | Page;
+      } | null)
+    | ({
+        relationTo: 'tests';
+        value: string | Test;
       } | null);
   globalSlug?: string | null;
   user: {

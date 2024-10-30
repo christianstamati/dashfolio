@@ -13,7 +13,8 @@ import { en } from "@payloadcms/translations/languages/en";
 import { env } from "@/env/server";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { i18nConfig } from "@/i18n/i18n.config";
-import { Fruits } from "@/collections/Fruits";
+import { Pages } from "@/collections/Pages";
+import { Test } from "@/collections/Test";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -33,7 +34,7 @@ export default buildConfig({
     supportedLanguages: { en, it },
     fallbackLanguage: "en",
   },
-  collections: [Users, Media, Fruits],
+  collections: [Users, Media, Pages, Test],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET || "",
   typescript: {

@@ -22,7 +22,9 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
+  globals: {
+    sidebar: Sidebar;
+  };
   locale: 'it' | 'en';
   user: User & {
     collection: 'users';
@@ -192,6 +194,29 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sidebar".
+ */
+export interface Sidebar {
+  id: string;
+  links?:
+    | {
+        label: string;
+        href: string;
+        page: {
+          relationTo: 'pages';
+          value: string | Page;
+        };
+        icon: string;
+        shortcut?: string | null;
+        group?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

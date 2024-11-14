@@ -1,15 +1,20 @@
 import type { GlobalConfig } from "payload";
 
-export const Sidebar: GlobalConfig = {
-  slug: "sidebar",
+export const Menu: GlobalConfig = {
+  slug: "menu",
   fields: [
     {
       name: "links",
       type: "array",
-      localized: true,
       fields: [
         {
           name: "label",
+          type: "text",
+          required: true,
+          localized: true,
+        },
+        {
+          name: "icon",
           type: "text",
           required: true,
         },
@@ -23,11 +28,6 @@ export const Sidebar: GlobalConfig = {
           type: "relationship",
           required: true,
           relationTo: ["pages"],
-        },
-        {
-          name: "icon",
-          type: "text",
-          required: true,
         },
         {
           name: "shortcut",

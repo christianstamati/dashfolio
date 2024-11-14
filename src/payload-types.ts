@@ -14,7 +14,6 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
-    tests: Test;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -24,7 +23,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    tests: TestsSelect<false> | TestsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -33,10 +31,10 @@ export interface Config {
     defaultIDType: string;
   };
   globals: {
-    sidebar: Sidebar;
+    menu: Menu;
   };
   globalsSelect: {
-    sidebar: SidebarSelect<false> | SidebarSelect<true>;
+    menu: MenuSelect<false> | MenuSelect<true>;
   };
   locale: 'it' | 'en';
   user: User & {
@@ -89,6 +87,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -108,44 +107,8 @@ export interface Media {
 export interface Page {
   id: string;
   title: string;
-  title3: string;
-  title2: string;
-  meta: {
-    title1: string;
-  };
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tests".
- */
-export interface Test {
-  id: string;
-  title: string;
-  slider?:
-    | {
-        title?: string | null;
-        caption?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  layout?: QuoteBlock[] | null;
-  enableCoolStuff?: boolean | null;
-  trackingCode: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "QuoteBlock".
- */
-export interface QuoteBlock {
-  quoteHeader: string;
-  quoteText?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'Quote';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -165,10 +128,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
-      } | null)
-    | ({
-        relationTo: 'tests';
-        value: string | Test;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -233,6 +192,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -251,43 +211,6 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  title3?: T;
-  title2?: T;
-  meta?:
-    | T
-    | {
-        title1?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tests_select".
- */
-export interface TestsSelect<T extends boolean = true> {
-  title?: T;
-  slider?:
-    | T
-    | {
-        title?: T;
-        caption?: T;
-        id?: T;
-      };
-  layout?:
-    | T
-    | {
-        Quote?:
-          | T
-          | {
-              quoteHeader?: T;
-              quoteText?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  enableCoolStuff?: T;
-  trackingCode?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -325,19 +248,19 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sidebar".
+ * via the `definition` "menu".
  */
-export interface Sidebar {
+export interface Menu {
   id: string;
   links?:
     | {
         label: string;
+        icon: string;
         href: string;
         page: {
           relationTo: 'pages';
           value: string | Page;
         };
-        icon: string;
         shortcut?: string | null;
         group?: string | null;
         id?: string | null;
@@ -348,16 +271,16 @@ export interface Sidebar {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sidebar_select".
+ * via the `definition` "menu_select".
  */
-export interface SidebarSelect<T extends boolean = true> {
+export interface MenuSelect<T extends boolean = true> {
   links?:
     | T
     | {
         label?: T;
+        icon?: T;
         href?: T;
         page?: T;
-        icon?: T;
         shortcut?: T;
         group?: T;
         id?: T;

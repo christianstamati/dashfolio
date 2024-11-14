@@ -10,7 +10,7 @@ import { navigation } from "@/lib/data";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-function NavItem({
+function SidebarItem({
   expand,
   icon,
   label,
@@ -53,7 +53,7 @@ function NavItem({
   );
 }
 
-function SideNav() {
+function SidebarNav() {
   const pathname = usePathname();
 
   const [expand, setExpand] = useState(false);
@@ -91,7 +91,7 @@ function SideNav() {
       </div>
       <nav className="flex flex-col gap-1 px-4">
         {navigation.map((item, index) => (
-          <NavItem
+          <SidebarItem
             key={index}
             {...item}
             shortcut={index + 1 + ""}
@@ -126,4 +126,4 @@ function SideNav() {
   );
 }
 
-export default SideNav;
+export default SidebarNav;

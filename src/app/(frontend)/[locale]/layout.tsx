@@ -6,7 +6,7 @@ import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { geistMono, geistSans } from "@/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
-import SideNav from "@/components/side-nav";
+import SidebarNav from "@/components/sidebar-nav";
 import BottomNav from "@/components/bottom-nav";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "I’m a Fullstack Developer with a passion for creating digital products.",
   icons: {
-    icon: "/static/favicon.ico",
+    icon: "/favicon.ico",
   },
 };
 
@@ -49,7 +49,7 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <SideNav />
+            <SidebarNav />
             <div className="h-full w-full overflow-auto">{children}</div>
             <BottomNav />
           </ThemeProvider>

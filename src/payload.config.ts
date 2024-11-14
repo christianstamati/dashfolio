@@ -14,8 +14,7 @@ import { env } from "@/env/server";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { i18nConfig } from "@/i18n/i18n.config";
 import { Pages } from "@/collections/Pages";
-import { Test } from "@/collections/Test";
-import { Sidebar } from "@/globals/Sidebar";
+import { Menu } from "@/globals/Menu";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -35,8 +34,8 @@ export default buildConfig({
     supportedLanguages: { en, it },
     fallbackLanguage: "en",
   },
-  collections: [Users, Media, Pages, Test],
-  globals: [Sidebar],
+  collections: [Users, Media, Pages],
+  globals: [Menu],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET || "",
   typescript: {
@@ -49,7 +48,9 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: true,
+        media: {
+          prefix: "media",
+        },
       },
       bucket: env.AWS_BUCKET_NAME,
       config: {

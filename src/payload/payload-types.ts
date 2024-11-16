@@ -256,11 +256,10 @@ export interface Menu {
     | {
         label: string;
         icon: string;
-        href: string;
-        page: {
-          relationTo: 'pages';
-          value: string | Page;
-        };
+        type?: ('reference' | 'custom') | null;
+        url?: string | null;
+        reference?: (string | null) | Page;
+        newTab?: boolean | null;
         shortcut?: string | null;
         group?: string | null;
         id?: string | null;
@@ -279,8 +278,10 @@ export interface MenuSelect<T extends boolean = true> {
     | {
         label?: T;
         icon?: T;
-        href?: T;
-        page?: T;
+        type?: T;
+        url?: T;
+        reference?: T;
+        newTab?: T;
         shortcut?: T;
         group?: T;
         id?: T;

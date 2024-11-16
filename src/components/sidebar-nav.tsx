@@ -9,6 +9,7 @@ import LucideIcon from "@/components/lucide-icon";
 import { navigation } from "@/lib/data";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { getCachedGlobal } from "@/payload/lib/get-globals";
 
 function SidebarItem({
   expand,
@@ -55,9 +56,7 @@ function SidebarItem({
 
 function SidebarNav() {
   const pathname = usePathname();
-
   const [expand, setExpand] = useState(false);
-
   return (
     <div className="hidden flex-col border-r-[0.01rem] bg-neutral-50 lg:flex">
       <div

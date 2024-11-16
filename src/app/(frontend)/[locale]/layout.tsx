@@ -4,7 +4,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
-import { geistMono, geistSans } from "@/fonts";
+import { geistMono, geistSans } from "src/lib/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 import SidebarNav from "@/components/sidebar-nav";
 import BottomNav from "@/components/bottom-nav";

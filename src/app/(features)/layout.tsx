@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import { geistMono, geistSans } from "@/fonts";
+import { geistMono, geistSans } from "src/lib/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 

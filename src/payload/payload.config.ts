@@ -6,15 +6,15 @@ import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
 
-import { Users } from "./collections/Users";
-import { Media } from "./collections/Media";
+import { Users } from "@/payload/collections/Users";
+import { Media } from "@/payload/collections/Media";
 import { it } from "@payloadcms/translations/languages/it";
 import { en } from "@payloadcms/translations/languages/en";
 import { env } from "@/env/server";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { i18nConfig } from "@/i18n/i18n.config";
-import { Pages } from "@/collections/Pages";
-import { Menu } from "@/globals/Menu";
+import { Pages } from "@/payload/collections/Pages";
+import { Menu } from "@/payload/globals/Menu";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

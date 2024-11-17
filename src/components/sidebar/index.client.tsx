@@ -1,62 +1,22 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import React from "react";
-import LucideIcon from "@/components/lucide-icon";
-import { navigation } from "@/lib/data";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { getCachedGlobal } from "@/payload/lib/get-globals";
+import { SidebarItem } from "@/components/sidebar/sidebar-item";
+import { Menu } from "@/payload/payload-types";
 
-function SidebarItem({
-  expand,
-  icon,
-  label,
-  shortcut,
-  selected,
-  href,
-}: {
-  expand?: boolean;
-  selected?: boolean;
-  icon: string;
-  label: string;
-  shortcut: string;
-  href: string;
-}) {
-  return (
-    <Link href={href}>
-      <div
-        className={cn(
-          "flex w-fit items-center justify-center gap-2 rounded-lg p-2.5 text-sm text-neutral-500",
-          { "w-full": expand },
-          {
-            "bg-primary/90 text-primary-foreground": selected,
-          },
-        )}
-      >
-        <LucideIcon iconName={icon} size={20} />
-        {expand && <span className="w-full">{label}</span>}
-        {expand && (
-          <span
-            className={cn(
-              `aspect-square rounded-sm px-1.5 ring-1 ring-neutral-100`,
-              { "b-red-500 ring-1 ring-neutral-600": selected },
-            )}
-          >
-            {shortcut}
-          </span>
-        )}
-      </div>
-    </Link>
-  );
-}
+type Props = {
+  menu: Menu;
+};
 
-function SidebarNav() {
+export default function SidebarClient(props: Props) {
   const pathname = usePathname();
   const [expand, setExpand] = useState(false);
+
+  console.log(props.menu);
   return (
     <div className="hidden flex-col border-r-[0.01rem] bg-neutral-50 lg:flex">
       <div
@@ -89,14 +49,8 @@ function SidebarNav() {
         </Button>
       </div>
       <nav className="flex flex-col gap-1 px-4">
-        {navigation.map((item, index) => (
-          <SidebarItem
-            key={index}
-            {...item}
-            shortcut={index + 1 + ""}
-            selected={pathname === item.href}
-            expand={expand}
-          />
+        {props.menu.links?.map((item, index) => (
+          <SidebarItem key={index} {...item} expand={expand} />
         ))}
       </nav>
       <div className="h-full" />
@@ -124,5 +78,3 @@ function SidebarNav() {
     </div>
   );
 }
-
-export default SidebarNav;

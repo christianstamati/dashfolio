@@ -6,8 +6,8 @@ import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { geistMono, geistSans } from "src/lib/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
-import SidebarNav from "@/components/sidebar-nav";
 import BottomNav from "@/components/bottom-nav";
+import Sidebar from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title:
@@ -49,7 +49,7 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <SidebarNav />
+            <Sidebar />
             <div className="h-full w-full overflow-auto">{children}</div>
             <BottomNav />
           </ThemeProvider>

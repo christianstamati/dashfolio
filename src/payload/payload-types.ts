@@ -107,8 +107,20 @@ export interface Media {
 export interface Page {
   id: string;
   title: string;
+  slug?: string | null;
+  layout: TestBlock[];
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Test Block".
+ */
+export interface TestBlock {
+  content?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'test';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -211,6 +223,18 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        test?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -256,12 +280,15 @@ export interface Menu {
     | {
         label: string;
         icon: string;
-        type?: ('reference' | 'custom') | null;
-        url?: string | null;
-        reference?: (string | null) | Page;
-        newTab?: boolean | null;
-        shortcut?: string | null;
-        group?: string | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: string | Page;
+          } | null;
+          url?: string | null;
+        };
         id?: string | null;
       }[]
     | null;
@@ -278,12 +305,14 @@ export interface MenuSelect<T extends boolean = true> {
     | {
         label?: T;
         icon?: T;
-        type?: T;
-        url?: T;
-        reference?: T;
-        newTab?: T;
-        shortcut?: T;
-        group?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
         id?: T;
       };
   updatedAt?: T;

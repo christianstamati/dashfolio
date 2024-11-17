@@ -31,6 +31,9 @@
       ],
       "@payload-config": [
         "./src/payload/payload.config.ts"
+      ],
+      "@payload-types": [
+        "./src/payload/payload-types.ts"
       ]
     },
   },

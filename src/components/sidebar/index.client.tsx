@@ -4,19 +4,19 @@ import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 import { SidebarItem } from "@/components/sidebar/sidebar-item";
-import { Menu } from "@/payload/payload-types";
+import { Menu } from "@payload-types";
+import { Link } from "@/components/link";
+import { usePathname } from "@/i18n/routing";
+import { getLink } from "@/payload/lib/get-link";
 
 type Props = {
   menu: Menu;
 };
 
 export default function SidebarClient(props: Props) {
-  const pathname = usePathname();
   const [expand, setExpand] = useState(false);
-
-  console.log(props.menu);
+  const pathname = usePathname();
   return (
     <div className="hidden flex-col border-r-[0.01rem] bg-neutral-50 lg:flex">
       <div
@@ -50,11 +50,18 @@ export default function SidebarClient(props: Props) {
       </div>
       <nav className="flex flex-col gap-1 px-4">
         {props.menu.links?.map((item, index) => (
-          <SidebarItem key={index} {...item} expand={expand} />
+          <Link key={index} {...item.link}>
+            <SidebarItem
+              {...item}
+              expand={expand}
+              selected={pathname === getLink(item.link!)}
+              shortcut={(index + 1).toString()}
+            />
+          </Link>
         ))}
       </nav>
       <div className="h-full" />
-      <div className="p-4">
+      <div className="hidden p-4">
         <div
           className={cn(
             "flex w-fit items-center justify-center gap-2 rounded-md p-2.5 text-sm ring-1 ring-neutral-300",

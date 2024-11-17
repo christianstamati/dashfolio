@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { Test } from "@/payload/blocks/test/config";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
@@ -10,6 +11,29 @@ export const Pages: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
+    },
+    {
+      name: "slug",
+      type: "text",
+      admin: {
+        position: "sidebar",
+      },
+    },
+    {
+      type: "tabs",
+      tabs: [
+        {
+          fields: [
+            {
+              name: "layout",
+              type: "blocks",
+              blocks: [Test],
+              required: true,
+            },
+          ],
+          label: "Content",
+        },
+      ],
     },
   ],
 };

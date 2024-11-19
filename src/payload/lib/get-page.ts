@@ -1,21 +1,21 @@
-import { cache } from 'react'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
-import configPromise from '@payload-config'
+import { cache } from "react";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
 
 const getPage = cache(async ({ slug }: { slug: string }) => {
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise });
 
   const result = await payload.find({
-    collection: 'pages',
+    collection: "pages",
     limit: 1,
     where: {
       slug: {
         equals: slug,
       },
     },
-  })
+  });
 
-  return result.docs?.[0] || null
+  return result.docs?.[0] || null;
 });
 
-export default getPage
+export default getPage;

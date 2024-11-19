@@ -1,12 +1,12 @@
 import configPromise from "@payload-config";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
+import { getPayload } from "payload";
 import { Config } from "@/payload/payload-types";
 import { unstable_cache } from "next/cache";
 
 type Global = keyof Config["globals"];
 
 export async function getGlobal(slug: Global, depth = 0) {
-  const payload = await getPayloadHMR({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
 
   const global = await payload.findGlobal({
     slug,

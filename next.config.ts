@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   devIndicators: {
     appIsrStatus: false,
   },
+  experimental: {
+    reactCompiler: true,
+  },
 };
 
 export default withNextIntl(withPayload(nextConfig));

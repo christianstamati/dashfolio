@@ -18,7 +18,7 @@ export default function SidebarClient(props: Props) {
   const [expand, setExpand] = useState(false);
   const pathname = usePathname();
   return (
-    <div className="hidden flex-col border-r-[0.01rem] bg-neutral-50 lg:flex">
+    <div className="hidden flex-col border-r-[0.01rem] bg-background/100 lg:flex">
       <div
         className={cn("relative flex justify-center p-4", {
           "pb-5 pt-6": expand,
@@ -39,13 +39,15 @@ export default function SidebarClient(props: Props) {
         <Button
           onClick={() => setExpand((prevState) => !prevState)}
           className={cn(
-            "absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-[0.01rem] text-neutral-500",
+            "absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-[0.01rem] bg-background text-neutral-500 hover:bg-background",
             { "-right-3 h-6 w-6": expand },
           )}
           variant={"secondary"}
           size={"icon"}
         >
-          {expand ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+          <div>
+            {expand ? <ChevronLeft size={16} /> : <ChevronRight size={12} />}
+          </div>
         </Button>
       </div>
       <nav className="flex flex-col gap-1 px-4">

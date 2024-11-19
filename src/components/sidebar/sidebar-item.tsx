@@ -19,24 +19,32 @@ export function SidebarItem({
   return (
     <div
       className={cn(
-        "flex w-fit items-center justify-center gap-2 rounded-lg p-2.5 text-sm text-neutral-500",
+        "flex w-fit items-center justify-center gap-3 rounded-lg p-2.5 text-sm font-medium text-neutral-500",
         { "w-full": expand },
         {
-          "bg-primary/90 text-primary-foreground": selected,
+          "bg-primary text-primary-foreground dark:bg-secondary dark:text-primary":
+            selected,
+        },
+        {
+          "hover:text-neutral-900 dark:hover:text-neutral-200": !selected,
         },
       )}
     >
-      <LucideIcon iconName={icon} size={20} />
+      <div>
+        <LucideIcon iconName={icon} size={20} />
+      </div>
       {expand && <span className="w-full">{label}</span>}
       {expand && (
         <span
           className={cn(
-            `aspect-square rounded-sm px-1.5 ring-1 ring-neutral-100`,
-            { "b-red-500 ring-1 ring-neutral-600": selected },
+            `flex aspect-square w-6 items-center justify-center rounded-sm px-1.5 ring-1 ring-neutral-100 dark:ring-neutral-700`,
+            {
+              "ring-neutral-500": selected,
+            },
           )}
         >
-            {shortcut}
-          </span>
+          {shortcut}
+        </span>
       )}
     </div>
   );

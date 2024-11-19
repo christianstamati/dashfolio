@@ -8,6 +8,7 @@ import { geistMono, geistSans } from "src/lib/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
 import BottomNav from "@/components/bottom-nav";
 import Sidebar from "@/components/sidebar";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export const metadata: Metadata = {
   title:
@@ -49,6 +50,9 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <div className="fixed right-0">
+              <ThemeToggle />
+            </div>
             <Sidebar />
             <div className="h-full w-full overflow-auto">{children}</div>
             <BottomNav />

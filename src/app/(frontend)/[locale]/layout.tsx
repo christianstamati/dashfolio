@@ -41,7 +41,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-geist-sans flex h-svh antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex h-svh font-geist-sans antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -54,10 +54,7 @@ export default async function LocaleLayout({
               <ThemeToggle />
             </div>
             <Sidebar />
-            <div className="h-full flex-1 overflow-auto bg-background">
-              CONTENT
-              {children}
-            </div>
+            <div className="w-full">{children}</div>
             <BottomNav />
           </ThemeProvider>
         </NextIntlClientProvider>

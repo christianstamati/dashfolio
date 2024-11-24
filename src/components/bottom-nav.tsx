@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { NavData } from "@/lib/types";
 import TextIcon from "@/components/text-icon";
 import Overlay from "@/components/overlay";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 function NavLinks(props: { navItems: NavData[]; pathname?: string }) {
   return (

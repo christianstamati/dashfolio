@@ -7,7 +7,7 @@ import { useNavbar } from "@/stores/use-navbar";
 import { MinimizeButton } from "@/features/sidebar/minimize-button";
 import { Profile } from "@/features/sidebar/profile";
 import { NavItem } from "@/features/sidebar/nav-item";
-import SearchInput from "@/features/sidebar/search-input";
+import { ExpandableIconTextButton } from "@/features/sidebar/expandable-icon-text-button";
 
 type Props = {
   menu: Menu;
@@ -18,16 +18,18 @@ export default function SidebarClient(props: Props) {
   const pathname = usePathname();
   return (
     <div
-      className={`h-full flex-shrink-0 border ${minimized ? "w-fit" : "w-[240px]"}`}
+      className={`flex flex-shrink-0 flex-col border ${minimized ? "w-fit" : "w-[240px]"}`}
     >
-      <div className={"relative justify-start px-5 pb-5 pt-4"}>
-        <Profile minimized={minimized} />
+      <div className={"relative justify-start p-4"}>
+        <Profile
+          href={"/"}
+          image={"https://github.com/shadcn.png"}
+          minimized={minimized}
+        />
         <MinimizeButton />
       </div>
-      <nav className="flex h-full flex-col">
-        <ul
-          className={`flex h-full flex-col gap-2 bg-green-300 px-4 ${!minimized && "p-4"}`}
-        >
+      <nav className={`${!minimized ? "mt-4" : "mt-0"}`}>
+        <ul className={`flex flex-col gap-2 px-4`}>
           {props.menu.links?.map((item, index) => (
             <NavItem
               key={index}
@@ -37,10 +39,18 @@ export default function SidebarClient(props: Props) {
               expand={!minimized}
             />
           ))}
-          <div className="h-full bg-red-500">sa</div>
-          <SearchInput />
         </ul>
       </nav>
+      <div className="h-full" />
+      <div className="p-4">
+        <ExpandableIconTextButton
+          variant={"outline"}
+          icon={"Search"}
+          label={"Search"}
+          shortcut={"S"}
+          expand={!minimized}
+        />
+      </div>
     </div>
   );
 }

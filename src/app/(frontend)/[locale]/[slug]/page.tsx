@@ -32,6 +32,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <main>
+      BLOCKS
       <Blocks blocks={layout} />
     </main>
   );

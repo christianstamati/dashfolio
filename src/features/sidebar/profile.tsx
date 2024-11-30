@@ -1,17 +1,20 @@
 import { Link } from "@/i18n/routing";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
 import React from "react";
 
-export function Profile({ minimized }: { minimized: boolean }) {
+export function Profile({
+  minimized,
+  href,
+  image,
+}: {
+  minimized: boolean;
+  image: string;
+  href: string;
+}) {
   return (
-    <Link href={"/"} className="flex gap-4 overflow-hidden">
-      <Avatar
-        className={cn("h-8 w-8", {
-          "h-10 w-10": !minimized,
-        })}
-      >
-        <AvatarImage src="https://github.com/shadcn.png" alt="profile-image" />
+    <Link href={href} className="flex justify-center gap-4">
+      <Avatar className={`${minimized ? "h-8 w-8" : "h-10 w-10"}`}>
+        <AvatarImage src={image} alt="profile-image" />
         <AvatarFallback>CS</AvatarFallback>
       </Avatar>
       {!minimized && (

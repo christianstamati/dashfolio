@@ -9,7 +9,6 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import BottomNav from "@/components/bottom-nav";
 import Sidebar from "@/features/sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title:
@@ -35,8 +34,6 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
@@ -51,12 +48,8 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="fixed right-0">
-              <ThemeToggle />
-            </div>
             <Sidebar />
             <div className="w-full">{children}</div>
-            <BottomNav />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

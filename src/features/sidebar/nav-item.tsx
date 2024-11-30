@@ -1,18 +1,9 @@
 import { Page } from "@payload-types";
-import { Button } from "@/components/ui/button";
-import LucideIcon from "@/components/lucide-icon";
 import React from "react";
 import { Link } from "@/components/link";
-import { Badge } from "@/components/ui/badge";
+import { ExpandableIconTextButton } from "@/features/sidebar/expandable-icon-text-button";
 
-export function NavItem({
-  expand,
-  icon,
-  label,
-  shortcut,
-  selected,
-  link,
-}: {
+export function NavItem(props: {
   expand?: boolean;
   selected?: boolean;
   icon: string;
@@ -25,28 +16,12 @@ export function NavItem({
     url?: string | null;
   };
 }) {
+  const { link, ...rest } = props;
+
   return (
     <li>
       <Link {...link}>
-        <Button
-          variant={`${selected ? "secondary" : "ghost"}`}
-          className={`flex h-fit w-full overflow-hidden p-0 ${selected && "bg-secondary"}`}
-        >
-          <div className="p-3">
-            <LucideIcon iconName={icon} size={18} />
-          </div>
-          {expand && (
-            <div className={`flex w-full items-center text-left`}>
-              <span className="h-fit w-full">{label}</span>
-              <Badge
-                variant="outline"
-                className="mr-2 rounded-sm p-1.5 dark:border-neutral-700"
-              >
-                {shortcut}
-              </Badge>
-            </div>
-          )}
-        </Button>
+        <ExpandableIconTextButton {...rest} />
       </Link>
     </li>
   );

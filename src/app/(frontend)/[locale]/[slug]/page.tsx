@@ -28,11 +28,12 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <div>Page not found!</div>;
   }
 
-  const { layout } = page;
+  const { layout, hero } = page;
+
+  console.log(page);
 
   return (
     <main>
-      BLOCKS
       <Blocks blocks={layout} />
     </main>
   );

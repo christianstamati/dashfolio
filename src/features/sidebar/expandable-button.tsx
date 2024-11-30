@@ -1,7 +1,6 @@
 import { Button, ButtonProps } from "@/components/ui/button";
 import LucideIcon from "@/components/lucide-icon";
 import { Badge } from "@/components/ui/badge";
-import React from "react";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -12,19 +11,23 @@ type Props = {
   shortcut: string;
   className?: string;
   variant?: ButtonProps["variant"];
+  asChild?: boolean;
 };
 
-export function ExpandableIconTextButton({
-  expand,
-  icon,
-  label,
-  shortcut,
-  selected,
-  className,
-  variant,
-}: Props) {
+export function ExpandableButton(props: Props) {
+  const {
+    expand,
+    icon,
+    label,
+    shortcut,
+    selected,
+    className,
+    asChild,
+    variant,
+  } = props;
   return (
     <Button
+      asChild={asChild}
       variant={`${selected ? "secondary" : (variant ?? "ghost")}`}
       className={cn("flex h-fit w-full overflow-hidden p-0", {
         "bg-secondary": selected,

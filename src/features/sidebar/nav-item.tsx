@@ -1,7 +1,7 @@
 import { Page } from "@payload-types";
 import React from "react";
 import { Link } from "@/components/link";
-import { ExpandableIconTextButton } from "@/features/sidebar/expandable-icon-text-button";
+import { ExpandableButton } from "@/features/sidebar/expandable-button";
 
 export function NavItem(props: {
   expand?: boolean;
@@ -21,7 +21,7 @@ export function NavItem(props: {
   return (
     <li>
       <Link {...link}>
-        <ExpandableIconTextButton {...rest} />
+        <ExpandableButton {...rest} />
       </Link>
     </li>
   );

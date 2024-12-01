@@ -14,7 +14,6 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { i18nConfig } from "@/i18n/i18n.config";
 import { Pages } from "@/payload/collections/Pages";
 import { Menu } from "@/payload/globals/Menu";
-import { RichTextTesting } from "@/payload/globals/rich-text-testing";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -35,7 +34,7 @@ export default buildConfig({
     fallbackLanguage: "en",
   },
   collections: [Users, Media, Pages],
-  globals: [Menu, RichTextTesting],
+  globals: [Menu],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET || "",
   typescript: {

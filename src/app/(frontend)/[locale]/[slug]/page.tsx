@@ -28,7 +28,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <div>Page not found!</div>;
   }
 
-  const { layout, hero } = page;
+  const { layout } = page;
 
   console.log(page);
 

@@ -1,4 +1,4 @@
-import SidebarClient from "@/features/sidebar/index.client";
+import SidebarClient from "@/components/sidebar/index.client";
 import { getCachedGlobal } from "@/payload/lib/get-globals";
 
 export default async function Sidebar() {

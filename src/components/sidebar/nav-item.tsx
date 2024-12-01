@@ -1,7 +1,7 @@
 import { Page } from "@payload-types";
 import React from "react";
 import { Link } from "@/components/link";
-import { ExpandableButton } from "@/features/sidebar/expandable-button";
+import { ExpandableButton } from "@/components/sidebar/expandable-button";
 
 export function NavItem(props: {
   expand?: boolean;

@@ -1,12 +1,9 @@
 import React, { Fragment } from "react";
-
 import type { Page } from "@payload-types";
-import Component from "@/payload/blocks/test/component";
-
+import TestBlock from "@/payload/blocks/test/component";
 const blockComponents = {
-  test: Component,
+  test: TestBlock,
 };
-
 export const Blocks: React.FC<{
   blocks: Page["layout"][0][];
 }> = (props) => {

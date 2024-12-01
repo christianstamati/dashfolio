@@ -1,72 +1,72 @@
 import { Field } from "payload";
 
-export const link = (): Field => {
+export const Link = (): Field => {
   const linkResult: Field = {
-    name: 'link',
-    type: 'group',
+    name: "link",
+    type: "group",
     admin: {
       hideGutter: true,
     },
     fields: [
       {
-        type: 'row',
+        type: "row",
         fields: [
           {
-            name: 'type',
-            type: 'radio',
+            name: "type",
+            type: "radio",
             admin: {
-              layout: 'horizontal',
-              width: '50%',
+              layout: "horizontal",
+              width: "50%",
             },
-            defaultValue: 'reference',
+            defaultValue: "reference",
             options: [
               {
-                label: 'Internal link',
-                value: 'reference',
+                label: "Internal link",
+                value: "reference",
               },
               {
-                label: 'Custom URL',
-                value: 'custom',
+                label: "Custom URL",
+                value: "custom",
               },
             ],
           },
           {
-            name: 'newTab',
-            type: 'checkbox',
+            name: "newTab",
+            type: "checkbox",
             admin: {
               style: {
-                alignSelf: 'flex-end',
+                alignSelf: "flex-end",
               },
-              width: '50%',
+              width: "50%",
             },
-            label: 'Open in new tab',
+            label: "Open in new tab",
           },
         ],
       },
     ],
-  }
+  };
   const linkTypes: Field[] = [
     {
-      name: 'reference',
-      type: 'relationship',
+      name: "reference",
+      type: "relationship",
       admin: {
-        condition: (_, siblingData) => siblingData?.type === 'reference',
+        condition: (_, siblingData) => siblingData?.type === "reference",
       },
-      label: 'Document to link to',
+      label: "Document to link to",
       maxDepth: 1,
-      relationTo: ['pages'],
+      relationTo: ["pages"],
       required: true,
     },
     {
-      name: 'url',
-      type: 'text',
+      name: "url",
+      type: "text",
       admin: {
-        condition: (_, siblingData) => siblingData?.type === 'custom',
+        condition: (_, siblingData) => siblingData?.type === "custom",
       },
-      label: 'Custom URL',
+      label: "Custom URL",
       required: true,
     },
-  ]
-  linkResult.fields = [...linkResult.fields, ...linkTypes]
-  return linkResult
-}
+  ];
+  linkResult.fields = [...linkResult.fields, ...linkTypes];
+  return linkResult;
+};

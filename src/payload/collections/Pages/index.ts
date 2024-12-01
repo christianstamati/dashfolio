@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { Test } from "@/payload/blocks/test/config";
-import { hero } from "@/payload/features/hero/config";
+import { HeroBlock } from "@/payload/blocks/hero/config";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
@@ -24,15 +24,11 @@ export const Pages: CollectionConfig = {
       type: "tabs",
       tabs: [
         {
-          fields: [hero],
-          label: "Hero",
-        },
-        {
           fields: [
             {
               name: "layout",
               type: "blocks",
-              blocks: [Test],
+              blocks: [Test, HeroBlock],
               required: true,
             },
           ],

@@ -32,11 +32,9 @@ export interface Config {
   };
   globals: {
     menu: Menu;
-    richTextTesting: RichTextTesting;
   };
   globalsSelect: {
     menu: MenuSelect<false> | MenuSelect<true>;
-    richTextTesting: RichTextTestingSelect<false> | RichTextTestingSelect<true>;
   };
   locale: 'it' | 'en';
   user: User & {
@@ -110,23 +108,6 @@ export interface Page {
   id: string;
   title: string;
   slug?: string | null;
-  hero?: {
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
   layout: TestBlock[];
   updatedAt: string;
   createdAt: string;
@@ -243,11 +224,6 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  hero?:
-    | T
-    | {
-        richText?: T;
-      };
   layout?:
     | T
     | {
@@ -321,30 +297,6 @@ export interface Menu {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "richTextTesting".
- */
-export interface RichTextTesting {
-  id: string;
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menu_select".
  */
 export interface MenuSelect<T extends boolean = true> {
@@ -363,16 +315,6 @@ export interface MenuSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "richTextTesting_select".
- */
-export interface RichTextTestingSelect<T extends boolean = true> {
-  richText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

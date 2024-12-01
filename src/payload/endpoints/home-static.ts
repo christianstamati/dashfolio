@@ -7,4 +7,5 @@ export const homeStatic: Page = {
   slug: "home",
   updatedAt: "",
   createdAt: "",
+  layout: [],
 };

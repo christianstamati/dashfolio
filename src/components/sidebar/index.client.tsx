@@ -4,10 +4,10 @@ import { Menu } from "@payload-types";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { getLink } from "@/payload/lib/get-link";
 import { useNavbar } from "@/stores/use-navbar";
-import { MinimizeButton } from "@/features/sidebar/minimize-button";
-import { Profile } from "@/features/sidebar/profile";
-import { NavItem } from "@/features/sidebar/nav-item";
-import { ExpandableButton } from "@/features/sidebar/expandable-button";
+import { MinimizeButton } from "@/components/sidebar/minimize-button";
+import { Profile } from "@/components/sidebar/profile";
+import { NavItem } from "@/components/sidebar/nav-item";
+import { ExpandableButton } from "@/components/sidebar/expandable-button";
 import logger from "@/lib/logger";
 
 type Props = {

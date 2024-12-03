@@ -1,6 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { revalidateMenu } from "@/payload/globals/Menu/hooks/revalidate-menu";
-import { Link } from "@/payload/fields/link";
+import { link } from "@/payload/fields/link";
 
 export const Menu: GlobalConfig = {
   slug: "menu",
@@ -20,7 +20,7 @@ export const Menu: GlobalConfig = {
           type: "text",
           required: true,
         },
-        Link(),
+        link(),
       ],
     },
   ],

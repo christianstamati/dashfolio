@@ -1,6 +1,31 @@
 import { Field } from "payload";
+import deepMerge from "@/payload/lib/deep-merge";
 
-export const Link = (): Field => {
+export type LinkAppearances = "default" | "outline";
+export const appearanceOptions: Record<
+  LinkAppearances,
+  { label: string; value: string }
+> = {
+  default: {
+    label: "Default",
+    value: "default",
+  },
+  outline: {
+    label: "Outline",
+    value: "outline",
+  },
+};
+type LinkType = (options?: {
+  appearances?: LinkAppearances[] | false;
+  disableLabel?: boolean;
+  overrides?: Record<string, unknown>;
+}) => Field;
+
+export const link: LinkType = ({
+  appearances,
+  disableLabel = false,
+  overrides = {},
+} = {}) => {
   const linkResult: Field = {
     name: "link",
     type: "group",
@@ -45,6 +70,7 @@ export const Link = (): Field => {
       },
     ],
   };
+
   const linkTypes: Field[] = [
     {
       name: "reference",
@@ -67,6 +93,57 @@ export const Link = (): Field => {
       required: true,
     },
   ];
-  linkResult.fields = [...linkResult.fields, ...linkTypes];
-  return linkResult;
+
+  if (!disableLabel) {
+    linkTypes.map((linkType) => ({
+      ...linkType,
+      admin: {
+        ...linkType.admin,
+        width: "50%",
+      },
+    }));
+
+    linkResult.fields.push({
+      type: "row",
+      fields: [
+        ...linkTypes,
+        {
+          name: "label",
+          type: "text",
+          admin: {
+            width: "50%",
+          },
+          label: "Label",
+          required: true,
+        },
+      ],
+    });
+  } else {
+    linkResult.fields = [...linkResult.fields, ...linkTypes];
+  }
+
+  if (appearances !== false) {
+    let appearanceOptionsToUse = [
+      appearanceOptions.default,
+      appearanceOptions.outline,
+    ];
+
+    if (appearances) {
+      appearanceOptionsToUse = appearances.map(
+        (appearance) => appearanceOptions[appearance],
+      );
+    }
+
+    linkResult.fields.push({
+      name: "appearance",
+      type: "select",
+      admin: {
+        description: "Choose how the link should be rendered.",
+      },
+      defaultValue: "default",
+      options: appearanceOptionsToUse,
+    });
+  }
+
+  return deepMerge(linkResult, overrides);
 };

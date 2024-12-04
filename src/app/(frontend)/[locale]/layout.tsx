@@ -6,9 +6,7 @@ import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { geistMono, geistSans } from "src/lib/fonts";
 import { ThemeProvider } from "@/providers/theme-provider";
-import BottomNav from "@/components/bottom-nav";
-import Sidebar from "src/components/sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
+import Sidebar from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title:

@@ -1,5 +1,4 @@
 import { Block } from "payload";
-import { link } from "@/payload/fields/link";
 
 export const HeroBlock: Block = {
   slug: "hero",
@@ -14,7 +13,5 @@ export const HeroBlock: Block = {
       name: "description",
       type: "text",
     },
-    link(),
-    link(),
   ],
 };

@@ -108,19 +108,30 @@ export interface Page {
   id: string;
   title: string;
   slug?: string | null;
-  layout: TestBlock[];
+  layout: (TestBlock | HeroBlock)[];
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Test Block".
+ * via the `definition` "TestBlock".
  */
 export interface TestBlock {
   content?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'test';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock".
+ */
+export interface HeroBlock {
+  title: string;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -234,6 +245,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        hero?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -280,7 +299,7 @@ export interface Menu {
     | {
         label: string;
         icon: string;
-        link?: {
+        link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?: {
@@ -288,6 +307,8 @@ export interface Menu {
             value: string | Page;
           } | null;
           url?: string | null;
+          label: string;
+          appearance?: ('default' | 'outline') | null;
         };
         id?: string | null;
       }[]
@@ -312,6 +333,8 @@ export interface MenuSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              label?: T;
+              appearance?: T;
             };
         id?: T;
       };

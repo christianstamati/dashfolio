@@ -30,8 +30,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { layout } = page;
 
-  console.log(page);
-
   return (
     <main>
       <Blocks blocks={layout} />

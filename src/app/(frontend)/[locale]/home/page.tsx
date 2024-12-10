@@ -158,31 +158,10 @@ function Drops() {
   );
 }
 
-function Hero() {
-  return (
-    <div className="flex flex-col gap-4">
-      <h1 className={"text-5xl font-bold"}>
-        Hey, I&apos;m Christian. <br /> I design software.
-      </h1>
-      <p className="text-lg">
-        The Original Dashboard-Styled Personal Website Template for <br />{" "}
-        Framer just got even better – with Dashfolio+
-      </p>
-      <div className={"flex gap-3"}>
-        <Button size="lg">About</Button>
-        <Button size="lg" variant={"secondary"}>
-          E-mail
-        </Button>
-      </div>
-    </div>
-  );
-}
-
 export default function Page() {
   return (
     <main className="flex items-center justify-center">
       <div className="flex w-full max-w-4xl flex-col gap-16 py-28">
-        <Hero />
         <Drops />
         <Thoughts />
         <Links />

@@ -20,7 +20,10 @@ export const Menu: GlobalConfig = {
           type: "text",
           required: true,
         },
-        link(),
+        link({
+          disableLabel: true,
+          appearances: false,
+        }),
       ],
     },
   ],

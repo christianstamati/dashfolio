@@ -108,6 +108,30 @@ export interface Page {
   id: string;
   title: string;
   slug?: string | null;
+  header: string;
+  description?: string | null;
+  primary: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+    label: string;
+    appearance?: ('default' | 'outline') | null;
+  };
+  secondary: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+    label: string;
+    appearance?: ('default' | 'outline') | null;
+  };
   layout: (TestBlock | HeroBlock)[];
   updatedAt: string;
   createdAt: string;
@@ -235,6 +259,28 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  header?: T;
+  description?: T;
+  primary?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
+  secondary?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
   layout?:
     | T
     | {
@@ -299,7 +345,7 @@ export interface Menu {
     | {
         label: string;
         icon: string;
-        link: {
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?: {
@@ -307,8 +353,6 @@ export interface Menu {
             value: string | Page;
           } | null;
           url?: string | null;
-          label: string;
-          appearance?: ('default' | 'outline') | null;
         };
         id?: string | null;
       }[]
@@ -333,8 +377,6 @@ export interface MenuSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
-              label?: T;
-              appearance?: T;
             };
         id?: T;
       };

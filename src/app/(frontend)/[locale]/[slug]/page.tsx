@@ -2,6 +2,7 @@ import type { Page as PageType } from "@payload-types";
 import getPage from "@/payload/lib/get-page";
 import { homeStatic } from "@/payload/endpoints/home-static";
 import { Blocks } from "@/payload/blocks";
+import Hero from "@/components/hero";
 
 type Args = {
   params: Promise<{
@@ -31,8 +32,11 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { layout } = page;
 
   return (
-    <main>
-      <Blocks blocks={layout} />
+    <main className="flex items-center justify-center">
+      <div className="flex w-full max-w-4xl flex-col gap-16 py-28">
+        <Hero />
+        <Blocks blocks={layout} />
+      </div>
     </main>
   );
 }

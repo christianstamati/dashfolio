@@ -284,24 +284,30 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        test?:
-          | T
-          | {
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        hero?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              id?: T;
-              blockName?: T;
-            };
+        test?: T | TestBlockSelect<T>;
+        hero?: T | HeroBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestBlock_select".
+ */
+export interface TestBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock_select".
+ */
+export interface HeroBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

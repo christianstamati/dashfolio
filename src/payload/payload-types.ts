@@ -107,32 +107,47 @@ export interface Media {
 export interface Page {
   id: string;
   title: string;
-  slug?: string | null;
-  header: string;
-  description?: string | null;
-  primary: {
-    type?: ('reference' | 'custom') | null;
-    newTab?: boolean | null;
-    reference?: {
-      relationTo: 'pages';
-      value: string | Page;
-    } | null;
-    url?: string | null;
-    label: string;
-    appearance?: ('default' | 'outline') | null;
+  slug: string;
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  hero: {
+    primary: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: string | Page;
+      } | null;
+      url?: string | null;
+      label: string;
+      appearance?: ('default' | 'outline') | null;
+    };
+    secondary: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?: {
+        relationTo: 'pages';
+        value: string | Page;
+      } | null;
+      url?: string | null;
+      label: string;
+      appearance?: ('default' | 'outline') | null;
+    };
   };
-  secondary: {
-    type?: ('reference' | 'custom') | null;
-    newTab?: boolean | null;
-    reference?: {
-      relationTo: 'pages';
-      value: string | Page;
-    } | null;
-    url?: string | null;
-    label: string;
-    appearance?: ('default' | 'outline') | null;
-  };
-  layout: (TestBlock | HeroBlock)[];
+  layout: TestBlock[];
   updatedAt: string;
   createdAt: string;
 }
@@ -145,17 +160,6 @@ export interface TestBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'test';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeroBlock".
- */
-export interface HeroBlock {
-  title: string;
-  description?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -259,33 +263,35 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  header?: T;
-  description?: T;
-  primary?:
+  richText?: T;
+  hero?:
     | T
     | {
-        type?: T;
-        newTab?: T;
-        reference?: T;
-        url?: T;
-        label?: T;
-        appearance?: T;
-      };
-  secondary?:
-    | T
-    | {
-        type?: T;
-        newTab?: T;
-        reference?: T;
-        url?: T;
-        label?: T;
-        appearance?: T;
+        primary?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        secondary?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
       };
   layout?:
     | T
     | {
         test?: T | TestBlockSelect<T>;
-        hero?: T | HeroBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -296,16 +302,6 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface TestBlockSelect<T extends boolean = true> {
   content?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeroBlock_select".
- */
-export interface HeroBlockSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
   id?: T;
   blockName?: T;
 }

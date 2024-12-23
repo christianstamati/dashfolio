@@ -1,7 +1,7 @@
-import type { CollectionConfig } from "payload";
 import { Test } from "@/payload/blocks/test/config";
-import { HeroBlock } from "@/payload/blocks/hero/config";
 import { link } from "@/payload/fields/link";
+import { CollectionConfig } from "payload";
+import { lexicalEditor, HeadingFeature, FixedToolbarFeature, InlineToolbarFeature } from "@payloadcms/richtext-lexical";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
@@ -17,6 +17,7 @@ export const Pages: CollectionConfig = {
     {
       name: "slug",
       type: "text",
+      required: true,
       admin: {
         position: "sidebar",
       },
@@ -27,16 +28,28 @@ export const Pages: CollectionConfig = {
         {
           fields: [
             {
-              name: "header",
-              type: "text",
-              required: true,
+              name: 'richText',
+              type: 'richText',
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                  ]
+                },
+              }),
+              label: false,
             },
             {
-              name: "description",
-              type: "text",
-            },
-            link({ overrides: { name: "primary" } }),
-            link({ overrides: { name: "secondary" } }),
+              type: "group",
+              name: "hero",
+              fields: [
+                link({ overrides: { name: "primary" } }),
+                link({ overrides: { name: "secondary" } }),
+              ]
+            }
           ],
           label: "Hero",
         },
@@ -45,7 +58,7 @@ export const Pages: CollectionConfig = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [Test, HeroBlock],
+              blocks: [Test],
               required: true,
             },
           ],

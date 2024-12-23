@@ -29,12 +29,12 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <div>Page not found!</div>;
   }
 
-  const { layout } = page;
+  const { layout, hero } = page;
 
   return (
     <main className="flex items-center justify-center">
       <div className="flex w-full max-w-4xl flex-col gap-16 py-28">
-        <Hero />
+        <Hero hero={hero} />
         <Blocks blocks={layout} />
       </div>
     </main>

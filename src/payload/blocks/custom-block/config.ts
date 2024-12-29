@@ -1,8 +1,8 @@
 import { Block } from "payload";
 
-export const Test: Block = {
-  slug: "test",
-  interfaceName: "TestBlock",
+export const CustomBlock: Block = {
+  slug: "custom-block",
+  interfaceName: "CustomBlock",
   fields: [
     {
       name: "content",

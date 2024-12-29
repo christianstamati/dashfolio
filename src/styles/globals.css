@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -63,6 +64,7 @@
     --custom-1: 0 0% 11%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
@@ -72,10 +74,98 @@
   }
 }
 
-@layer utilities {
-  .center-content {
-    @apply flex items-center justify-center
-  }
+.payload-richtext h1 {
+  font-size: 3rem; /* Equivalent to text-5xl */
+  font-weight: 700; /* Equivalent to font-bold */
+}
+
+.payload-richtext h2 {
+  font-size: 2.25rem; /* Equivalent to text-4xl */
+  font-weight: 600; /* Equivalent to font-semibold */
+}
+
+.payload-richtext h3 {
+  font-size: 1.875rem; /* Equivalent to text-3xl */
+  font-weight: 500; /* Equivalent to font-medium */
+}
+
+.payload-richtext h4 {
+  font-size: 1.5rem; /* Equivalent to text-2xl */
+  font-weight: 500; /* Equivalent to font-medium */
+}
+
+.payload-richtext h5 {
+  font-size: 1.25rem; /* Equivalent to text-xl */
+  font-weight: 500; /* Equivalent to font-medium */
+}
+
+.payload-richtext h6 {
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  font-weight: 500; /* Equivalent to font-medium */
+}
+
+.payload-richtext p {
+  font-size: 1rem; /* Equivalent to text-base */
+  font-weight: 400; /* Equivalent to font-normal */
+}
+
+.payload-richtext a {
+  color: #3b82f6; /* Equivalent to text-blue-500 */
+}
+
+.list-bullet {
+  list-style-type: disc;
+  padding-inline-start: 1.5rem;
+  margin-top: 0.25rem;
+}
+.list-bullet > .nestedListItem > .list-bullet {
+  list-style-type: circle;
+}
+.list-bullet > .nestedListItem > .list-bullet > .nestedListItem > .list-bullet {
+  list-style-type: square;
+}
+.list-bullet > li:has(> ul),
+.list-bullet > li > .nestedListItem:has(> ul) {
+  list-style: none;
+}
+
+.list-number {
+  list-style-type: decimal;
+  padding-inline-start: 1.5rem;
+  margin-top: 0.25rem;
+}
+.list-number > .nestedListItem > .list-number {
+  list-style-type: lower-alpha;
+}
+.list-number > .nestedListItem > .list-number > .nestedListItem > .list-number {
+  list-style-type: lower-roman;
+}
+.list-number > li:has(> ol),
+.list-number > li > .nestedListItem:has(> ol) {
+  list-style: none;
 }
 
 
+.list-check {
+  padding-inline-start: 1.5rem;
+  margin-top: 0.25rem;
+  pointer-events: none;
+}
+.list-item-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.list-item-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.75rem;
+}
+
+
+.payload-richtext blockquote {
+  border-left: 4px solid #ccc; /* Light grey border on the left */
+  padding: 1rem; /* Add padding around the blockquote content */
+  margin: 1rem 0; /* Optional: Adds space above and below the blockquote */
+  background-color: #f9f9f9; /* Optional: Light background color for the blockquote */
+}

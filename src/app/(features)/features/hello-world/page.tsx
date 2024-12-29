@@ -1,10 +1,7 @@
 import React from "react";
 
 function Page() {
-  return (
-    <div>
-      Rich tex </div>
-  );
+  return <div>Hello World!!</div>;
 }
 
 export default Page;

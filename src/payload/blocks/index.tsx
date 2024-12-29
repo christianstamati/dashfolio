@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import type { Page } from "@payload-types";
-import TestBlock from "@/payload/blocks/test/component";
+import CustomBlock from "@/payload/blocks/custom-block/component";
 const blockComponents = {
-  test: TestBlock,
+  "custom-block": CustomBlock,
 };
 export const Blocks: React.FC<{
   blocks: Page["layout"][0][];

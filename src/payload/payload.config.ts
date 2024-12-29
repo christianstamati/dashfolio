@@ -1,6 +1,5 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
@@ -14,6 +13,8 @@ import { s3Storage } from "@payloadcms/storage-s3";
 import { i18nConfig } from "@/i18n/i18n.config";
 import { Pages } from "@/payload/collections/Pages";
 import { Menu } from "@/payload/globals/Menu";
+import { RichTextFeature } from "@/payload/globals/rich-text-feature";
+import lexicalEditor from "@/payload/lexical-editor";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -34,8 +35,8 @@ export default buildConfig({
     fallbackLanguage: "en",
   },
   collections: [Users, Media, Pages],
-  globals: [Menu],
-  editor: lexicalEditor(),
+  globals: [Menu, RichTextFeature],
+  editor: lexicalEditor,
   secret: env.PAYLOAD_SECRET || "",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),

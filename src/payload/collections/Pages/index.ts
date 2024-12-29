@@ -1,7 +1,12 @@
-import { Test } from "@/payload/blocks/test/config";
+import { CustomBlock } from "@/payload/blocks/custom-block/config";
 import { link } from "@/payload/fields/link";
 import { CollectionConfig } from "payload";
-import { lexicalEditor, HeadingFeature, FixedToolbarFeature, InlineToolbarFeature } from "@payloadcms/richtext-lexical";
+import {
+  lexicalEditor,
+  HeadingFeature,
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+} from "@payloadcms/richtext-lexical";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
@@ -28,16 +33,18 @@ export const Pages: CollectionConfig = {
         {
           fields: [
             {
-              name: 'richText',
-              type: 'richText',
+              name: "richText",
+              type: "richText",
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                    HeadingFeature({
+                      enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
+                    }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
-                  ]
+                  ];
                 },
               }),
               label: false,
@@ -48,8 +55,8 @@ export const Pages: CollectionConfig = {
               fields: [
                 link({ overrides: { name: "primary" } }),
                 link({ overrides: { name: "secondary" } }),
-              ]
-            }
+              ],
+            },
           ],
           label: "Hero",
         },
@@ -58,7 +65,7 @@ export const Pages: CollectionConfig = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [Test],
+              blocks: [CustomBlock],
               required: true,
             },
           ],

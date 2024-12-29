@@ -32,9 +32,11 @@ export interface Config {
   };
   globals: {
     menu: Menu;
+    'rich-text-feature': RichTextFeature;
   };
   globalsSelect: {
     menu: MenuSelect<false> | MenuSelect<true>;
+    'rich-text-feature': RichTextFeatureSelect<false> | RichTextFeatureSelect<true>;
   };
   locale: 'it' | 'en';
   user: User & {
@@ -133,6 +135,9 @@ export interface Page {
       } | null;
       url?: string | null;
       label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
       appearance?: ('default' | 'outline') | null;
     };
     secondary: {
@@ -144,22 +149,25 @@ export interface Page {
       } | null;
       url?: string | null;
       label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
       appearance?: ('default' | 'outline') | null;
     };
   };
-  layout: TestBlock[];
+  layout: CustomBlock[];
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TestBlock".
+ * via the `definition` "CustomBlock".
  */
-export interface TestBlock {
+export interface CustomBlock {
   content?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'test';
+  blockType: 'custom-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -291,16 +299,16 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        test?: T | TestBlockSelect<T>;
+        'custom-block'?: T | CustomBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TestBlock_select".
+ * via the `definition` "CustomBlock_select".
  */
-export interface TestBlockSelect<T extends boolean = true> {
+export interface CustomBlockSelect<T extends boolean = true> {
   content?: T;
   id?: T;
   blockName?: T;
@@ -364,6 +372,30 @@ export interface Menu {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "rich-text-feature".
+ */
+export interface RichTextFeature {
+  id: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menu_select".
  */
 export interface MenuSelect<T extends boolean = true> {
@@ -385,6 +417,27 @@ export interface MenuSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "rich-text-feature_select".
+ */
+export interface RichTextFeatureSelect<T extends boolean = true> {
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: string | Media;
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'media';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

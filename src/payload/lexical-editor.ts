@@ -7,6 +7,7 @@ import {
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import { Media } from "@/payload/blocks/media/config";
+import { CallToAction } from "@/payload/blocks/cta/config";
 
 export default lexicalEditor({
   features: ({ defaultFeatures }) => {
@@ -17,7 +18,7 @@ export default lexicalEditor({
       InlineToolbarFeature(),
       HorizontalRuleFeature(),
       BlocksFeature({
-        blocks: [Media],
+        blocks: [Media, CallToAction],
       }),
     ];
   },

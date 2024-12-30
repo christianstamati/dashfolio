@@ -1,16 +1,16 @@
 import { Page } from "@payload-types";
 import React from "react";
-import { Link } from "@/components/link";
+import { Link } from "@/payload/blocks/link";
 import { ExpandableButton } from "@/components/sidebar/expandable-button";
 
 export function NavItem(props: {
   expand?: boolean;
   selected?: boolean;
-  icon: string;
-  label: string;
   shortcut: string;
   link?: {
     type?: "reference" | "custom" | null;
+    label: string;
+    icon: string;
     newTab?: boolean | null;
     reference?: { relationTo: "pages"; value: string | Page } | null;
     url?: string | null;
@@ -18,10 +18,16 @@ export function NavItem(props: {
 }) {
   const { link, ...rest } = props;
 
+  const buttonProps = {
+    label: link?.label ?? "none",
+    icon: link?.icon ?? "",
+    ...rest,
+  };
+
   return (
     <li>
       <Link {...link}>
-        <ExpandableButton {...rest} />
+        <ExpandableButton {...buttonProps} />
       </Link>
     </li>
   );

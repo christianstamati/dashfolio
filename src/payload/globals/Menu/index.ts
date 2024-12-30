@@ -9,19 +9,9 @@ export const Menu: GlobalConfig = {
       name: "links",
       type: "array",
       fields: [
-        {
-          name: "label",
-          type: "text",
-          required: true,
-          localized: true,
-        },
-        {
-          name: "icon",
-          type: "text",
-          required: true,
-        },
         link({
-          disableLabel: true,
+          useIcon: true,
+          disableLabel: false,
           appearances: false,
         }),
       ],

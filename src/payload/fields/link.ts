@@ -18,12 +18,14 @@ export const appearanceOptions: Record<
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false;
   disableLabel?: boolean;
+  useIcon?: boolean;
   overrides?: Record<string, unknown>;
 }) => Field;
 
 export const link: LinkType = ({
   appearances,
   disableLabel = false,
+  useIcon = false,
   overrides = {},
 } = {}) => {
   const linkResult: Field = {
@@ -94,6 +96,13 @@ export const link: LinkType = ({
     },
   ];
 
+  if (useIcon) {
+    linkTypes.push({
+      name: "icon",
+      type: "text",
+    });
+  }
+
   if (!disableLabel) {
     linkTypes.map((linkType) => ({
       ...linkType,
@@ -115,6 +124,7 @@ export const link: LinkType = ({
           },
           label: "Label",
           required: true,
+          localized: true,
         },
       ],
     });

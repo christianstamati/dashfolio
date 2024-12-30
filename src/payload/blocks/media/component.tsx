@@ -1,14 +1,20 @@
-import type { MediaBlock as MediaBlockProps } from "@payload-types";
+import type { Media, MediaBlock as MediaBlockProps } from "@payload-types";
 import Image from "next/image";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
+import getPayload from "@/payload/lib/get-payload";
+
+function isString<T>(obj: string | T) {
+  return typeof obj === "string";
+}
+
+async function findMedia(id: string) {
+  const payload = await getPayload();
+  return (await payload.findByID({ collection: "media", id })) as Media;
+}
 
 export default async function Component(props: MediaBlockProps) {
-  const payload = await getPayload({ config: configPromise });
-  const media = await payload.findByID({
-    collection: "media",
-    id: props.media as string,
-  });
+  const media = isString(props.media)
+    ? await findMedia(props.media)
+    : props.media;
 
   const isVideo = media.mimeType?.includes("video");
 

@@ -110,7 +110,7 @@ export interface Page {
   id: string;
   title: string;
   slug: string;
-  richText?: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -125,49 +125,8 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
-  hero: {
-    primary: {
-      type?: ('reference' | 'custom') | null;
-      newTab?: boolean | null;
-      reference?: {
-        relationTo: 'pages';
-        value: string | Page;
-      } | null;
-      url?: string | null;
-      label: string;
-      /**
-       * Choose how the link should be rendered.
-       */
-      appearance?: ('default' | 'outline') | null;
-    };
-    secondary: {
-      type?: ('reference' | 'custom') | null;
-      newTab?: boolean | null;
-      reference?: {
-        relationTo: 'pages';
-        value: string | Page;
-      } | null;
-      url?: string | null;
-      label: string;
-      /**
-       * Choose how the link should be rendered.
-       */
-      appearance?: ('default' | 'outline') | null;
-    };
-  };
-  layout: CustomBlock[];
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CustomBlock".
- */
-export interface CustomBlock {
-  content?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'custom-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -271,47 +230,9 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  richText?: T;
-  hero?:
-    | T
-    | {
-        primary?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        secondary?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-      };
-  layout?:
-    | T
-    | {
-        'custom-block'?: T | CustomBlockSelect<T>;
-      };
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CustomBlock_select".
- */
-export interface CustomBlockSelect<T extends boolean = true> {
-  content?: T;
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -353,9 +274,7 @@ export interface Menu {
   id: string;
   links?:
     | {
-        label: string;
-        icon: string;
-        link?: {
+        link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?: {
@@ -363,6 +282,8 @@ export interface Menu {
             value: string | Page;
           } | null;
           url?: string | null;
+          icon?: string | null;
+          label: string;
         };
         id?: string | null;
       }[]
@@ -402,8 +323,6 @@ export interface MenuSelect<T extends boolean = true> {
   links?:
     | T
     | {
-        label?: T;
-        icon?: T;
         link?:
           | T
           | {
@@ -411,6 +330,8 @@ export interface MenuSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              icon?: T;
+              label?: T;
             };
         id?: T;
       };
@@ -438,6 +359,45 @@ export interface MediaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'media';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  primary: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+    icon?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
+  secondary: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+    icon?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'call-to-action';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

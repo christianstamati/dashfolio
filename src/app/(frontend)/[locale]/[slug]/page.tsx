@@ -1,7 +1,8 @@
 import type { Page as PageType } from "@payload-types";
 import getPage from "@/payload/lib/get-page";
 import { homeStatic } from "@/payload/endpoints/home-static";
-import { Blocks } from "@/payload/blocks";
+import { RichText } from "@/payload/blocks/rich-text";
+import { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 type Args = {
   params: Promise<{
@@ -27,12 +28,12 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <div>Page not found!</div>;
   }
 
-  const { layout } = page;
+  const { content } = page;
 
   return (
     <main className="flex items-center justify-center">
       <div className="flex w-full max-w-4xl flex-col gap-16 py-28">
-        <Blocks blocks={layout} />
+        <RichText data={content as SerializedEditorState} />
       </div>
     </main>
   );

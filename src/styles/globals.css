@@ -77,39 +77,25 @@
 .payload-richtext h1 {
   font-size: 3rem; /* Equivalent to text-5xl */
   font-weight: 700; /* Equivalent to font-bold */
+  line-height: 3rem;
 }
-
 .payload-richtext h2 {
   font-size: 2.25rem; /* Equivalent to text-4xl */
   font-weight: 600; /* Equivalent to font-semibold */
 }
-
 .payload-richtext h3 {
   font-size: 1.875rem; /* Equivalent to text-3xl */
   font-weight: 500; /* Equivalent to font-medium */
 }
-
 .payload-richtext h4 {
   font-size: 1.5rem; /* Equivalent to text-2xl */
   font-weight: 500; /* Equivalent to font-medium */
 }
-
-.payload-richtext h5 {
-  font-size: 1.25rem; /* Equivalent to text-xl */
-  font-weight: 500; /* Equivalent to font-medium */
-}
-
-.payload-richtext h6 {
-  font-size: 1.125rem; /* Equivalent to text-lg */
-  font-weight: 500; /* Equivalent to font-medium */
-}
-
 .payload-richtext p {
-  font-size: 1rem; /* Equivalent to text-base */
+  font-size: 1.125rem; /* Equivalent to text-base */
   font-weight: 400; /* Equivalent to font-normal */
 }
-
-.payload-richtext a {
+.payload-richtext p a {
   color: #3b82f6; /* Equivalent to text-blue-500 */
 }
 
@@ -166,6 +152,10 @@
 .payload-richtext blockquote {
   border-left: 4px solid #ccc; /* Light grey border on the left */
   padding: 1rem; /* Add padding around the blockquote content */
-  margin: 1rem 0; /* Optional: Adds space above and below the blockquote */
   background-color: #f9f9f9; /* Optional: Light background color for the blockquote */
+}
+
+.payload-richtext .dark blockquote,
+.dark blockquote {
+  background-color: #272727;
 }

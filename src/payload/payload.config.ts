@@ -15,6 +15,9 @@ import { Pages } from "@/payload/collections/Pages";
 import { Menu } from "@/payload/globals/Menu";
 import { RichTextFeature } from "@/payload/globals/rich-text-feature";
 import lexicalEditor from "@/payload/lexical-editor";
+import { Projects } from "@/payload/collections/Projects";
+import { Thoughts } from "@/payload/collections/Thoughts";
+import { Categories } from "@/payload/collections/Categories";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -34,7 +37,7 @@ export default buildConfig({
     supportedLanguages: { en, it },
     fallbackLanguage: "en",
   },
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Pages, Categories, Projects, Thoughts],
   globals: [Menu, RichTextFeature],
   editor: lexicalEditor,
   secret: env.PAYLOAD_SECRET || "",

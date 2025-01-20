@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArchiveX, Command, File, Inbox, Send, Trash2 } from "lucide-react";
+import { ArchiveX, File, Inbox, Send, Trash2 } from "lucide-react";
 
 import {
   Sidebar,
@@ -16,6 +16,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { ThemeToggle } from "./theme-toggle";
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // This is sample data
 const data = {
@@ -65,32 +67,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { setOpen } = useSidebar();
 
   return (
-    <Sidebar className="!w-[calc(var(--sidebar-width-icon)_+_1px)] border-r">
+    <Sidebar className="w-fit border-r">
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0">
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          <div className="mt-4 flex w-full items-center justify-center">
+            <Link href="#">
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </Link>
+          </div>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="flex flex-col items-center justify-center">
         <SidebarGroup>
           <SidebarGroupContent className="px-1.5 md:px-0">
-            <SidebarMenu>
+            <SidebarMenu className="gap-3">
               {data.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
-                    className="[&>svg]:size-4 px-2.5 md:px-4"
+                    className="flex h-[55px] w-[55px] items-center justify-center rounded-2xl md:px-2 [&>svg]:size-6"
                     tooltip={{
                       children: item.title,
                       hidden: false,
@@ -110,7 +110,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <ThemeToggle></ThemeToggle>
+        <ThemeToggle />
       </SidebarFooter>
     </Sidebar>
   );

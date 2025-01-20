@@ -65,7 +65,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { setOpen } = useSidebar();
 
   return (
-    <Sidebar className="!w-[calc(var(--sidebar-width-icon)_+_1px)] border-r ">
+    <Sidebar className="!w-[calc(var(--sidebar-width-icon)_+_1px)] border-r">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -90,20 +90,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               {data.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
+                    className="[&>svg]:size-4 px-2.5 md:px-4"
                     tooltip={{
                       children: item.title,
                       hidden: false,
                     }}
                     onClick={() => {
                       setActiveItem(item);
-
                       setOpen(true);
                     }}
                     isActive={activeItem.title === item.title}
-                    className="px-2.5 "
                   >
                     <item.icon />
-                    <span>{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

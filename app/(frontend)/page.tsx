@@ -1,5 +1,5 @@
-import { ThemeToggle } from "@/components/theme-toggle";
+import React from "react";
 
 export default function Home() {
-  return <div>Hello World!</div>;
+  return <div>Home</div>;
 }

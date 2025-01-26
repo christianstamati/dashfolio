@@ -1,7 +1,6 @@
 "use client";
 
-import * as React from "react";
-import { ArchiveX, File, Inbox, Send, Trash2 } from "lucide-react";
+import { Home, Work, Message, User } from "react-iconly";
 
 import {
   Sidebar,
@@ -15,93 +14,94 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+
 import { ThemeToggle } from "./theme-toggle";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { usePathname } from "next/navigation";
 
-// This is sample data
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+  avatar: {
+    src: "https://github.com/shadcn.png",
+    alt: "avatar",
   },
   navMain: [
     {
-      title: "Inbox",
-      url: "#",
-      icon: Inbox,
-      isActive: true,
+      title: "Home",
+      url: "/",
+      icon: Home,
     },
     {
-      title: "Drafts",
-      url: "#",
-      icon: File,
-      isActive: false,
+      title: "About",
+      url: "/about",
+      icon: User,
     },
     {
-      title: "Sent",
-      url: "#",
-      icon: Send,
-      isActive: false,
+      title: "Portfolio",
+      url: "/portfolio",
+      icon: Work,
     },
     {
-      title: "Junk",
-      url: "#",
-      icon: ArchiveX,
-      isActive: false,
-    },
-    {
-      title: "Trash",
-      url: "#",
-      icon: Trash2,
-      isActive: false,
+      title: "Contact",
+      url: "/contact",
+      icon: Message,
     },
   ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  // Note: I'm using state to show active item.
-  // IRL you should use the url/router.
-  const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
-  const { setOpen } = useSidebar();
+  const pathname = usePathname();
+
+  const isActive = (url: string) => {
+    return pathname === url;
+  };
+
+  const { isMobile } = useSidebar();
+
+  if (isMobile) {
+    return (
+      <div className="fixed inset-x-0 bottom-0 z-50 bg-black p-4">
+        Mobile sidebar
+      </div>
+    );
+  }
 
   return (
-    <Sidebar className="w-fit border-r">
+    <Sidebar
+      collapsible="none"
+      className="fixed inset-y-0 left-0 z-50 border-r"
+    >
       <SidebarHeader>
         <SidebarMenu>
           <div className="mt-4 flex w-full items-center justify-center">
-            <Link href="#">
-              <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
+            <Link href="/">
+              <Avatar className="h-8 w-8">
+                <AvatarImage {...data.avatar} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </Link>
           </div>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="flex flex-col items-center justify-center">
+      <SidebarContent className="flex flex-col items-center justify-center p-0">
         <SidebarGroup>
-          <SidebarGroupContent className="px-1.5 md:px-0">
-            <SidebarMenu className="gap-3">
+          <SidebarGroupContent>
+            <SidebarMenu className="items-center gap-3">
               {data.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     className="flex h-[55px] w-[55px] items-center justify-center rounded-2xl md:px-2 [&>svg]:size-6"
+                    asChild
                     tooltip={{
                       children: item.title,
                       hidden: false,
+                      className: "text-base",
                     }}
-                    onClick={() => {
-                      setActiveItem(item);
-                      setOpen(true);
-                    }}
-                    isActive={activeItem.title === item.title}
+                    isActive={isActive(item.url)}
                   >
-                    <item.icon />
+                    <Link href={item.url}>
+                      <item.icon set={isActive(item.url) ? "bold" : "light"} />
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -109,7 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="items-center">
         <ThemeToggle />
       </SidebarFooter>
     </Sidebar>

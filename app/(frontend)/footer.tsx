@@ -12,16 +12,27 @@ import { Button } from "@/components/ui/button";
 
 const Newsletter = () => {
   return (
-    <form className="flex flex-col gap-6">
-      <div className="flex items-center gap-3 rounded-full border bg-primary-foreground px-2 shadow-md">
+    <form className="flex flex-col gap-4 md:max-w-md">
+      <div className="flex items-center gap-2 rounded-full border bg-primary-foreground pl-2 pr-0.5 shadow-md">
         <Input
-          className="h-14 border-none bg-transparent !text-base placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="h-12 border-none bg-transparent !text-base placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0"
           placeholder="your@mail.com"
         ></Input>
-        <Button size={"lg"} className="rounded-full" type="submit">
-          Submit
+        <Button
+          size={"lg"}
+          className="hidden rounded-full sm:block"
+          type="submit"
+        >
+          Subscribe
         </Button>
       </div>
+      <Button
+        size={"lg"}
+        className="block h-12 rounded-full text-base sm:hidden"
+        type="submit"
+      >
+        Subscribe
+      </Button>
       <span className="pl-6 text-xs text-muted-foreground">
         By subscribing you agree to with our Privacy Policy and provide consent
         to receive updates from our company.
@@ -70,7 +81,7 @@ const LinkGroup = ({
                 href={x.url}
               >
                 {x.icon && <x.icon size={21}></x.icon>}
-                <span>{x.label}</span>
+                <span className="underline sm:no-underline">{x.label}</span>
               </Link>
             </Bounding>
           </li>
@@ -80,11 +91,28 @@ const LinkGroup = ({
   );
 };
 
+export const Credits = () => {
+  return (
+    <div className="flex flex-col-reverse gap-4 p-4 py-6 pb-28 text-sm text-muted-foreground md:flex-row md:justify-between md:px-12">
+      <span>
+        Crafted with love using{" "}
+        <Link href={"#"} className="font-medium text-blue-500 underline">
+          Next.js
+        </Link>
+      </span>
+      <div className="flex flex-col gap-4 md:flex-row">
+        <Link href="/">Privacy Policy</Link>
+        <Link href="/">Terms & Conditions</Link>
+      </div>
+    </div>
+  );
+};
+
 const Footer = () => {
   return (
-    <footer className="flex flex-col gap-8 border-t-[0.02rem] bg-gray-100 p-10 py-20">
-      <div className="grid grid-cols-5 gap-20 pb-12">
-        <div className="col-span-2">
+    <footer className="flex flex-col border-t-[0.02rem] bg-gray-100">
+      <div className="flex flex-col gap-10 p-4 py-12 md:grid md:grid-cols-6 md:gap-6 md:px-12 md:py-20">
+        <div className="col-span-3">
           <div>
             <Avatar className="h-24 w-24">
               <AvatarImage src="https://github.com/shadcn.png" alt="avatar" />
@@ -92,29 +120,22 @@ const Footer = () => {
             </Avatar>
             <div className="flex flex-col pb-4 pt-2">
               <div className="text-2xl font-bold">Christian Stamati</div>
-              <div className="text-muted-foreground">Join the newsletter!</div>
+              <div className="text-muted-foreground">
+                Your next favorite email awaits—sign up for our newsletter!
+              </div>
             </div>
           </div>
-          <div>
-            <Newsletter />
-          </div>
+
+          <Newsletter />
         </div>
-        <LinkGroup name="Pages" links={pages} />
-        <LinkGroup name="Resources" links={resources} />
-        <LinkGroup name="Socials" links={socials} />
-      </div>
-      <div className="flex justify-between border-t-[1px] py-12 text-sm text-muted-foreground">
-        <span>
-          Made with{" "}
-          <Link href={"#"} className="font-medium text-blue-500 underline">
-            Next.js
-          </Link>
-        </span>
-        <div className="flex gap-2">
-          <Link href="/">Privacy Policy</Link>
-          <Link href="/">Terms and Conditions</Link>
+        <div className="flex flex-col gap-6 sm:grid sm:grid-cols-3 md:col-span-3">
+          <LinkGroup name="Pages" links={pages} />
+          <LinkGroup name="Resources" links={resources} />
+          <LinkGroup name="Socials" links={socials} />
         </div>
       </div>
+      <div className="w-full border-b-[1px]" />
+      <Credits />
     </footer>
   );
 };

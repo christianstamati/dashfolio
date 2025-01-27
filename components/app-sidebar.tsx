@@ -60,7 +60,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   if (isMobile) {
     return (
-      <div className="fixed inset-x-0 bottom-0 z-50 bg-black p-4">
+      <div className="fixed inset-x-0 bottom-0 z-50 bg-red-400 p-4 opacity-10">
         Mobile sidebar
       </div>
     );

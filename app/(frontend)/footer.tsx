@@ -125,7 +125,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-
           <Newsletter />
         </div>
         <div className="flex flex-col gap-6 sm:grid sm:grid-cols-3 md:col-span-3">
@@ -134,7 +133,9 @@ const Footer = () => {
           <LinkGroup name="Socials" links={socials} />
         </div>
       </div>
-      <div className="w-full border-b-[1px]" />
+      <div className="px-4 md:px-12">
+        <div className="w-full border-b-[1px]" />
+      </div>
       <Credits />
     </footer>
   );

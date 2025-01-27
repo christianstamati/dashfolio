@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import {
   FaInstagram as Instagram,
@@ -8,38 +7,7 @@ import {
   FaXTwitter as X,
 } from "react-icons/fa6";
 import { Bounding } from "../../components/bounding";
-import { Button } from "@/components/ui/button";
-
-const Newsletter = () => {
-  return (
-    <form className="flex flex-col gap-4 md:max-w-md">
-      <div className="flex items-center gap-2 rounded-full border bg-primary-foreground pl-2 pr-0.5 shadow-md">
-        <Input
-          className="h-12 border-none bg-transparent !text-base placeholder:text-base focus-visible:ring-0 focus-visible:ring-offset-0"
-          placeholder="your@mail.com"
-        ></Input>
-        <Button
-          size={"lg"}
-          className="hidden rounded-full sm:block"
-          type="submit"
-        >
-          Subscribe
-        </Button>
-      </div>
-      <Button
-        size={"lg"}
-        className="block h-12 rounded-full text-base sm:hidden"
-        type="submit"
-      >
-        Subscribe
-      </Button>
-      <span className="pl-6 text-xs text-muted-foreground">
-        By subscribing you agree to with our Privacy Policy and provide consent
-        to receive updates from our company.
-      </span>
-    </form>
-  );
-};
+import { Newsletter } from "@/components/newsletter";
 
 const socials = [
   { label: "YouTube", icon: Youtube, url: "" },
@@ -60,7 +28,13 @@ const resources = [
   { label: "My Stack", url: "" },
 ];
 
-const LinkGroup = ({
+const profile = {
+  src: "https://github.com/shadcn.png",
+  alt: "profile",
+  fallback: "CS",
+};
+
+const Links = ({
   name,
   links,
 }: {
@@ -91,7 +65,7 @@ const LinkGroup = ({
   );
 };
 
-export const Credits = () => {
+const Credits = () => {
   return (
     <div className="flex flex-col-reverse gap-4 p-4 py-6 pb-28 text-sm text-muted-foreground md:flex-row md:justify-between md:px-12">
       <span>
@@ -115,8 +89,8 @@ const Footer = () => {
         <div className="col-span-3">
           <div>
             <Avatar className="h-24 w-24">
-              <AvatarImage src="https://github.com/shadcn.png" alt="avatar" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={profile.src} alt={profile.alt} />
+              <AvatarFallback>{profile.fallback}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col pb-4 pt-2">
               <div className="text-2xl font-bold">Christian Stamati</div>
@@ -128,9 +102,9 @@ const Footer = () => {
           <Newsletter />
         </div>
         <div className="flex flex-col gap-6 sm:grid sm:grid-cols-3 md:col-span-3">
-          <LinkGroup name="Pages" links={pages} />
-          <LinkGroup name="Resources" links={resources} />
-          <LinkGroup name="Socials" links={socials} />
+          <Links name="Pages" links={pages} />
+          <Links name="Resources" links={resources} />
+          <Links name="Socials" links={socials} />
         </div>
       </div>
       <div className="px-4 md:px-12">

@@ -31,9 +31,13 @@ export default buildConfig({
 	sharp,
 	plugins: [
 		s3Storage({
+			clientUploads: true,
 			collections: {
 				media: {
 					prefix: "media",
+					generateFileURL: ({ filename, prefix }) => {
+						return `https://${env.S3_BUCKET}.s3.${env.S3_REGION}.amazonaws.com/${prefix}/${filename}`;
+					},
 				},
 			},
 			bucket: env.S3_BUCKET,

@@ -23,22 +23,20 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 ### Prerequisites
 
 - Node.js 18+ 
-- npm, yarn, or pnpm
-- MongoDB or PostgreSQL database
+- Pnpm package manager
+- MongoDB database
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/dashfolio.git
+   git clone https://github.com/christianstamati/dashfolio.git
    cd dashfolio
    ```
 
 2. **Install dependencies**
    ```bash
-   npm install
-   # or
-   yarn install
+   pnpm install
    ```
 
 3. **Set up environment variables**
@@ -49,15 +47,16 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
    Configure your environment variables:
    ```env
    PAYLOAD_SECRET=your-secret-key
-   DATABASE_URI=your-database-connection-string
-   NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+   DATABASE_URL=your-database-connection-string
+   S3_ACCESS_KEY_ID=your-access-key-id
+   S3_SECRET_ACCESS_KEY=your-secret-access-key
+   S3_REGION=yeour-region
+   S3_BUCKET=your-bucket-name
    ```
 
 4. **Run the development server**
    ```bash
-   npm run dev
-   # or
-   yarn dev
+   pnpm run dev
    ```
 
 5. **Access the application**
@@ -68,22 +67,21 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 
 ```
 dashfolio/
-├── src/
-│   ├── app/                 # Next.js app directory
-│   │   ├── (pages)/        # Main portfolio pages
-│   │   │   ├── about/
-│   │   │   ├── projects/
-│   │   │   ├── writings/
-│   │   │   └── contact/
-│   │   └── admin/          # Payload CMS admin
-│   ├── components/         # Reusable React components
-│   ├── payload/           # Payload CMS configuration
-│   │   ├── collections/   # Content collections
-│   │   └── globals/       # Global settings
-│   └── styles/            # Global styles
-├── public/                # Static assets
-├── payload.config.ts      # Payload CMS configuration
-└── next.config.js        # Next.js configuration
+├── app/                   # Next.js app directory
+│   ├── (pages)/          # Main portfolio pages
+│   │   ├── about/
+│   │   ├── projects/
+│   │   ├── writings/
+│   │   └── contact/
+│   └── admin/            # Payload CMS admin
+├── components/           # Reusable React components
+├── payload/             # Payload CMS configuration
+│   ├── collections/     # Content collections
+│   └── globals/         # Global settings
+├── styles/              # Global styles
+├── public/              # Static assets
+├── payload.config.ts    # Payload CMS configuration
+└── next.config.js      # Next.js configuration
 ```
 
 ## 🎨 Customization
@@ -105,7 +103,7 @@ The project uses Tailwind CSS for styling. Customize the theme by editing:
 
 ### Collections
 
-Payload CMS collections are configured in `src/payload/collections/`:
+Payload CMS collections are configured in `payload/collections/`:
 - `Projects.ts` - Portfolio projects
 - `Posts.ts` - Blog posts and writings
 - `Media.ts` - File uploads and images
@@ -123,12 +121,12 @@ Payload CMS collections are configured in `src/payload/collections/`:
 
 1. **Build the project**
    ```bash
-   npm run build
+   pnpm run build
    ```
 
 2. **Start the production server**
    ```bash
-   npm start
+   pnpm start
    ```
 
 ## 📝 Content Guidelines
@@ -154,19 +152,6 @@ Payload CMS collections are configured in `src/payload/collections/`:
 DATABASE_URI=mongodb://localhost:27017/dashfolio
 ```
 
-**PostgreSQL**
-```env
-DATABASE_URI=postgresql://username:password@localhost:5432/dashfolio
-```
-
-### Email Configuration (for contact forms)
-```env
-SMTP_HOST=your-smtp-host
-SMTP_PORT=587
-SMTP_USER=your-email@domain.com
-SMTP_PASS=your-email-password
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -189,3 +174,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 If you have any questions or need help with setup, please:
 - Open an issue on GitHub
+- Send me an email: christian.stamati@gmail.com

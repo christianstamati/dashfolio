@@ -68,6 +68,9 @@ importers:
       react-dom:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
+      react-iconly:
+        specifier: ^2.2.10
+        version: 2.2.10(react@19.1.0)
       sharp:
         specifier: ^0.34.3
         version: 0.34.3
@@ -2840,6 +2843,12 @@ packages:
     resolution: {integrity: sha512-GQDxZ5Jd+Aq/qUxbCm1UtzmL/s++V7zKgE8yMktJiCQXCCFZnMZh9ng+6/Ne6PjNSXH0L9CjeOEREfRnq6Duag==}
     peerDependencies:
       react: '>=16.13.1'
+
+  react-iconly@2.2.10:
+    resolution: {integrity: sha512-AZYJRzXMj7yw+KIFUkom3cWhvfbrdlbOLbBDuFnPJrbrgynmNCcJhX8dIQ/JGKq5XDo1P9j8Gico0xZnV/bXWA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16.8.0'
 
   react-image-crop@10.1.8:
     resolution: {integrity: sha512-4rb8XtXNx7ZaOZarKKnckgz4xLMvds/YrU6mpJfGhGAsy2Mg4mIw1x+DCCGngVGq2soTBVVOxx2s/C6mTX9+pA==}
@@ -6597,6 +6606,10 @@ snapshots:
   react-error-boundary@4.1.2(react@19.1.0):
     dependencies:
       '@babel/runtime': 7.28.2
+      react: 19.1.0
+
+  react-iconly@2.2.10(react@19.1.0):
+    dependencies:
       react: 19.1.0
 
   react-image-crop@10.1.8(react@19.1.0):

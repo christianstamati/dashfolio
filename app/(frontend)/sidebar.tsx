@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, Folder, Home, Message, Profile } from "iconsax-reactjs";
+import { PathTool, Folder, Home, Profile, Sms } from "iconsax-reactjs";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -18,12 +18,12 @@ const links = [
 	{
 		label: "Contact",
 		href: "/contact",
-		icon: Message,
+		icon: Sms,
 	},
 	{
 		label: "Writing",
 		href: "/writing",
-		icon: Edit,
+		icon: PathTool,
 	},
 	{
 		label: "About",

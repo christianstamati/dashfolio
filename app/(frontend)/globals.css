@@ -118,3 +118,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Dynamic sidebar height */
+.group:hover {
+  height: var(--expanded-height) !important;
+}

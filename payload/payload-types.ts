@@ -68,8 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    projects: Project;
-    writings: Writing;
+    pages: Page;
     media: Media;
     inquiries: Inquiry;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,8 +78,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    projects: ProjectsSelect<false> | ProjectsSelect<true>;
-    writings: WritingsSelect<false> | WritingsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -90,8 +88,14 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    menu: Menu;
+    footer: Footer;
+  };
+  globalsSelect: {
+    menu: MenuSelect<false> | MenuSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -145,21 +149,13 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "projects".
+ * via the `definition` "pages".
  */
-export interface Project {
+export interface Page {
   id: string;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "writings".
- */
-export interface Writing {
-  id: string;
-  name: string;
+  title: string;
+  slug: string;
+  content?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -207,12 +203,8 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
-        relationTo: 'projects';
-        value: string | Project;
-      } | null)
-    | ({
-        relationTo: 'writings';
-        value: string | Writing;
+        relationTo: 'pages';
+        value: string | Page;
       } | null)
     | ({
         relationTo: 'media';
@@ -288,19 +280,12 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "projects_select".
+ * via the `definition` "pages_select".
  */
-export interface ProjectsSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "writings_select".
- */
-export interface WritingsSelect<T extends boolean = true> {
-  name?: T;
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -365,6 +350,64 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu".
+ */
+export interface Menu {
+  id: string;
+  links: {
+    label: string;
+    collapsed?: boolean | null;
+    icon: string;
+    type?: ('page' | 'external') | null;
+    page?: (string | null) | Page;
+    href?: string | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu_select".
+ */
+export interface MenuSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        label?: T;
+        collapsed?: T;
+        icon?: T;
+        type?: T;
+        page?: T;
+        href?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

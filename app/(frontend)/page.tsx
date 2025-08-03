@@ -1,3 +1,3 @@
-export default function Home() {
-	return <div>This is home page</div>;
-}
+import PageTemplate from "./[slug]/page";
+
+export default PageTemplate;

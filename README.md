@@ -50,7 +50,7 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
    DATABASE_URL=your-database-connection-string
    S3_ACCESS_KEY_ID=your-access-key-id
    S3_SECRET_ACCESS_KEY=your-secret-access-key
-   S3_REGION=yeour-region
+   S3_REGION=your-region
    S3_BUCKET=your-bucket-name
    ```
 

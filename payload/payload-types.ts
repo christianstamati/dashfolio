@@ -360,12 +360,13 @@ export interface Menu {
   links: {
     label: string;
     collapsed?: boolean | null;
-    icon: string;
+    icon: 'home' | 'folder' | 'message' | 'writing' | 'profile' | 'closeCircle' | 'layer';
     type?: ('page' | 'external') | null;
     page?: (string | null) | Page;
     href?: string | null;
     id?: string | null;
   }[];
+  homePage?: (string | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -395,6 +396,7 @@ export interface MenuSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  homePage?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

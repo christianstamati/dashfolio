@@ -6,6 +6,5 @@ export default async function Sidebar() {
 	const global = await payload.findGlobal({
 		slug: "menu",
 	});
-	const links = global.links;
-	return <SidebarItems links={links} />;
+	return <SidebarItems menu={global} />;
 }

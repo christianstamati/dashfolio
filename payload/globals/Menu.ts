@@ -1,4 +1,5 @@
 import type { GlobalConfig } from "payload";
+import iconsaxField from "../lib/iconsax-field";
 
 export const Menu: GlobalConfig = {
 	slug: "menu",
@@ -22,11 +23,7 @@ export const Menu: GlobalConfig = {
 					required: false,
 					defaultValue: false,
 				},
-				{
-					name: "icon",
-					type: "text",
-					required: true,
-				},
+				iconsaxField(),
 				{
 					name: "type",
 					type: "select",
@@ -42,7 +39,6 @@ export const Menu: GlobalConfig = {
 						},
 					],
 				},
-
 				{
 					name: "page",
 					type: "relationship",
@@ -61,6 +57,11 @@ export const Menu: GlobalConfig = {
 					},
 				},
 			],
+		},
+		{
+			name: "homePage",
+			type: "relationship",
+			relationTo: "pages",
 		},
 	],
 };

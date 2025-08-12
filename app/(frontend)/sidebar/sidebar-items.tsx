@@ -1,17 +1,9 @@
 "use client";
 
-import { Folder, Home, PathTool, Profile, Sms } from "iconsax-reactjs";
 import Link from "next/link";
+import Iconsax from "@/components/iconsax";
 import { cn } from "@/lib/utils";
 import type { Menu, Page } from "@/payload/payload-types";
-
-const icons = {
-	home: Home,
-	folder: Folder,
-	message: Sms,
-	writing: PathTool,
-	profile: Profile,
-};
 
 const SidebarItem = ({
 	className,
@@ -22,7 +14,6 @@ const SidebarItem = ({
 	icon: string;
 	label: string;
 }) => {
-	const Icon = icons[icon as keyof typeof icons] || Home;
 	return (
 		<div
 			className={cn(
@@ -31,7 +22,7 @@ const SidebarItem = ({
 			)}
 		>
 			<div className="flex size-14 flex-shrink-0 items-center justify-center">
-				<Icon variant="Bold" size={24} />
+				<Iconsax icon={icon} variant="Bold" size={24} />
 			</div>
 			<span className="whitespace-nowrap font-semibold text-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 				{label}
@@ -40,15 +31,28 @@ const SidebarItem = ({
 	);
 };
 
-const extractLink = (link: Menu["links"][0]): string => {
+const extractLink = (
+	link: Menu["links"][0],
+	homePage: Menu["homePage"],
+): string => {
 	if (link.type === "page") {
 		const page = link.page as Page;
-		return `/${page.slug}`;
+
+		if (
+			typeof homePage !== "string" &&
+			page.slug &&
+			page.slug !== homePage?.slug
+		) {
+			return `/${page.slug}`;
+		}
+
+		return "/";
 	}
 	return link.href || "";
 };
 
-export default function SidebarItems({ links }: { links: Menu["links"] }) {
+export default function SidebarItems({ menu }: { menu: Menu }) {
+	const { links, homePage } = menu;
 	// Separate visible and collapsed items
 	const visibleLinks = links.filter((link) => !link.collapsed);
 	const collapsedLinks = links.filter((link) => link.collapsed);
@@ -74,7 +78,7 @@ export default function SidebarItems({ links }: { links: Menu["links"] }) {
 			}
 		>
 			{sortedLinks.map((link, index) => (
-				<Link href={extractLink(link)} key={`${link.label}-${index}`}>
+				<Link href={extractLink(link, homePage)} key={`${link.label}-${index}`}>
 					<SidebarItem
 						icon={link.icon}
 						label={link.label}

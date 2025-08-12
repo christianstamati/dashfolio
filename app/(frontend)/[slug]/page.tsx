@@ -1,7 +1,30 @@
 import { draftMode } from "next/headers";
+import type { Metadata } from "next/types";
 import type { RequiredDataFromCollectionSlug } from "payload";
 import { cache } from "react";
 import { getPayloadClient } from "@/payload/client";
+import { generateMeta } from "@/payload/utilities/generate-meta";
+
+const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+	const { isEnabled: draft } = await draftMode();
+
+	const payload = await getPayloadClient();
+
+	const result = await payload.find({
+		collection: "pages",
+		draft,
+		limit: 1,
+		pagination: false,
+		overrideAccess: draft,
+		where: {
+			slug: {
+				equals: slug,
+			},
+		},
+	});
+
+	return result.docs?.[0] || null;
+});
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -27,38 +50,6 @@ export async function generateStaticParams() {
 	return params;
 }
 
-// export async function generateMetadata({
-// 	params: paramsPromise,
-// }: Args): Promise<Metadata> {
-// 	const { slug = "home" } = await paramsPromise;
-// 	const page = await queryPageBySlug({
-// 		slug,
-// 	});
-
-// 	return generateMeta({ doc: page });
-// }
-
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = await draftMode();
-
-	const payload = await getPayloadClient();
-
-	const result = await payload.find({
-		collection: "pages",
-		draft,
-		limit: 1,
-		pagination: false,
-		overrideAccess: draft,
-		where: {
-			slug: {
-				equals: slug,
-			},
-		},
-	});
-
-	return result.docs?.[0] || null;
-});
-
 type Args = {
 	params: Promise<{
 		slug?: string;
@@ -77,7 +68,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 	// Remove this code once your website is seeded
 	if (!page && slug === "home") {
 		page = {
-			content: "Static home page",
+			layout: [],
 			title: "Home",
 			slug: "home",
 		};
@@ -87,7 +78,25 @@ export default async function Page({ params: paramsPromise }: Args) {
 		return <div>Page not found</div>;
 	}
 
-	const { content } = page;
+	const { layout } = page;
 
-	return <main className="pt-16 pb-24">CURRENT PAGE: {slug}</main>;
+	return (
+		<main className="pt-16 pb-24">
+			{layout.map((block) => (
+				<div key={block.id}>{block.blockType}</div>
+			))}
+		</main>
+	);
+}
+
+export async function generateMetadata({
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug = "home" } = await paramsPromise;
+
+	const page = await queryPageBySlug({
+		slug,
+	});
+
+	return generateMeta({ doc: page });
 }

@@ -1,5 +1,5 @@
 import type { GlobalConfig } from "payload";
-import iconsaxField from "../lib/iconsax-field";
+import iconsaxField from "../fields/iconsax-field";
 
 export const Menu: GlobalConfig = {
 	slug: "menu",

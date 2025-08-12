@@ -155,9 +155,27 @@ export interface Page {
   id: string;
   title: string;
   slug: string;
-  content?: string | null;
+  layout: ExampleBlock[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExampleBlock".
+ */
+export interface ExampleBlock {
+  content?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'example-block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -285,9 +303,29 @@ export interface UsersSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        'example-block'?: T | ExampleBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExampleBlock_select".
+ */
+export interface ExampleBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

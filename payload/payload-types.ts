@@ -155,6 +155,11 @@ export interface Page {
   id: string;
   title: string;
   slug: string;
+  hero: {
+    header?: string | null;
+    description?: string | null;
+    type: 'none' | 'header';
+  };
   layout: ExampleBlock[];
   meta?: {
     title?: string | null;
@@ -303,6 +308,13 @@ export interface UsersSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  hero?:
+    | T
+    | {
+        header?: T;
+        description?: T;
+        type?: T;
+      };
   layout?:
     | T
     | {

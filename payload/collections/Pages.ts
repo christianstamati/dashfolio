@@ -39,6 +39,44 @@ export const Pages: CollectionConfig = {
 			type: "tabs",
 			tabs: [
 				{
+					name: "hero",
+					fields: [
+						{
+							name: "header",
+							type: "text",
+							required: true,
+							admin: {
+								condition: (data) => data.hero.type === "header",
+							},
+						},
+						{
+							name: "description",
+							type: "textarea",
+							required: true,
+							admin: {
+								condition: (data) => data.hero.type === "header",
+							},
+						},
+						{
+							name: "type",
+							type: "select",
+							required: true,
+							defaultValue: "none",
+							options: [
+								{
+									label: "None",
+									value: "none",
+								},
+								{
+									label: "Header",
+									value: "header",
+								},
+							],
+						},
+					],
+					label: "Hero",
+				},
+				{
 					fields: [
 						{
 							name: "layout",

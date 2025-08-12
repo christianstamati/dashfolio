@@ -68,6 +68,11 @@ export default async function Page({ params: paramsPromise }: Args) {
 	// Remove this code once your website is seeded
 	if (!page && slug === "home") {
 		page = {
+			hero: {
+				type: "none",
+				header: "Home",
+				description: "Home description",
+			},
 			layout: [],
 			title: "Home",
 			slug: "home",
@@ -78,13 +83,34 @@ export default async function Page({ params: paramsPromise }: Args) {
 		return <div>Page not found</div>;
 	}
 
-	const { layout } = page;
+	const { layout, hero } = page;
 
 	return (
-		<main className="pt-16 pb-24">
-			{layout.map((block) => (
-				<div key={block.id}>{block.blockType}</div>
-			))}
+		<main className="min-h-screen pt-16 pb-24">
+			<div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+				{/* Hero Section */}
+				{hero && hero.type !== "none" && (
+					<div className="mb-12">
+						<h1 className="mb-4 font-bold text-xl sm:text-2xl lg:text-3xl">
+							{hero.header || page.title}
+						</h1>
+						{hero.description && (
+							<p className="max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">
+								{hero.description}
+							</p>
+						)}
+					</div>
+				)}
+
+				{/* Layout Blocks */}
+				<div className="space-y-8">
+					{layout.map((block) => (
+						<div key={block.id} className="w-full">
+							{block.blockType}
+						</div>
+					))}
+				</div>
+			</div>
 		</main>
 	);
 }

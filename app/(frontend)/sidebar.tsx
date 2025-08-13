@@ -8,9 +8,10 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useSettings } from "@/hooks/queries/use-settings";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import type { Menu, Page } from "@/payload/payload-types";
+import type { Menu, Page, Setting } from "@/payload/payload-types";
 
 type SidebarProps = {
 	menu: Menu;
@@ -44,7 +45,7 @@ const SidebarDesktopItem = ({
 
 const extractLink = (
 	link: Menu["links"][0],
-	homePage: Menu["homePage"],
+	homePage: Setting["homePage"],
 ): string => {
 	if (link.type === "page") {
 		const page = link.page as Page;
@@ -63,7 +64,10 @@ const extractLink = (
 };
 
 function SidebarDesktop({ menu }: SidebarProps) {
-	const { links, homePage } = menu;
+	const { links } = menu;
+
+	const { data: settings } = useSettings();
+
 	// Separate visible and collapsed items
 	const visibleLinks = links.filter((link) => !link.collapsed);
 	const collapsedLinks = links.filter((link) => link.collapsed);
@@ -89,7 +93,10 @@ function SidebarDesktop({ menu }: SidebarProps) {
 			}
 		>
 			{sortedLinks.map((link, index) => (
-				<Link href={extractLink(link, homePage)} key={`${link.label}-${index}`}>
+				<Link
+					href={extractLink(link, settings?.homePage)}
+					key={`${link.label}-${index}`}
+				>
 					<SidebarDesktopItem
 						icon={link.icon}
 						label={link.label}
@@ -104,7 +111,11 @@ function SidebarDesktop({ menu }: SidebarProps) {
 }
 
 function SidebarMobile({ menu }: SidebarProps) {
-	const { links, homePage } = menu;
+	const { links } = menu;
+
+	const { data: settings } = useSettings();
+
+	const homePage = settings?.homePage;
 
 	// Take first 4 items for the main menu
 	const mainLinks = links.slice(0, 4);

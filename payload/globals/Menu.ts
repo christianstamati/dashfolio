@@ -58,10 +58,5 @@ export const Menu: GlobalConfig = {
 				},
 			],
 		},
-		{
-			name: "homePage",
-			type: "relationship",
-			relationTo: "pages",
-		},
 	],
 };

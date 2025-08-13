@@ -1,5 +1,6 @@
 import type React from "react";
 import "./globals.css";
+import { QueryClientProvider } from "@/components/query-client-provider";
 import { getPayloadClient } from "@/payload/client";
 import Footer from "./footer";
 import { Sidebar } from "./sidebar";
@@ -13,11 +14,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className="flex h-screen overflow-hidden bg-neutral-50">
-				<Sidebar menu={menu} />
-				<div className="w-full">
-					<main>{children}</main>
-					<Footer />
-				</div>
+				<QueryClientProvider>
+					<Sidebar menu={menu} />
+					<div className="w-full">
+						<main>{children}</main>
+						<Footer />
+					</div>
+				</QueryClientProvider>
 			</body>
 		</html>
 	);

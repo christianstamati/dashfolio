@@ -95,10 +95,12 @@ export interface Config {
   globals: {
     menu: Menu;
     footer: Footer;
+    settings: Setting;
   };
   globalsSelect: {
     menu: MenuSelect<false> | MenuSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -191,6 +193,7 @@ export interface ExampleBlock {
  * via the `definition` "ProjectListViewProps".
  */
 export interface ProjectListViewProps {
+  projectPage: string | Page;
   id?: string | null;
   blockName?: string | null;
   blockType: 'project-list-view';
@@ -390,6 +393,7 @@ export interface ExampleBlockSelect<T extends boolean = true> {
  * via the `definition` "ProjectListViewProps_select".
  */
 export interface ProjectListViewPropsSelect<T extends boolean = true> {
+  projectPage?: T;
   id?: T;
   blockName?: T;
 }
@@ -492,7 +496,6 @@ export interface Menu {
     href?: string | null;
     id?: string | null;
   }[];
-  homePage?: (string | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -503,6 +506,18 @@ export interface Menu {
 export interface Footer {
   id: string;
   copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: string;
+  homePage?: (string | null) | Page;
+  projectPage?: (string | null) | Page;
+  writingPage?: (string | null) | Page;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -522,7 +537,6 @@ export interface MenuSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
-  homePage?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -533,6 +547,18 @@ export interface MenuSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  homePage?: T;
+  projectPage?: T;
+  writingPage?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

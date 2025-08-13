@@ -14,6 +14,7 @@ import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
 import { Footer } from "./globals/Footer";
 import { Menu } from "./globals/Menu";
+import { Settings } from "./globals/Settings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,7 +27,7 @@ export default buildConfig({
 		},
 	},
 	collections: [Users, Pages, Projects, Media, Inquiries, Companies],
-	globals: [Menu, Footer],
+	globals: [Menu, Footer, Settings],
 	editor: lexicalEditor(),
 	secret: env.PAYLOAD_SECRET,
 	typescript: {

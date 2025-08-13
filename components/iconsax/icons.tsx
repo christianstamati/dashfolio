@@ -3,6 +3,7 @@ import {
 	Folder,
 	Home,
 	Layer,
+	More,
 	PathTool,
 	Profile,
 	Sms,
@@ -16,4 +17,5 @@ export const iconsaxIcons = {
 	profile: Profile,
 	closeCircle: CloseCircle,
 	layer: Layer,
+	more: More,
 } as const;

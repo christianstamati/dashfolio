@@ -113,7 +113,7 @@ function SidebarMobile({ menu }: SidebarProps) {
 
 	return (
 		<div className="fixed right-0 bottom-0 left-0 z-50 border-border border-t bg-white">
-			<div className="flex items-center justify-around px-4 py-2">
+			<div className="grid grid-cols-5 items-center px-4 py-2">
 				{/* Main menu items */}
 				{mainLinks.map((link, index) => (
 					<Link
@@ -126,15 +126,15 @@ function SidebarMobile({ menu }: SidebarProps) {
 					</Link>
 				))}
 
-				{/* Dropdown menu for additional items */}
-				{dropdownLinks.length > 0 && (
+				{/* More dropdown as the 5th item */}
+				{dropdownLinks.length > 0 ? (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<button
 								type="button"
 								className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-neutral-100"
 							>
-								<Iconsax icon="More" variant="Bold" size={20} />
+								<Iconsax icon="more" size={20} />
 								<span className="font-medium text-xs">More</span>
 							</button>
 						</DropdownMenuTrigger>
@@ -159,6 +159,9 @@ function SidebarMobile({ menu }: SidebarProps) {
 							))}
 						</DropdownMenuContent>
 					</DropdownMenu>
+				) : (
+					// Empty div to maintain grid layout when no dropdown is needed
+					<div />
 				)}
 			</div>
 		</div>

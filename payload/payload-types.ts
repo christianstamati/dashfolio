@@ -486,7 +486,7 @@ export interface Menu {
   links: {
     label: string;
     collapsed?: boolean | null;
-    icon: 'home' | 'folder' | 'message' | 'writing' | 'profile' | 'closeCircle' | 'layer';
+    icon: 'home' | 'folder' | 'message' | 'writing' | 'profile' | 'closeCircle' | 'layer' | 'more';
     type?: ('page' | 'external') | null;
     page?: (string | null) | Page;
     href?: string | null;

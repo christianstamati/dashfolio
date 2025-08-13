@@ -6,9 +6,11 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 import { env } from "@/env/server";
+import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
+import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
 import { Footer } from "./globals/Footer";
 import { Menu } from "./globals/Menu";
@@ -23,7 +25,7 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
-	collections: [Users, Pages, Media, Inquiries],
+	collections: [Users, Pages, Projects, Media, Inquiries, Companies],
 	globals: [Menu, Footer],
 	editor: lexicalEditor(),
 	secret: env.PAYLOAD_SECRET,

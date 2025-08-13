@@ -6,6 +6,7 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import type { CollectionConfig } from "payload";
 import { ExampleBlock } from "../blocks/example-block/config";
+import { ProjectListView } from "../blocks/project-list-view/config";
 
 export const Pages: CollectionConfig = {
 	slug: "pages",
@@ -81,7 +82,7 @@ export const Pages: CollectionConfig = {
 						{
 							name: "layout",
 							type: "blocks",
-							blocks: [ExampleBlock],
+							blocks: [ExampleBlock, ProjectListView],
 							required: true,
 						},
 					],

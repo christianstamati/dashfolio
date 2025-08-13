@@ -69,8 +69,10 @@ export interface Config {
   collections: {
     users: User;
     pages: Page;
+    projects: Project;
     media: Media;
     inquiries: Inquiry;
+    companies: Company;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,8 +81,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
+    companies: CompaniesSelect<false> | CompaniesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -160,7 +164,7 @@ export interface Page {
     description?: string | null;
     type: 'none' | 'header';
   };
-  layout: ExampleBlock[];
+  layout: (ExampleBlock | ProjectListViewProps)[];
   meta?: {
     title?: string | null;
     /**
@@ -184,6 +188,15 @@ export interface ExampleBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectListViewProps".
+ */
+export interface ProjectListViewProps {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'project-list-view';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -201,6 +214,30 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  company?: (string | null) | Company;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "companies".
+ */
+export interface Company {
+  id: string;
+  name: string;
+  logo?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -230,12 +267,20 @@ export interface PayloadLockedDocument {
         value: string | Page;
       } | null)
     | ({
+        relationTo: 'projects';
+        value: string | Project;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
     | ({
         relationTo: 'inquiries';
         value: string | Inquiry;
+      } | null)
+    | ({
+        relationTo: 'companies';
+        value: string | Company;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -319,6 +364,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         'example-block'?: T | ExampleBlockSelect<T>;
+        'project-list-view'?: T | ProjectListViewPropsSelect<T>;
       };
   meta?:
     | T
@@ -338,6 +384,26 @@ export interface ExampleBlockSelect<T extends boolean = true> {
   content?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectListViewProps_select".
+ */
+export interface ProjectListViewPropsSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  company?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -366,6 +432,16 @@ export interface InquiriesSelect<T extends boolean = true> {
   name?: T;
   email?: T;
   message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "companies_select".
+ */
+export interface CompaniesSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
   updatedAt?: T;
   createdAt?: T;
 }

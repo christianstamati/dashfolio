@@ -2,10 +2,21 @@
 
 import Link from "next/link";
 import Iconsax from "@/components/iconsax";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import type { Menu, Page } from "@/payload/payload-types";
 
-const SidebarItem = ({
+type SidebarProps = {
+	menu: Menu;
+};
+
+const SidebarDesktopItem = ({
 	className,
 	icon,
 	label,
@@ -51,7 +62,7 @@ const extractLink = (
 	return link.href || "";
 };
 
-export default function SidebarItems({ menu }: { menu: Menu }) {
+function SidebarDesktop({ menu }: SidebarProps) {
 	const { links, homePage } = menu;
 	// Separate visible and collapsed items
 	const visibleLinks = links.filter((link) => !link.collapsed);
@@ -79,7 +90,7 @@ export default function SidebarItems({ menu }: { menu: Menu }) {
 		>
 			{sortedLinks.map((link, index) => (
 				<Link href={extractLink(link, homePage)} key={`${link.label}-${index}`}>
-					<SidebarItem
+					<SidebarDesktopItem
 						icon={link.icon}
 						label={link.label}
 						className={
@@ -90,4 +101,76 @@ export default function SidebarItems({ menu }: { menu: Menu }) {
 			))}
 		</div>
 	);
+}
+
+function SidebarMobile({ menu }: SidebarProps) {
+	const { links, homePage } = menu;
+
+	// Take first 4 items for the main menu
+	const mainLinks = links.slice(0, 4);
+	// Remaining items go in the dropdown
+	const dropdownLinks = links.slice(4);
+
+	return (
+		<div className="fixed right-0 bottom-0 left-0 z-50 border-border border-t bg-white">
+			<div className="flex items-center justify-around px-4 py-2">
+				{/* Main menu items */}
+				{mainLinks.map((link, index) => (
+					<Link
+						href={extractLink(link, homePage)}
+						key={`mobile-${link.label}-${index}`}
+						className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-neutral-100"
+					>
+						<Iconsax icon={link.icon} variant="Bold" size={20} />
+						<span className="font-medium text-xs">{link.label}</span>
+					</Link>
+				))}
+
+				{/* Dropdown menu for additional items */}
+				{dropdownLinks.length > 0 && (
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<button
+								type="button"
+								className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-neutral-100"
+							>
+								<Iconsax icon="More" variant="Bold" size={20} />
+								<span className="font-medium text-xs">More</span>
+							</button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent
+							align="center"
+							side="top"
+							className="mb-2 w-48"
+						>
+							{dropdownLinks.map((link, index) => (
+								<DropdownMenuItem
+									key={`dropdown-${link.label}-${index}`}
+									asChild
+								>
+									<Link
+										href={extractLink(link, homePage)}
+										className="flex w-full items-center gap-2"
+									>
+										<Iconsax icon={link.icon} variant="Bold" size={16} />
+										{link.label}
+									</Link>
+								</DropdownMenuItem>
+							))}
+						</DropdownMenuContent>
+					</DropdownMenu>
+				)}
+			</div>
+		</div>
+	);
+}
+
+export function Sidebar(props: SidebarProps) {
+	const isMobile = useIsMobile();
+
+	if (isMobile) {
+		return <SidebarMobile {...props} />;
+	}
+
+	return <SidebarDesktop {...props} />;
 }

@@ -2,6 +2,7 @@ import { draftMode } from "next/headers";
 import type { Metadata } from "next/types";
 import type { RequiredDataFromCollectionSlug } from "payload";
 import { cache } from "react";
+import { RenderBlocks } from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utilities/generate-meta";
 
@@ -83,19 +84,19 @@ export default async function Page({ params: paramsPromise }: Args) {
 		return <div>Page not found</div>;
 	}
 
-	const { layout, hero } = page;
+	const { hero } = page;
 
 	return (
-		<main className="min-h-screen pt-16 pb-24">
-			<div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+		<main className="h-screen overflow-auto pt-16 pb-24">
+			<div className="mx-auto max-w-xl px-4 sm:px-6">
 				{/* Hero Section */}
 				{hero && hero.type !== "none" && (
-					<div className="mb-12">
-						<h1 className="mb-4 font-bold text-xl sm:text-2xl lg:text-3xl">
+					<div>
+						<h1 className="mb-4 font-bold text-2xl">
 							{hero.header || page.title}
 						</h1>
 						{hero.description && (
-							<p className="max-w-2xl text-lg text-muted-foreground leading-relaxed sm:text-xl">
+							<p className="max-w-2xl text-base text-muted-foreground">
 								{hero.description}
 							</p>
 						)}
@@ -103,13 +104,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 				)}
 
 				{/* Layout Blocks */}
-				<div className="space-y-8">
-					{layout.map((block) => (
-						<div key={block.id} className="w-full">
-							{block.blockType}
-						</div>
-					))}
-				</div>
+				<RenderBlocks target={page} />
 			</div>
 		</main>
 	);

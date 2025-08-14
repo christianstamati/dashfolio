@@ -7,6 +7,7 @@
  *
  */
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -44,24 +45,23 @@ const writings = [
 
 export default function Writings() {
 	return (
-		<section className="px-4 py-12 sm:py-16">
+		<section>
 			<div className="container mx-auto">
-				<h2 className="mb-8 text-center font-bold text-2xl sm:mb-12 sm:text-3xl">
-					Latest Writings
-				</h2>
-
+				<h2 className="mb-8 font-semibold text-3xl tracking-tight">Writings</h2>
 				<div className="mx-auto max-w-3xl space-y-4 sm:space-y-6">
 					{writings.map((writing) => (
-						<Card key={writing.id}>
+						<Card key={writing.id} className="p-0">
 							<CardHeader className="p-4 sm:p-6">
-								<div className="flex flex-col space-y-4 sm:flex-row sm:items-start sm:justify-between sm:space-y-0">
-									<div className="flex-1">
-										<CardTitle className="mb-2 text-lg sm:text-xl">
-											{writing.title}
-										</CardTitle>
-										<CardDescription className="mb-4 text-sm sm:text-base">
-											{writing.description}
-										</CardDescription>
+								<CardTitle className="mb-2">{writing.title}</CardTitle>
+								<CardDescription>{writing.description}</CardDescription>
+
+								<div className="flex items-center justify-between gap-2">
+									<div className="text-muted-foreground text-xs sm:text-sm">
+										{new Date(writing.date).toLocaleDateString("en-US", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})}
 									</div>
 									<Button
 										variant="outline"
@@ -69,20 +69,16 @@ export default function Writings() {
 										className="self-start sm:self-auto"
 										asChild
 									>
-										<a href={writing.href}>Read more</a>
+										<Link href={writing.href}>Read more</Link>
 									</Button>
-								</div>
-								<div className="text-muted-foreground text-xs sm:text-sm">
-									{new Date(writing.date).toLocaleDateString("en-US", {
-										year: "numeric",
-										month: "long",
-										day: "numeric",
-									})}
 								</div>
 							</CardHeader>
 						</Card>
 					))}
 				</div>
+				<Button asChild size="lg" variant="outline" className="mt-6 w-full">
+					<Link href="/writings">View all writings</Link>
+				</Button>
 			</div>
 		</section>
 	);

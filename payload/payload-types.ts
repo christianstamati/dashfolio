@@ -193,8 +193,10 @@ export interface Media {
  */
 export interface Inquiry {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
+  subject: string;
   message: string;
   updatedAt: string;
   createdAt: string;
@@ -326,8 +328,10 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "inquiries_select".
  */
 export interface InquiriesSelect<T extends boolean = true> {
-  name?: T;
+  firstName?: T;
+  lastName?: T;
   email?: T;
+  subject?: T;
   message?: T;
   updatedAt?: T;
   createdAt?: T;

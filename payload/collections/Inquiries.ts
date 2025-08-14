@@ -10,7 +10,15 @@ export const Inquiries: CollectionConfig = {
 	},
 	fields: [
 		{
-			name: "name",
+			name: "firstName",
+			type: "text",
+			required: true,
+			admin: {
+				readOnly: true,
+			},
+		},
+		{
+			name: "lastName",
 			type: "text",
 			required: true,
 			admin: {
@@ -20,6 +28,14 @@ export const Inquiries: CollectionConfig = {
 		{
 			name: "email",
 			type: "email",
+			required: true,
+			admin: {
+				readOnly: true,
+			},
+		},
+		{
+			name: "subject",
+			type: "text",
 			required: true,
 			admin: {
 				readOnly: true,

@@ -28,9 +28,9 @@ export const sidebarData = {
 			href: "/contact",
 		},
 		{
-			label: "Writing",
+			label: "Writings",
 			icon: PathTool,
-			href: "/writing",
+			href: "/writings",
 			collapsed: true,
 		},
 		{

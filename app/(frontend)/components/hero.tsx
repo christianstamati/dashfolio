@@ -20,7 +20,7 @@ export default function Hero() {
 					<AvatarFallback>CS</AvatarFallback>
 				</Avatar>
 				<h1 className="mb-2 font-semibold text-3xl tracking-tight">
-					Howdy, I’m Chri.
+					I’m Chri.
 				</h1>
 				<p className="mx-auto mb-6 text-base text-muted-foreground sm:mb-8">
 					I’m a Software Developer who turns bold ideas into seamless digital

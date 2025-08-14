@@ -1,3 +1,5 @@
+![project-preview](./images/project-thumbnail.png)
+
 # Dashfolio
 
 A modern, dashboard-style portfolio website built with Next.js and Payload CMS. Clean, professional, and easily customizable for showcasing your work and content.

@@ -1,5 +1,4 @@
 import type { Project } from "@payload-types";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
@@ -18,7 +17,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 		typeof project.company !== "string" ? project.company?.name : undefined;
 
 	return (
-		<Card className="group hover:-translate-y-1 cursor-pointer p-0 transition-all duration-300 hover:shadow-lg">
+		<Card className="cursor-pointer p-0">
 			<CardContent className="p-0">
 				<div className="flex h-full flex-col md:flex-row">
 					{/* Thumbnail Section */}
@@ -44,14 +43,8 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
 							</p>
 						</div>
-
 						<div className="text-muted-foreground text-sm">
 							{company}, {createdAt}
-						</div>
-
-						{/* Action Arrow */}
-						<div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100">
-							<ChevronRight className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
 						</div>
 					</div>
 				</div>
@@ -68,7 +61,7 @@ export async function ProjectList() {
 	});
 	return (
 		<div className="my-16">
-			<div className="flex flex-col gap-6">
+			<div className="flex flex-col gap-4">
 				{projects.docs.map((project) => (
 					<Link href={`/projects/${project.slug}`} key={project.id}>
 						<ProjectCard project={project} />

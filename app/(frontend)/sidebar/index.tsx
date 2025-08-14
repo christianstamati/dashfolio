@@ -23,6 +23,11 @@ export const sidebarData = {
 			href: "/projects",
 		},
 		{
+			label: "Contact",
+			icon: Sms,
+			href: "/contact",
+		},
+		{
 			label: "Writing",
 			icon: PathTool,
 			href: "/writing",
@@ -32,12 +37,6 @@ export const sidebarData = {
 			label: "Stack",
 			icon: Layer,
 			href: "/stack",
-			collapsed: true,
-		},
-		{
-			label: "Contact",
-			icon: Sms,
-			href: "/contact",
 			collapsed: true,
 		},
 	],

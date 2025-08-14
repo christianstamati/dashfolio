@@ -7,7 +7,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 	const { children } = props;
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className="flex h-screen flex-col overflow-auto">
+			<body className="flex h-svh flex-col overflow-auto">
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="light"
@@ -15,7 +15,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 					disableTransitionOnChange
 				>
 					<Sidebar />
-					<main className="pt-16 pb-24">
+					<main className="pt-6 pb-24 sm:pt-16">
 						<div className="mx-auto max-w-xl px-4 sm:px-6">{children}</div>
 					</main>
 				</ThemeProvider>

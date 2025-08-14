@@ -7,15 +7,17 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 - **Home** - Welcome page with an overview of your professional profile
 - **About** - Personal background, skills, and experience
 - **Projects** - Showcase of your work and portfolio pieces
-- **Writings** - Blog posts, articles, and written content
 - **Contact** - Easy ways for visitors to get in touch
+- **Writings** - Blog posts, articles, and written content
+- **Stack** - Tools used every day
+- **Themes** - Switch from Light to Dark mode
 
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/) - React framework for production
 - **CMS**: [Payload CMS](https://payloadcms.com/) - Modern headless CMS
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- **Database**: MongoDB/PostgreSQL (configurable)
+- **Database**: MongoDB
 - **Deployment**: Vercel/Netlify ready
 
 ## 🚀 Quick Start
@@ -41,7 +43,7 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 
 3. **Set up environment variables**
    ```bash
-   cp .env.example .env.local
+   cp env-example.txt .env.local
    ```
    
    Configure your environment variables:
@@ -68,20 +70,26 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 ```
 dashfolio/
 ├── app/                   # Next.js app directory
-│   ├── (pages)/          # Main portfolio pages
+│   ├── (frontend)/          # Main portfolio pages
 │   │   ├── about/
+│   │   ├── contact/
 │   │   ├── projects/
-│   │   ├── writings/
-│   │   └── contact/
-│   └── admin/            # Payload CMS admin
+│   │   ├── stack/
+│   │   └── writing/
+│   └── (payload)/            # Payload CMS admin
+│       ├── admin/
+│       └── api/
 ├── components/           # Reusable React components
+│   └── ui/              # UI component library
 ├── payload/             # Payload CMS configuration
 │   ├── collections/     # Content collections
-│   └── globals/         # Global settings
-├── styles/              # Global styles
-├── public/              # Static assets
+│   └── blocks/          # Content blocks
+├── hooks/               # Custom React hooks
+├── lib/                 # Utility functions
+├── env/                 # Environment configuration
 ├── payload.config.ts    # Payload CMS configuration
-└── next.config.js      # Next.js configuration
+├── next.config.ts       # Next.js configuration
+└── package.json         # Dependencies
 ```
 
 ## 🎨 Customization
@@ -91,22 +99,27 @@ dashfolio/
 Access the Payload CMS admin panel at `/admin` to:
 - Update your personal information
 - Add/edit projects
-- Publish blog posts and writings
+- Publish writings
 - Manage contact information
 - Upload media and assets
 
 ### Styling
 
 The project uses Tailwind CSS for styling. Customize the theme by editing:
-- `src/styles/globals.css` - Global styles
+- `app/(frontend)/globals.css` - Global styles
 - Component-level styles in individual files
 
 ### Collections
 
 Payload CMS collections are configured in `payload/collections/`:
-- `Projects.ts` - Portfolio projects
-- `Posts.ts` - Blog posts and writings
+- `Users.ts` - Users can access the admin
 - `Media.ts` - File uploads and images
+- `Inquiries.ts` - Contact Inquiries (read-only)
+- `Projects.ts` - Portfolio projects case studies
+- `Writings.ts` - Writing articles
+- `Campanies.ts` - The companies you worked with
+- `Tools.ts` - The tools you use
+
 
 ## 🚀 Deployment
 
@@ -128,20 +141,6 @@ Payload CMS collections are configured in `payload/collections/`:
    ```bash
    pnpm start
    ```
-
-## 📝 Content Guidelines
-
-### Projects
-- Include high-quality images
-- Write compelling descriptions
-- Add links to live demos and source code
-- Tag projects with relevant technologies
-
-### Writings
-- Use clear, engaging titles
-- Add featured images for better visual appeal
-- Organize content with proper headings
-- Include meta descriptions for SEO
 
 ## 🔧 Configuration
 

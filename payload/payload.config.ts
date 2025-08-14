@@ -9,12 +9,8 @@ import { env } from "@/env/server";
 import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
-import { Pages } from "./collections/Pages";
 import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
-import { Footer } from "./globals/Footer";
-import { Menu } from "./globals/Menu";
-import { Settings } from "./globals/Settings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,8 +22,7 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
-	collections: [Users, Pages, Projects, Media, Inquiries, Companies],
-	globals: [Menu, Footer, Settings],
+	collections: [Users, Projects, Media, Inquiries, Companies],
 	editor: lexicalEditor(),
 	secret: env.PAYLOAD_SECRET,
 	typescript: {

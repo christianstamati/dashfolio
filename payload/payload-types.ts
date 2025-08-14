@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    pages: Page;
     projects: Project;
     media: Media;
     inquiries: Inquiry;
@@ -80,7 +79,6 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    pages: PagesSelect<false> | PagesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
@@ -92,16 +90,8 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {
-    menu: Menu;
-    footer: Footer;
-    settings: Setting;
-  };
-  globalsSelect: {
-    menu: MenuSelect<false> | MenuSelect<true>;
-    footer: FooterSelect<false> | FooterSelect<true>;
-    settings: SettingsSelect<false> | SettingsSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: null;
   user: User & {
     collection: 'users';
@@ -155,71 +145,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: string;
-  title: string;
-  slug: string;
-  hero: {
-    header?: string | null;
-    description?: string | null;
-    type: 'none' | 'header';
-  };
-  layout: (ExampleBlock | ProjectListViewProps)[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ExampleBlock".
- */
-export interface ExampleBlock {
-  content?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'example-block';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProjectListViewProps".
- */
-export interface ProjectListViewProps {
-  projectPage: string | Page;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'project-list-view';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  prefix?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
 export interface Project {
@@ -244,6 +169,26 @@ export interface Company {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inquiries".
  */
 export interface Inquiry {
@@ -264,10 +209,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
-      } | null)
-    | ({
-        relationTo: 'pages';
-        value: string | Page;
       } | null)
     | ({
         relationTo: 'projects';
@@ -348,54 +289,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
- */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  hero?:
-    | T
-    | {
-        header?: T;
-        description?: T;
-        type?: T;
-      };
-  layout?:
-    | T
-    | {
-        'example-block'?: T | ExampleBlockSelect<T>;
-        'project-list-view'?: T | ProjectListViewPropsSelect<T>;
-      };
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ExampleBlock_select".
- */
-export interface ExampleBlockSelect<T extends boolean = true> {
-  content?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProjectListViewProps_select".
- */
-export interface ProjectListViewPropsSelect<T extends boolean = true> {
-  projectPage?: T;
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -480,88 +373,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu".
- */
-export interface Menu {
-  id: string;
-  links: {
-    label: string;
-    collapsed?: boolean | null;
-    icon: 'home' | 'folder' | 'message' | 'writing' | 'profile' | 'closeCircle' | 'layer' | 'more';
-    type?: ('page' | 'external') | null;
-    page?: (string | null) | Page;
-    href?: string | null;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer".
- */
-export interface Footer {
-  id: string;
-  copyright: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "settings".
- */
-export interface Setting {
-  id: string;
-  homePage?: (string | null) | Page;
-  projectPage?: (string | null) | Page;
-  writingPage?: (string | null) | Page;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu_select".
- */
-export interface MenuSelect<T extends boolean = true> {
-  links?:
-    | T
-    | {
-        label?: T;
-        collapsed?: T;
-        icon?: T;
-        type?: T;
-        page?: T;
-        href?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer_select".
- */
-export interface FooterSelect<T extends boolean = true> {
-  copyright?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "settings_select".
- */
-export interface SettingsSelect<T extends boolean = true> {
-  homePage?: T;
-  projectPage?: T;
-  writingPage?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,29 +1,43 @@
 "use client";
 
+import {
+	Folder,
+	Home,
+	type Icon,
+	Layer,
+	More,
+	PathTool,
+	Profile,
+	Sms,
+} from "iconsax-reactjs";
 import Link from "next/link";
-import Iconsax from "@/components/iconsax";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSettings } from "@/hooks/queries/use-settings";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import type { Menu, Page, Setting } from "@/payload/payload-types";
+
+type SidebarItem = {
+	label: string;
+	icon: Icon;
+	href: string;
+	collapsed?: boolean;
+};
 
 type SidebarProps = {
-	menu: Menu;
+	items: SidebarItem[];
 };
 
 const SidebarDesktopItem = ({
 	className,
-	icon,
+	icon: Icon,
 	label,
 }: {
 	className?: string;
-	icon: string;
+	icon: Icon;
 	label: string;
 }) => {
 	return (
@@ -34,7 +48,7 @@ const SidebarDesktopItem = ({
 			)}
 		>
 			<div className="flex size-14 flex-shrink-0 items-center justify-center">
-				<Iconsax icon={icon} variant="Bold" size={24} />
+				<Icon variant="Bold" size={24} />
 			</div>
 			<span className="whitespace-nowrap font-semibold text-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 				{label}
@@ -43,34 +57,10 @@ const SidebarDesktopItem = ({
 	);
 };
 
-const extractLink = (
-	link: Menu["links"][0],
-	homePage: Setting["homePage"],
-): string => {
-	if (link.type === "page") {
-		const page = link.page as Page;
-
-		if (
-			typeof homePage !== "string" &&
-			page.slug &&
-			page.slug !== homePage?.slug
-		) {
-			return `/${page.slug}`;
-		}
-
-		return "/";
-	}
-	return link.href || "";
-};
-
-function SidebarDesktop({ menu }: SidebarProps) {
-	const { links } = menu;
-
-	const { data: settings } = useSettings();
-
+function Desktop({ items }: SidebarProps) {
 	// Separate visible and collapsed items
-	const visibleLinks = links.filter((link) => !link.collapsed);
-	const collapsedLinks = links.filter((link) => link.collapsed);
+	const visibleLinks = items.filter((link) => !link.collapsed);
+	const collapsedLinks = items.filter((link) => link.collapsed);
 
 	// Combine: visible items first, then collapsed items
 	const sortedLinks = [...visibleLinks, ...collapsedLinks];
@@ -93,10 +83,7 @@ function SidebarDesktop({ menu }: SidebarProps) {
 			}
 		>
 			{sortedLinks.map((link, index) => (
-				<Link
-					href={extractLink(link, settings?.homePage)}
-					key={`${link.label}-${index}`}
-				>
+				<Link href={link.href} key={`${link.label}-${index}`}>
 					<SidebarDesktopItem
 						icon={link.icon}
 						label={link.label}
@@ -110,30 +97,24 @@ function SidebarDesktop({ menu }: SidebarProps) {
 	);
 }
 
-function SidebarMobile({ menu }: SidebarProps) {
-	const { links } = menu;
-
-	const { data: settings } = useSettings();
-
-	const homePage = settings?.homePage;
-
+function Mobile({ items }: SidebarProps) {
 	// Take first 4 items for the main menu
-	const mainLinks = links.slice(0, 4);
+	const mainLinks = items.slice(0, 4);
 	// Remaining items go in the dropdown
-	const dropdownLinks = links.slice(4);
+	const dropdownLinks = items.slice(4);
 
 	return (
 		<div className="fixed right-0 bottom-0 left-0 z-50 border-border border-t bg-white">
 			<div className="grid grid-cols-5 items-center px-4 py-2">
 				{/* Main menu items */}
-				{mainLinks.map((link, index) => (
+				{mainLinks.map((item, index) => (
 					<Link
-						href={extractLink(link, homePage)}
-						key={`mobile-${link.label}-${index}`}
+						href={item.href}
+						key={`mobile-${item.label}-${index}`}
 						className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-neutral-100"
 					>
-						<Iconsax icon={link.icon} variant="Bold" size={20} />
-						<span className="font-medium text-xs">{link.label}</span>
+						<item.icon variant="Bold" size={20} />
+						<span className="font-medium text-xs">{item.label}</span>
 					</Link>
 				))}
 
@@ -145,7 +126,7 @@ function SidebarMobile({ menu }: SidebarProps) {
 								type="button"
 								className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-neutral-100"
 							>
-								<Iconsax icon="more" size={20} />
+								<More variant="Bold" size={20} />
 								<span className="font-medium text-xs">More</span>
 							</button>
 						</DropdownMenuTrigger>
@@ -154,17 +135,17 @@ function SidebarMobile({ menu }: SidebarProps) {
 							side="top"
 							className="mb-2 w-48"
 						>
-							{dropdownLinks.map((link, index) => (
+							{dropdownLinks.map((item, index) => (
 								<DropdownMenuItem
-									key={`dropdown-${link.label}-${index}`}
+									key={`dropdown-${item.label}-${index}`}
 									asChild
 								>
 									<Link
-										href={extractLink(link, homePage)}
+										href={item.href}
 										className="flex w-full items-center gap-2"
 									>
-										<Iconsax icon={link.icon} variant="Bold" size={16} />
-										{link.label}
+										<item.icon variant="Bold" size={16} />
+										{item.label}
 									</Link>
 								</DropdownMenuItem>
 							))}
@@ -179,12 +160,48 @@ function SidebarMobile({ menu }: SidebarProps) {
 	);
 }
 
-export function Sidebar(props: SidebarProps) {
+const links = [
+	{
+		label: "Home",
+		icon: Home,
+		href: "/",
+	},
+	{
+		label: "About",
+		icon: Profile,
+		href: "/about",
+	},
+	{
+		label: "Projects",
+		icon: Folder,
+		href: "/projects",
+	},
+	{
+		label: "Writing",
+		icon: PathTool,
+		href: "/writing",
+		collapsed: true,
+	},
+	{
+		label: "Stack",
+		icon: Layer,
+		href: "/stack",
+		collapsed: true,
+	},
+	{
+		label: "Contact",
+		icon: Sms,
+		href: "/contact",
+		collapsed: true,
+	},
+];
+
+export function Sidebar() {
 	const isMobile = useIsMobile();
 
 	if (isMobile) {
-		return <SidebarMobile {...props} />;
+		return <Mobile items={links} />;
 	}
 
-	return <SidebarDesktop {...props} />;
+	return <Desktop items={links} />;
 }

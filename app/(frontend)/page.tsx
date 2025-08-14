@@ -1,5 +1,3 @@
-import PageTemplate, { generateMetadata } from "./page-template";
-
-export default PageTemplate;
-
-export { generateMetadata };
+export default function Home() {
+	return <div>Home</div>;
+}

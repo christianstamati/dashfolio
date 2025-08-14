@@ -10,7 +10,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 			<body className="flex h-screen flex-col overflow-auto">
 				<ThemeProvider
 					attribute="class"
-					defaultTheme="system"
+					defaultTheme="light"
 					enableSystem
 					disableTransitionOnChange
 				>

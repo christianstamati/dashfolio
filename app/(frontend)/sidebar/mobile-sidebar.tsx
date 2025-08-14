@@ -1,7 +1,8 @@
 "use client";
 
-import { More } from "iconsax-reactjs";
+import { Moon, More, Sun1 } from "iconsax-reactjs";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -9,6 +10,29 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { sidebarData } from ".";
+
+const ThemeToggle = () => {
+	const { theme, setTheme } = useTheme();
+
+	return (
+		<button
+			type="button"
+			className="w-full"
+			onClick={() => setTheme((prev) => (prev === "light" ? "dark" : "light"))}
+		>
+			<DropdownMenuItem>
+				{theme === "light" ? (
+					<Moon variant="Bold" size={20} />
+				) : (
+					<Sun1 variant="Bold" size={20} />
+				)}
+				<span className="font-medium text-xs">
+					{theme === "light" ? "Dark" : "Light"}
+				</span>
+			</DropdownMenuItem>
+		</button>
+	);
+};
 
 export function MobileSidebar() {
 	const items = sidebarData.links;
@@ -18,7 +42,7 @@ export function MobileSidebar() {
 	const dropdownLinks = items.slice(4);
 
 	return (
-		<div className="fixed right-0 bottom-0 left-0 z-50 border-border border-t">
+		<div className="fixed right-0 bottom-0 left-0 z-50 border-border border-t bg-background">
 			<div className="grid grid-cols-5 items-center px-4 py-2">
 				{/* Main menu items */}
 				{mainLinks.map((item, index) => (
@@ -34,22 +58,20 @@ export function MobileSidebar() {
 
 				{/* More dropdown as the 5th item */}
 				{dropdownLinks.length > 0 ? (
-					<DropdownMenu>
+					<DropdownMenu modal={false}>
 						<DropdownMenuTrigger asChild>
 							<button
 								type="button"
-								className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-neutral-100"
+								className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-muted"
 							>
-								<More variant="Bold" size={20} />
+								<More variant="Outline" size={20} />
 								<span className="font-medium text-xs">More</span>
 							</button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent side="top">
+							<ThemeToggle />
 							{dropdownLinks.map((item, index) => (
-								<DropdownMenuItem
-									key={`dropdown-${item.label}-${index}`}
-									asChild
-								>
+								<DropdownMenuItem key={`dropdown-${item.label}-${index}`}>
 									<Link
 										href={item.href}
 										className="flex w-full items-center gap-2"

@@ -4,11 +4,17 @@ import type { Icon } from "iconsax-reactjs";
 import { Moon, Sun1 } from "iconsax-reactjs";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
 import { sidebarData } from ".";
 
 const ThemeToggle = () => {
 	const { theme, setTheme } = useTheme();
+	const mounted = useMounted();
+
+	if (!mounted) {
+		return null;
+	}
 
 	return (
 		<button

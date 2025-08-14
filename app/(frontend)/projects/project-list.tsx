@@ -1,4 +1,4 @@
-import type { Project, ProjectListViewProps } from "@payload-types";
+import type { Project } from "@payload-types";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +18,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 		typeof project.company !== "string" ? project.company?.name : undefined;
 
 	return (
-		<Card className="group hover:-translate-y-1 cursor-pointer p-0 transition-all duration-300 hover:bg-muted/50 hover:shadow-lg">
+		<Card className="group hover:-translate-y-1 cursor-pointer p-0 transition-all duration-300 hover:shadow-lg">
 			<CardContent className="p-0">
 				<div className="flex h-full flex-col md:flex-row">
 					{/* Thumbnail Section */}
@@ -50,7 +50,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 						</div>
 
 						{/* Action Arrow */}
-						<div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:bg-muted/80 group-hover:opacity-100">
+						<div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100">
 							<ChevronRight className="h-4 w-4 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110" />
 						</div>
 					</div>
@@ -60,30 +60,21 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 	);
 };
 
-export const ProjectListView: React.FC<ProjectListViewProps> = async (
-	props,
-) => {
-	const { id, projectPage } = props;
-
+export async function ProjectList() {
 	const payload = await getPayloadClient();
-
 	const projects = await payload.find({
 		collection: "projects",
-		limit: 3,
+		limit: 4,
 	});
-
-	const projectPageSlug =
-		typeof projectPage === "string" ? projectPage : projectPage?.slug;
-
 	return (
-		<div className="my-16" id={`block-${id}`}>
+		<div className="my-16">
 			<div className="flex flex-col gap-6">
 				{projects.docs.map((project) => (
-					<Link href={`/${projectPageSlug}/${project.slug}`} key={project.id}>
+					<Link href={`/projects/${project.slug}`} key={project.id}>
 						<ProjectCard project={project} />
 					</Link>
 				))}
 			</div>
 		</div>
 	);
-};
+}

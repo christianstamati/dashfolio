@@ -1,6 +1,5 @@
 import type React from "react";
 import "./globals.css";
-import Footer from "./footer";
 import { Sidebar } from "./sidebar";
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -12,7 +11,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 				<main className="pt-16 pb-24">
 					<div className="mx-auto max-w-xl px-4 sm:px-6">{children}</div>
 				</main>
-				<Footer />
 			</body>
 		</html>
 	);

@@ -53,31 +53,31 @@ export default function Projects() {
 					{projects.map((project) => (
 						<Card
 							key={project.id}
-							className="group relative overflow-hidden rounded-none p-0"
+							className="group relative cursor-pointer overflow-hidden rounded-none p-0"
 						>
-							<div className="flex h-48">
+							<div className="flex h-56">
 								{/* Left Section - Text Content */}
 								<div className="flex-1 p-4 pr-80">
 									{/* Category Badge with Icon */}
 									<div className="mb-2 flex items-center gap-2">
-										<TrendingUp className="h-4 w-4 text-yellow-400" />
-										<span className="font-medium text-sm text-yellow-400 tracking-wide">
+										<TrendingUp size={16} className="text-yellow-400" />
+										<span className="font-medium text-xs text-yellow-400 tracking-widest">
 											{project.category}
 										</span>
 									</div>
 
 									{/* Main Title */}
-									<CardTitle className="mb-2 line-clamp-2 font-bold text-lg text-white lg:text-xl">
+									<CardTitle className="mb-2 line-clamp-2 font-bold text-lg text-white">
 										{project.stats}
 									</CardTitle>
 
 									{/* Description */}
-									<CardDescription className="mb-3 line-clamp-2 text-gray-300 text-sm">
+									<CardDescription className="mb-3 line-clamp-3 text-gray-300 text-sm">
 										{project.description}
 									</CardDescription>
 
 									{/* Call to Action */}
-									<div className="flex cursor-pointer items-center gap-2 text-white transition-colors duration-300 hover:text-yellow-400">
+									<div className="flex cursor-pointer items-center gap-2 text-white transition-colors duration-300 group-hover:text-yellow-400">
 										<span className="font-medium text-sm">Learn more</span>
 										<ArrowRight
 											className="transition-transform duration-300 group-hover:translate-x-1"
@@ -87,11 +87,11 @@ export default function Projects() {
 								</div>
 							</div>
 							{/* Right Section - Image anchored to bottom right */}
-							<div className="absolute right-0 bottom-0 w-80">
+							<div className="absolute right-0 bottom-0 h-full w-[60%]">
 								<Image
 									src={project.image}
 									alt={project.title}
-									className="h-[50%] w-full object-contain"
+									className="h-full w-full object-contain"
 									width={320}
 									height={320}
 								/>

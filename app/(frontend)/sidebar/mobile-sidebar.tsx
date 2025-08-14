@@ -3,6 +3,7 @@
 import { Moon, More, Sun1 } from "iconsax-reactjs";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { Card } from "@/components/ui/card";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -42,7 +43,7 @@ export function MobileSidebar() {
 	const dropdownLinks = items.slice(4);
 
 	return (
-		<div className="fixed right-0 bottom-0 left-0 z-50 border-border border-t bg-background">
+		<Card className="fixed right-0 bottom-0 left-0 z-50 rounded-none border-x-0 border-b-0 bg-background p-0">
 			<div className="grid grid-cols-5 items-center px-4 py-2">
 				{/* Main menu items */}
 				{mainLinks.map((item, index) => (
@@ -88,6 +89,6 @@ export function MobileSidebar() {
 					<div />
 				)}
 			</div>
-		</div>
+		</Card>
 	);
 }

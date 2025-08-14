@@ -4,6 +4,7 @@ import type { Icon } from "iconsax-reactjs";
 import { Moon, Sun1 } from "iconsax-reactjs";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { Card } from "@/components/ui/card";
 import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
 import { sidebarData } from ".";
@@ -73,8 +74,8 @@ export function DesktopSidebar() {
 	const expandedHeight = sortedLinks.length * itemHeight + padding + 56;
 
 	return (
-		<div
-			className={`-translate-y-1/2 group fixed top-1/2 left-8 z-50 w-[72px] overflow-hidden rounded-[36px] p-2 shadow-xl/5 ring ring-border transition-all duration-300 ease-in-out hover:w-[200px] hover:rounded-3xl`}
+		<Card
+			className={`-translate-y-1/2 group fixed top-1/2 left-8 z-50 w-[72px] gap-0 overflow-hidden rounded-[36px] p-2 shadow-xl/5 transition-all duration-300 ease-in-out hover:w-[200px] hover:rounded-3xl`}
 			style={
 				{
 					height: `${collapsedHeight}px`,
@@ -97,6 +98,6 @@ export function DesktopSidebar() {
 				</Link>
 			))}
 			<ThemeToggle />
-		</div>
+		</Card>
 	);
 }

@@ -41,7 +41,7 @@ function ProjectCategory({
 function ProjectCard({ project }: { project: Project }) {
 	return (
 		<Link href={`/projects/${project.slug}`}>
-			<Card className="hover:-translate-y-1 relative cursor-pointer overflow-hidden p-0 transition-all duration-300 ease-in-out hover:shadow-2xl">
+			<Card className="card-hover relative overflow-hidden p-0">
 				{/* Mobile Layout - Vertical */}
 				<div className="flex flex-col md:hidden">
 					{/* Content Section - Top */}

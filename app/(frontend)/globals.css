@@ -123,3 +123,7 @@
 .group:hover {
   height: var(--expanded-height) !important;
 }
+
+.card-hover {
+  @apply hover:-translate-y-1 relative cursor-pointer transition-all duration-300 ease-in-out hover:shadow-2xl;
+}

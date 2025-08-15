@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     categories: Category;
     projects: Project;
+    writings: Writing;
     media: Media;
     inquiries: Inquiry;
     companies: Company;
@@ -82,6 +83,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    writings: WritingsSelect<false> | WritingsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
@@ -211,6 +213,18 @@ export interface Company {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "writings".
+ */
+export interface Writing {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inquiries".
  */
 export interface Inquiry {
@@ -241,6 +255,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: string | Project;
+      } | null)
+    | ({
+        relationTo: 'writings';
+        value: string | Writing;
       } | null)
     | ({
         relationTo: 'media';
@@ -340,6 +358,17 @@ export interface ProjectsSelect<T extends boolean = true> {
   thumbnail?: T;
   cover?: T;
   company?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "writings_select".
+ */
+export interface WritingsSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

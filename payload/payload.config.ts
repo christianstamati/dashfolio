@@ -12,6 +12,7 @@ import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
+import { Writings } from "./collections/Writings";
 import { Hero } from "./globals/hero";
 import { SelectedProjects } from "./globals/selected-projects";
 
@@ -25,7 +26,15 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
-	collections: [Users, Categories, Projects, Media, Inquiries, Companies],
+	collections: [
+		Users,
+		Categories,
+		Projects,
+		Writings,
+		Media,
+		Inquiries,
+		Companies,
+	],
 	globals: [Hero, SelectedProjects],
 	editor: lexicalEditor(),
 	secret: env.PAYLOAD_SECRET,

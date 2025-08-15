@@ -11,6 +11,7 @@ import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
+import { Hero } from "./globals/hero";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,6 +24,7 @@ export default buildConfig({
 		},
 	},
 	collections: [Users, Projects, Media, Inquiries, Companies],
+	globals: [Hero],
 	editor: lexicalEditor(),
 	secret: env.PAYLOAD_SECRET,
 	typescript: {

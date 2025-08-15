@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Hero from "./components/hero";
 import Newsletter from "./components/newsletter";
 import Projects from "./components/projects";
 import Socials from "./components/socials";
 import Stack from "./components/stack";
 import Writings from "./components/writings";
+
+export const metadata: Metadata = {
+	title: "Christian Stamati — Software Developer",
+	description:
+		"Christian Stamati is a software developer with a passion for building web applications that are both functional and aesthetically pleasing.",
+};
 
 export default function Home() {
 	return (

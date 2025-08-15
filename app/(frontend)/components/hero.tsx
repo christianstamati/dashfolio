@@ -1,12 +1,3 @@
-/**
- * Hero component
- *
- * Avatar
- * Title: Howdy, Ronnie here
- * Short Description: I'm Ron, a creative product designer based out of New York. I specialize in transforming visionary concepts into tangible realities, focusing on user-centered design.
- * CTA: Get in touch
- */
-
 import { DocumentDownload, Sms } from "iconsax-reactjs";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

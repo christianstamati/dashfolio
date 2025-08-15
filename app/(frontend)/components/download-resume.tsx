@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 const downloadResume = async (resume: string) => {
 	const response = await fetch(resume);
 	const blob = await response.blob();
-	const url = window.URL.createObjectURL(blob);
+	const url = URL.createObjectURL(blob);
 	const a = document.createElement("a");
 	a.href = url;
-	a.download = "resume.pdf";
+	a.download = "christian-stamati-resume-en.pdf";
 	a.click();
-	window.URL.revokeObjectURL(url);
+	URL.revokeObjectURL(url);
 };
 
 export default function DownloadResume({ resume }: { resume: string }) {

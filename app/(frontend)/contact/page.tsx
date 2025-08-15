@@ -1,5 +1,5 @@
-import PageDescription from "@/components/page-description";
-import PageTitle from "@/components/page-title";
+import Description from "@/components/description";
+import PageTitle from "@/components/title";
 import ContactForm from "./contact-form";
 
 export default function Contact() {
@@ -7,10 +7,10 @@ export default function Contact() {
 		<div className="flex flex-col gap-8">
 			<div>
 				<PageTitle>How can I help?</PageTitle>
-				<PageDescription>
+				<Description>
 					Whether you have a question, a project in mind, or just want to say
 					hello, I’d love to hear from you.
-				</PageDescription>
+				</Description>
 			</div>
 			<ContactForm />
 		</div>

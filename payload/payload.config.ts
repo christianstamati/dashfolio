@@ -6,12 +6,14 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 import { env } from "@/env/server";
+import { Categories } from "./collections/Categories";
 import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
 import { Hero } from "./globals/hero";
+import { SelectedProjects } from "./globals/selected-projects";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,8 +25,8 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
-	collections: [Users, Projects, Media, Inquiries, Companies],
-	globals: [Hero],
+	collections: [Users, Categories, Projects, Media, Inquiries, Companies],
+	globals: [Hero, SelectedProjects],
 	editor: lexicalEditor(),
 	secret: env.PAYLOAD_SECRET,
 	typescript: {

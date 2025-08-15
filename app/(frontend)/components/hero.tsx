@@ -1,5 +1,7 @@
 import { DocumentDownload, Sms } from "iconsax-reactjs";
 import Link from "next/link";
+import Description from "@/components/description";
+import Title from "@/components/title";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getPayloadClient } from "@/payload/client";
@@ -32,12 +34,10 @@ export default async function Hero() {
 					<AvatarImage className="size-12" src={imageUrl} alt="avatar-image" />
 					<AvatarFallback>CS</AvatarFallback>
 				</Avatar>
-				<h1 className="mb-2 font-semibold text-3xl tracking-tight">
-					{hero.title || "No title"}
-				</h1>
-				<p className="mx-auto mb-6 text-base text-muted-foreground sm:mb-8">
+				<Title>{hero.title || "No title"}</Title>
+				<Description className="mx-auto mb-6 sm:mb-8">
 					{hero.description || "No description"}
-				</p>
+				</Description>
 				<div className="flex gap-4">
 					<Button size="lg" asChild>
 						<Link href="/contact">

@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -58,7 +59,7 @@ export default function Stack() {
 	return (
 		<section>
 			<div>
-				<h2 className="mb-8 font-semibold text-3xl tracking-tight">Stack</h2>
+				<Title>Stack</Title>
 				<div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
 					{tools.map((tool) => (
 						<Card

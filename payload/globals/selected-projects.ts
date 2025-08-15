@@ -1,0 +1,19 @@
+import type { GlobalConfig } from "payload";
+
+export const SelectedProjects: GlobalConfig = {
+	slug: "selected-projects",
+	fields: [
+		{
+			name: "projects",
+			type: "relationship",
+			relationTo: "projects",
+			hasMany: true,
+			validate: (val) => {
+				if (val && val.length > 3) {
+					return "Maximum 3 projects allowed";
+				}
+				return true;
+			},
+		},
+	],
+};

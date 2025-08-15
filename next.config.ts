@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "placehold.co",
 			},
+			{
+				protocol: "https",
+				hostname: "dashfolio-prod.s3.eu-central-1.amazonaws.com",
+			},
 		],
 	},
 };

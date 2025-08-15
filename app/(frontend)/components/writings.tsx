@@ -8,6 +8,7 @@
  */
 
 import Link from "next/link";
+import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -47,7 +48,7 @@ export default function Writings() {
 	return (
 		<section>
 			<div className="container mx-auto">
-				<h2 className="mb-8 font-semibold text-3xl tracking-tight">Writings</h2>
+				<Title>Writings</Title>
 				<div className="mx-auto max-w-3xl space-y-4 sm:space-y-6">
 					{writings.map((writing) => (
 						<Card key={writing.id} className="p-0">

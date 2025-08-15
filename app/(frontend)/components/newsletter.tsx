@@ -14,7 +14,7 @@ export default function Newsletter() {
 			<div className="container mx-auto">
 				<Card className="mx-auto max-w-2xl">
 					<CardHeader>
-						<CardTitle className="text-xl sm:text-2xl">Newsletter</CardTitle>
+						<CardTitle className="text-2xl">Newsletter</CardTitle>
 						<CardDescription>
 							I document my learnings once a month. I would love to share them
 							with you over mail. No bullshit. No spam. Straight up value.

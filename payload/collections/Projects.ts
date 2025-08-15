@@ -11,6 +11,15 @@ export const Projects: CollectionConfig = {
 	},
 	fields: [
 		{
+			name: "slug",
+			type: "text",
+			required: true,
+			unique: true,
+			admin: {
+				position: "sidebar",
+			},
+		},
+		{
 			name: "title",
 			type: "text",
 			required: true,
@@ -21,16 +30,31 @@ export const Projects: CollectionConfig = {
 			required: true,
 		},
 		{
+			name: "category",
+			type: "relationship",
+			relationTo: "categories",
+			hasMany: false,
+			admin: {
+				position: "sidebar",
+			},
+		},
+		{
+			name: "thumbnail",
+			type: "relationship",
+			relationTo: "media",
+			hasMany: false,
+		},
+		{
+			name: "cover",
+			type: "relationship",
+			relationTo: "media",
+			hasMany: false,
+		},
+		{
 			name: "company",
 			type: "relationship",
 			relationTo: "companies",
 			hasMany: false,
-		},
-		{
-			name: "slug",
-			type: "text",
-			required: true,
-			unique: true,
 			admin: {
 				position: "sidebar",
 			},

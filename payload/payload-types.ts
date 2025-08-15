@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    categories: Category;
     projects: Project;
     media: Media;
     inquiries: Inquiry;
@@ -79,6 +80,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
@@ -92,9 +94,11 @@ export interface Config {
   };
   globals: {
     hero: Hero;
+    'selected-projects': SelectedProject;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
+    'selected-projects': SelectedProjectsSelect<false> | SelectedProjectsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -149,25 +153,28 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "projects".
+ * via the `definition` "categories".
  */
-export interface Project {
+export interface Category {
   id: string;
-  title: string;
-  description: string;
-  company?: (string | null) | Company;
-  slug: string;
+  name: string;
+  icon: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "companies".
+ * via the `definition` "projects".
  */
-export interface Company {
+export interface Project {
   id: string;
-  name: string;
-  logo?: (string | null) | Media;
+  slug: string;
+  title: string;
+  description: string;
+  category?: (string | null) | Category;
+  thumbnail?: (string | null) | Media;
+  cover?: (string | null) | Media;
+  company?: (string | null) | Company;
   updatedAt: string;
   createdAt: string;
 }
@@ -193,6 +200,17 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "companies".
+ */
+export interface Company {
+  id: string;
+  name: string;
+  logo?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inquiries".
  */
 export interface Inquiry {
@@ -215,6 +233,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: string | Category;
       } | null)
     | ({
         relationTo: 'projects';
@@ -298,13 +320,26 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
+  slug?: T;
   title?: T;
   description?: T;
+  category?: T;
+  thumbnail?: T;
+  cover?: T;
   company?: T;
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -397,6 +432,16 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "selected-projects".
+ */
+export interface SelectedProject {
+  id: string;
+  projects?: (string | Project)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
@@ -404,6 +449,16 @@ export interface HeroSelect<T extends boolean = true> {
   description?: T;
   image?: T;
   resume?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "selected-projects_select".
+ */
+export interface SelectedProjectsSelect<T extends boolean = true> {
+  projects?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Socials from "@/components/socials";
 import Hero from "./components/hero";
 import Newsletter from "./components/newsletter";
 import SelectedProjects from "./components/projects";
-import Socials from "./components/socials";
 import Stack from "./components/stack";
 import Writings from "./components/writings";
 

@@ -11,6 +11,7 @@ import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
+import { Tools } from "./collections/Tools";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
 import { Hero } from "./globals/hero";
@@ -34,6 +35,7 @@ export default buildConfig({
 		Media,
 		Inquiries,
 		Companies,
+		Tools,
 	],
 	globals: [Hero, SelectedProjects],
 	editor: lexicalEditor(),

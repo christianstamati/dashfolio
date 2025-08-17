@@ -1,10 +1,24 @@
 import type React from "react";
 import "./globals.css";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { WorkInProgressBanner } from "./banner";
 import { Sidebar } from "./sidebar";
+
+export const metadata: Metadata = {
+	title: "Christian Stamati",
+	description: "Christian Stamati's portfolio",
+	icons: {
+		icon: [
+			{
+				url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✌️</text></svg>",
+				type: "image/svg+xml",
+			},
+		],
+	},
+};
 
 const geistSans = Geist({
 	variable: "--font-sans",

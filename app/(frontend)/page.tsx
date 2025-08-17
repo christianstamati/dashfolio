@@ -4,6 +4,8 @@ import Newsletter from "./components/newsletter";
 import SelectedProjects from "./components/projects";
 import Writings from "./components/writings";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
 	return (
 		<div className="flex flex-col gap-16">

@@ -9,7 +9,7 @@ import Writings from "./components/writings";
 export const metadata: Metadata = {
 	title: "Christian Stamati — Software Developer",
 	description:
-		"Christian Stamati is a software developer with a passion for building web applications that are both functional and aesthetically pleasing.",
+		"A Software Developer based out of Italy. I specialize in creating interactive and immersive web experiences, combining 3D and web technologies.",
 };
 
 export default function Home() {

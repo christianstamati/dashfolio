@@ -23,7 +23,7 @@ const getWritings = async () => {
 
 function WritingCard({ writing }: { writing: Writing }) {
 	return (
-		<Link href={writing.slug}>
+		<Link href={`/writings/${writing.slug}`} target="_blank">
 			<Card key={writing.id} className="card-hover">
 				<CardHeader className="items-start">
 					<CardTitle className="mb-2">{writing.title}</CardTitle>

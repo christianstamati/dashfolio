@@ -25,9 +25,65 @@ export const Projects: CollectionConfig = {
 			required: true,
 		},
 		{
+			name: "projectIcon",
+			type: "relationship",
+			relationTo: "media",
+			hasMany: false,
+			admin: {
+				description: "Icon/logo for the project",
+			},
+		},
+		{
+			name: "year",
+			type: "number",
+			required: true,
+			admin: {
+				position: "sidebar",
+			},
+		},
+		{
 			name: "description",
 			type: "textarea",
 			required: true,
+		},
+		{
+			name: "role",
+			type: "text",
+			required: true,
+		},
+		{
+			name: "responsibilities",
+			type: "array",
+			fields: [
+				{
+					name: "responsibility",
+					type: "text",
+					required: true,
+				},
+			],
+		},
+		{
+			name: "team",
+			type: "array",
+			fields: [
+				{
+					name: "name",
+					type: "text",
+					required: true,
+				},
+				{
+					name: "role",
+					type: "text",
+					required: true,
+				},
+			],
+		},
+		{
+			name: "problemCaption",
+			type: "textarea",
+			admin: {
+				description: "Description of the problem this project solves",
+			},
 		},
 		{
 			name: "category",

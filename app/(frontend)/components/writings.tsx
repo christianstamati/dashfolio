@@ -9,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { formatDate } from "@/lib/format-date";
 import { getPayloadClient } from "@/payload/client";
 import type { Writing } from "@/payload/payload-types";
 
@@ -38,11 +39,7 @@ function WritingCard({ writing }: { writing: Writing }) {
 							<ArrowRight size={16} />
 						</div>
 						<div className="text-muted-foreground text-xs sm:text-sm">
-							{new Date(writing.createdAt).toLocaleDateString("en-US", {
-								year: "numeric",
-								month: "long",
-								day: "numeric",
-							})}
+							{formatDate(writing.createdAt)}
 						</div>
 					</div>
 				</CardFooter>

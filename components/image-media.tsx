@@ -25,7 +25,7 @@ export default function ImageMedia({
 
 	return (
 		<Image
-			src={mediaUrl}
+			src={mediaUrl + "?v=1"}
 			alt={media.alt}
 			className={cn("h-full w-full", className)}
 			width={media.width || 100}

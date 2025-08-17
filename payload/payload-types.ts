@@ -172,7 +172,30 @@ export interface Project {
   id: string;
   slug: string;
   title: string;
+  /**
+   * Icon/logo for the project
+   */
+  projectIcon?: (string | null) | Media;
+  year: number;
   description: string;
+  role: string;
+  responsibilities?:
+    | {
+        responsibility: string;
+        id?: string | null;
+      }[]
+    | null;
+  team?:
+    | {
+        name: string;
+        role: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Description of the problem this project solves
+   */
+  problemCaption?: string | null;
   category?: (string | null) | Category;
   thumbnail?: (string | null) | Media;
   cover?: (string | null) | Media;
@@ -353,7 +376,24 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface ProjectsSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
+  projectIcon?: T;
+  year?: T;
   description?: T;
+  role?: T;
+  responsibilities?:
+    | T
+    | {
+        responsibility?: T;
+        id?: T;
+      };
+  team?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        id?: T;
+      };
+  problemCaption?: T;
   category?: T;
   thumbnail?: T;
   cover?: T;

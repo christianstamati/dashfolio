@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const socialLinks = [
 	{
 		name: "Instagram",
-		href: "https://instagram.com/ronnie",
+		href: "https://www.instagram.com/christianstamati/",
 		icon: (
 			<svg
 				width="20"
@@ -23,7 +23,7 @@ const socialLinks = [
 	},
 	{
 		name: "LinkedIn",
-		href: "https://linkedin.com/in/ronnie",
+		href: "https://www.linkedin.com/in/christianstamati/",
 		icon: (
 			<svg
 				width="20"
@@ -41,8 +41,8 @@ const socialLinks = [
 		),
 	},
 	{
-		name: "X (Twitter)",
-		href: "https://x.com/ronnie",
+		name: "X",
+		href: "https://x.com/chri_dev",
 		icon: (
 			<svg
 				width="20"
@@ -61,7 +61,7 @@ const socialLinks = [
 	},
 	{
 		name: "YouTube",
-		href: "https://youtube.com/@ronnie",
+		href: "https://www.youtube.com/@christianstamati",
 		icon: (
 			<svg
 				width="20"

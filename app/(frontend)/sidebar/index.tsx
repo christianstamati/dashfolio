@@ -1,6 +1,6 @@
 "use client";
 
-import { Folder, Home, Layer, PathTool, Profile, Sms } from "iconsax-reactjs";
+import { Folder, Home, PathTool, Profile, Sms } from "iconsax-reactjs";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DesktopSidebar } from "./desktop-sidebar";
 import { MobileSidebar } from "./mobile-sidebar";
@@ -31,12 +31,6 @@ export const sidebarData = {
 			label: "Writings",
 			icon: PathTool,
 			href: "/writings",
-			collapsed: true,
-		},
-		{
-			label: "Stack",
-			icon: Layer,
-			href: "/stack",
 			collapsed: true,
 		},
 	],

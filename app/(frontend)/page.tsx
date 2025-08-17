@@ -3,7 +3,6 @@ import Socials from "@/components/socials";
 import Hero from "./components/hero";
 import Newsletter from "./components/newsletter";
 import SelectedProjects from "./components/projects";
-import Stack from "./components/stack";
 import Writings from "./components/writings";
 
 export const metadata: Metadata = {
@@ -18,7 +17,6 @@ export default function Home() {
 			<Hero />
 			<SelectedProjects />
 			<Writings />
-			<Stack />
 			<Newsletter />
 			<Socials />
 		</div>

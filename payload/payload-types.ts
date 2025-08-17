@@ -74,7 +74,6 @@ export interface Config {
     media: Media;
     inquiries: Inquiry;
     companies: Company;
-    tools: Tool;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -88,7 +87,6 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
-    tools: ToolsSelect<false> | ToolsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -241,20 +239,6 @@ export interface Inquiry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tools".
- */
-export interface Tool {
-  id: string;
-  name: string;
-  subtitle: string;
-  description: string;
-  logo?: (string | null) | Media;
-  link: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -287,10 +271,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'companies';
         value: string | Company;
-      } | null)
-    | ({
-        relationTo: 'tools';
-        value: string | Tool;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -431,19 +411,6 @@ export interface InquiriesSelect<T extends boolean = true> {
 export interface CompaniesSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tools_select".
- */
-export interface ToolsSelect<T extends boolean = true> {
-  name?: T;
-  subtitle?: T;
-  description?: T;
-  logo?: T;
-  link?: T;
   updatedAt?: T;
   createdAt?: T;
 }

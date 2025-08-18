@@ -2,19 +2,9 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { IconsaxIcon } from "@/components/iconsax-icon";
 import ImageMedia from "@/components/image-media";
-import Title from "@/components/title";
-import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { getPayloadClient } from "@/payload/client";
+import { cn } from "@/lib/utils";
 import type { Category, Project } from "@/payload/payload-types";
-
-const getSelectedProjects = async () => {
-	const payload = await getPayloadClient();
-	const projects = await payload.findGlobal({
-		slug: "selected-projects",
-	});
-	return projects;
-};
 
 function ProjectCategory({
 	category,
@@ -118,22 +108,17 @@ function ProjectCard({ project }: { project: Project }) {
 	);
 }
 
-export default async function SelectedProjects() {
-	const selectedProjects = await getSelectedProjects();
-	const projects = selectedProjects?.projects as Project[];
+type ProjectListProps = {
+	projects: Project[];
+	className?: string;
+};
+
+export async function ProjectList({ projects, className }: ProjectListProps) {
 	return (
-		<section>
-			<div>
-				<Title>Projects</Title>
-				<div className="flex flex-col gap-4">
-					{projects?.map((project) => (
-						<ProjectCard key={project.id} project={project} />
-					))}
-				</div>
-				<Button asChild size="lg" variant="outline" className="mt-8 w-full">
-					<Link href="/projects">View all projects</Link>
-				</Button>
-			</div>
-		</section>
+		<div className={cn("flex flex-col gap-4", className)}>
+			{projects.map((project) => (
+				<ProjectCard key={project.id} project={project} />
+			))}
+		</div>
 	);
 }

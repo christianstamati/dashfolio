@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { WorkInProgressBanner } from "./banner";
+import BottomSocials from "./bottom-socials";
 import { Sidebar } from "./sidebar";
 
 export const metadata: Metadata = {
@@ -45,9 +46,18 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 					disableTransitionOnChange
 				>
 					<WorkInProgressBanner />
+					{/* Pearl Mist Background with Top Glow */}
+					<div
+						className="-z-50 absolute inset-0 hidden dark:block"
+						style={{
+							background:
+								"radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226, 232, 240, 0.15), transparent 70%), #0A0A0A",
+						}}
+					/>
 					<Sidebar />
-					<main className="pt-12 pb-24 sm:pt-24">
+					<main className="pt-12 pb-28 sm:pt-24">
 						<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>
+						<BottomSocials />
 					</main>
 					<Toaster />
 				</ThemeProvider>

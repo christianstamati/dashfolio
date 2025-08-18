@@ -10,14 +10,14 @@ export default function BackButton({ label }: { label?: string }) {
 		<div className="flex items-center gap-3">
 			<Button
 				variant={"ghost"}
-				size={"sm"}
+				size={"icon"}
 				type="button"
 				onClick={() => router.back()}
-				className="flex items-center gap-3 text-gray-300 transition-colors hover:text-gray-100"
+				className="flex items-center gap-3 rounded-full transition-colors"
 			>
 				<ChevronLeftIcon size={16} />
 			</Button>
-			<span className="font-medium text-gray-300">{label || "Back"}</span>
+			<span className="font-medium">{label || "Back"}</span>
 		</div>
 	);
 }

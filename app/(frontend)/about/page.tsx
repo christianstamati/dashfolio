@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import JourneyItem from "@/app/(frontend)/about/journey-item";
 import Description from "@/components/description";
-import Socials from "@/components/socials";
 import Title from "@/components/title";
 
 export default function AboutPage() {
@@ -179,10 +178,6 @@ export default function AboutPage() {
 						</>
 					}
 				/>
-			</div>
-
-			<div className="pt-8">
-				<Socials />
 			</div>
 		</div>
 	);

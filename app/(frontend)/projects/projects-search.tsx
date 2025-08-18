@@ -1,12 +1,17 @@
 "use client";
 
-import { ArrowRightIcon, FilterIcon, SearchIcon, XIcon } from "lucide-react";
+import { ArrowRightIcon, FilterIcon, SearchIcon } from "lucide-react";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
 import { ProjectList } from "@/components/project-list";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import MultipleSelector from "@/components/ui/multiselect";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCategories } from "./hooks/queries/use-categories";
 import { useProjectsInfinite } from "./hooks/queries/use-projects-infinite";
@@ -15,23 +20,7 @@ interface ProjectsInfiniteListProps {
 	search?: string;
 	filters?: {
 		category?: string[];
-		company?: string;
-		year?: number;
 	};
-}
-
-function ProjectSkeleton() {
-	return <Skeleton className="h-56" />;
-}
-
-function ProjectsSkeleton() {
-	return (
-		<div className="space-y-4">
-			<ProjectSkeleton />
-			<ProjectSkeleton />
-			<ProjectSkeleton />
-		</div>
-	);
 }
 
 function ProjectsInfiniteList({ search, filters }: ProjectsInfiniteListProps) {
@@ -50,7 +39,13 @@ function ProjectsInfiniteList({ search, filters }: ProjectsInfiniteListProps) {
 	});
 
 	if (isLoading) {
-		return <ProjectsSkeleton />;
+		return (
+			<div className="space-y-4">
+				<Skeleton className="h-56" />;
+				<Skeleton className="h-56" />;
+				<Skeleton className="h-56" />;
+			</div>
+		);
 	}
 
 	if (isError) {
@@ -93,11 +88,9 @@ function ProjectsInfiniteList({ search, filters }: ProjectsInfiniteListProps) {
 export default function ProjectsSearch() {
 	const [searchText, setSearchText] = useState("");
 	const [debouncedSearch] = useDebounce(searchText, 500);
-	const [showFilters, setShowFilters] = useState(false);
+	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [filters, setFilters] = useState<{
 		category?: string[];
-		company?: string;
-		year?: number;
 	}>({});
 
 	const { data: categories, isLoading: categoriesLoading } = useCategories();
@@ -121,77 +114,77 @@ export default function ProjectsSearch() {
 		}));
 	};
 
+	const handleDone = () => {
+		setIsPopoverOpen(false);
+	};
+
 	return (
 		<div className="mt-8 space-y-6">
-			{/* Toggle Button */}
-			<div className="flex justify-end">
-				<button
-					type="button"
-					onClick={() => setShowFilters(!showFilters)}
-					className="flex items-center gap-2 px-3 py-2 font-medium text-muted-foreground text-sm transition-colors hover:text-foreground"
-				>
-					{showFilters ? (
-						<>
-							<XIcon size={16} />
-							Hide Filters
-						</>
-					) : (
-						<>
-							<FilterIcon size={16} />
-							Show Filters
-						</>
-					)}
-				</button>
-			</div>
-
-			{/* Search and Filters Section */}
-			{showFilters && (
-				<div className="space-y-4">
-					<div className="relative">
-						<Input
-							className="peer ps-9 pe-9"
-							placeholder="Search..."
-							type="search"
-							value={searchText}
-							onChange={(e) => setSearchText(e.target.value)}
-						/>
-						<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-							<SearchIcon size={16} />
-						</div>
-						<button
-							className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md text-muted-foreground/80 outline-none transition-[color,box-shadow] hover:text-foreground focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-							aria-label="Submit search"
-							type="submit"
-						>
-							<ArrowRightIcon size={16} aria-hidden="true" />
-						</button>
+			<div className="flex w-full items-center justify-center gap-2">
+				<div className="relative w-full">
+					<Input
+						className="peer w-full ps-9 pe-9"
+						placeholder="Search..."
+						type="search"
+						value={searchText}
+						onChange={(e) => setSearchText(e.target.value)}
+					/>
+					<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+						<SearchIcon size={16} />
 					</div>
-					{categoriesLoading ? (
-						<div>Loading categories...</div>
-					) : (
-						<MultipleSelector
-							commandProps={{
-								label: "Select categories",
-							}}
-							value={categoryOptions.filter((cat) =>
-								filters.category?.includes(cat.value),
-							)}
-							defaultOptions={categoryOptions}
-							placeholder={
-								categoriesLoading
-									? "Loading categories..."
-									: "Select categories"
-							}
-							hideClearAllButton
-							hidePlaceholderWhenSelected
-							onChange={handleCategoryChange}
-							emptyIndicator={
-								<p className="text-center text-sm">No categories found</p>
-							}
-						/>
-					)}
+					<button
+						className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md text-muted-foreground/80 outline-none transition-[color,box-shadow] hover:text-foreground focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+						aria-label="Submit search"
+						type="submit"
+					>
+						<ArrowRightIcon size={16} aria-hidden="true" />
+					</button>
 				</div>
-			)}
+				{/* Filter Popover */}
+				<Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+					<PopoverTrigger asChild>
+						<Button variant="ghost" type="button">
+							<FilterIcon size={16} />
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className="w-80" align="end">
+						<div className="space-y-4">
+							<div className="flex items-center justify-between">
+								<h4 className="font-medium leading-none">Filter by category</h4>
+							</div>
+							{categoriesLoading ? (
+								<div>Loading categories...</div>
+							) : (
+								<MultipleSelector
+									commandProps={{
+										label: "Select categories",
+									}}
+									value={categoryOptions.filter((cat) =>
+										filters.category?.includes(cat.value),
+									)}
+									defaultOptions={categoryOptions}
+									placeholder={
+										categoriesLoading
+											? "Loading categories..."
+											: "Select categories"
+									}
+									hideClearAllButton
+									hidePlaceholderWhenSelected
+									onChange={handleCategoryChange}
+									emptyIndicator={
+										<p className="text-center text-sm">No categories found</p>
+									}
+								/>
+							)}
+							<div className="flex justify-end">
+								<Button onClick={handleDone} size="sm">
+									Done
+								</Button>
+							</div>
+						</div>
+					</PopoverContent>
+				</Popover>
+			</div>
 			<ProjectsInfiniteList search={debouncedSearch} filters={filters} />
 		</div>
 	);

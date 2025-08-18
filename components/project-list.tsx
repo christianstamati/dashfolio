@@ -113,7 +113,7 @@ type ProjectListProps = {
 	className?: string;
 };
 
-export async function ProjectList({ projects, className }: ProjectListProps) {
+export function ProjectList({ projects, className }: ProjectListProps) {
 	return (
 		<div className={cn("flex flex-col gap-4", className)}>
 			{projects.map((project) => (

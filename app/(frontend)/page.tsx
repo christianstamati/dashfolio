@@ -1,3 +1,4 @@
+import Socials from "@/components/socials";
 import Hero from "./components/hero";
 import Newsletter from "./components/newsletter";
 import SelectedProjects from "./components/selected-projects";
@@ -12,6 +13,7 @@ export default function Home() {
 			<SelectedProjects />
 			<Writings />
 			<Newsletter />
+			<Socials />
 		</div>
 	);
 }

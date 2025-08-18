@@ -5,7 +5,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { WorkInProgressBanner } from "./banner";
-import BottomSocials from "./bottom-socials";
 import { Sidebar } from "./sidebar";
 
 export const metadata: Metadata = {
@@ -34,6 +33,7 @@ const geistMono = Geist_Mono({
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
 	const { children } = props;
+	const env = process.env.NODE_ENV;
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
@@ -45,7 +45,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 					enableSystem
 					disableTransitionOnChange
 				>
-					<WorkInProgressBanner />
+					{env !== "development" && <WorkInProgressBanner />}
 					{/* Pearl Mist Background with Top Glow */}
 					<div
 						className="-z-50 absolute inset-0 hidden dark:block"
@@ -55,9 +55,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 						}}
 					/>
 					<Sidebar />
-					<main className="pt-12 pb-28 sm:pt-24">
+					<main className="pt-12 pb-32 sm:pt-24">
 						<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>
-						<BottomSocials />
 					</main>
 					<Toaster />
 				</ThemeProvider>

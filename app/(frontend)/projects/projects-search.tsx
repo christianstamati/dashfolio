@@ -57,13 +57,13 @@ function ProjectsInfiniteList({ search, filters }: ProjectsInfiniteListProps) {
 	return (
 		<div className="space-y-6">
 			<ProjectList projects={allProjects} />
-
 			{hasNextPage && (
 				<div className="flex justify-center">
 					<Button
 						onClick={() => fetchNextPage()}
 						disabled={isFetchingNextPage}
 						variant="outline"
+						size="lg"
 					>
 						{isFetchingNextPage ? "Loading more..." : "Load More"}
 					</Button>

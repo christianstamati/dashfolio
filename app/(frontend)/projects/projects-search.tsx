@@ -41,9 +41,9 @@ function ProjectsInfiniteList({ search, filters }: ProjectsInfiniteListProps) {
 	if (isLoading) {
 		return (
 			<div className="space-y-4">
-				<Skeleton className="h-56" />;
-				<Skeleton className="h-56" />;
-				<Skeleton className="h-56" />;
+				<Skeleton className="h-56" />
+				<Skeleton className="h-56" />
+				<Skeleton className="h-56" />
 			</div>
 		);
 	}

@@ -11,6 +11,8 @@ import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
+import { Roles } from "./collections/Roles";
+import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
 import { Hero } from "./globals/hero";
@@ -34,6 +36,8 @@ export default buildConfig({
 		Media,
 		Inquiries,
 		Companies,
+		Roles,
+		Teammates,
 	],
 	globals: [Hero, SelectedProjects],
 	editor: lexicalEditor(),

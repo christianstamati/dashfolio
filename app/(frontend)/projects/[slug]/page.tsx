@@ -1,11 +1,12 @@
 import { ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import BackButton from "@/components/back-button";
 import ImageMedia from "@/components/image-media";
 import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { formatDate } from "@/lib/format-date";
+import RenderBlocks from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
 
 const getProjectBySlug = async (slug: string) => {
@@ -42,14 +43,6 @@ export default async function Project({
 			{/* Project Header */}
 			<div className="flex flex-col gap-4">
 				<div className="flex items-start gap-4">
-					{project.projectIcon && (
-						<div className="h-12 w-12 flex-shrink-0">
-							<ImageMedia
-								media={project.projectIcon}
-								className="h-full w-full object-contain"
-							/>
-						</div>
-					)}
 					<div className="flex-1">
 						<Title>{project.title}</Title>
 						{project.company && typeof project.company === "object" && (
@@ -65,48 +58,34 @@ export default async function Project({
 					{project.description}
 				</p>
 			</div>
+
 			{/* Project Cover Image */}
 			{project.cover && (
 				<div className="flex flex-col items-center justify-center gap-4">
 					<ImageMedia media={project.cover} className="rounded-lg" />
-					<Button size={"lg"} className="mt-4 w-fit rounded-full">
-						<ExternalLink />
-						<span>Live Site</span>
-					</Button>
+					{project.link && (
+						<Button size={"lg"} className="mt-4 w-fit rounded-full" asChild>
+							<Link href={project.link} target="_blank">
+								<ExternalLink />
+								<span>Live Site</span>
+							</Link>
+						</Button>
+					)}
 				</div>
 			)}
 
 			{/* Project Details Grid */}
-			<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+			<div className="mb-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
 				{/* Left Column */}
 				<div className="space-y-6">
 					{/* Role */}
 					<div>
 						<h3 className="mb-2 font-semibold text-lg">ROLE</h3>
-						<p className="text-muted-foreground">Full Stack Developer</p>
-					</div>
-
-					{/* Responsibilities */}
-					<div>
-						<h3 className="mb-2 font-semibold text-lg">RESPONSIBILITIES</h3>
-						<ul className="space-y-1">
-							{project.responsibilities &&
-							project.responsibilities.length > 0 ? (
-								project.responsibilities.map((item: any) => (
-									<li key={item.id} className="text-muted-foreground">
-										{item.responsibility}
-									</li>
-								))
-							) : (
-								<>
-									<li className="text-muted-foreground">
-										Frontend Development
-									</li>
-									<li className="text-muted-foreground">UI/UX Design</li>
-									<li className="text-muted-foreground">Project Management</li>
-								</>
-							)}
-						</ul>
+						<p className="text-muted-foreground">
+							{project.role &&
+								typeof project.role !== "string" &&
+								project.role.name}
+						</p>
 					</div>
 				</div>
 
@@ -117,43 +96,33 @@ export default async function Project({
 						<h3 className="mb-2 font-semibold text-lg">TEAM</h3>
 						<ul className="space-y-1">
 							{project.team && project.team.length > 0 ? (
-								project.team.map((member: any) => (
-									<li key={member.id} className="text-muted-foreground">
-										{member.name}, {member.role}
-									</li>
-								))
+								project.team.map((teammate) => {
+									if (typeof teammate === "string") {
+										return <div>invalid teammate {teammate}</div>;
+									}
+
+									const roleName =
+										typeof teammate.role === "string"
+											? teammate.role
+											: teammate.role?.name;
+
+									return (
+										<li key={teammate.id} className="text-muted-foreground">
+											{teammate.name}
+											{roleName ? `, ${roleName}` : ""}
+										</li>
+									);
+								})
 							) : (
-								<>
-									<li className="text-muted-foreground">
-										John Doe, Project Manager
-									</li>
-									<li className="text-muted-foreground">
-										Jane Smith, Lead Developer
-									</li>
-									<li className="text-muted-foreground">
-										Mike Johnson, UI/UX Designer
-									</li>
-									<li className="text-muted-foreground">
-										Sarah Wilson, Backend Developer
-									</li>
-								</>
+								<li className="text-muted-foreground">Not available.</li>
 							)}
 						</ul>
 					</div>
 				</div>
 			</div>
 
-			{/* Problem Section */}
-			{project.problemCaption && (
-				<Card className="bg-muted/50">
-					<CardContent className="pt-6">
-						<h3 className="mb-3 font-semibold text-lg">PROBLEM</h3>
-						<p className="text-muted-foreground leading-relaxed">
-							{project.problemCaption}
-						</p>
-					</CardContent>
-				</Card>
-			)}
+			{/* Render Blocks */}
+			<RenderBlocks blocks={project.layout} />
 		</div>
 	);
 }

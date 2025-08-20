@@ -74,6 +74,8 @@ export interface Config {
     media: Media;
     inquiries: Inquiry;
     companies: Company;
+    roles: Role;
+    teammates: Teammate;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -87,6 +89,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
+    roles: RolesSelect<false> | RolesSelect<true>;
+    teammates: TeammatesSelect<false> | TeammatesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -172,34 +176,15 @@ export interface Project {
   id: string;
   slug: string;
   title: string;
-  /**
-   * Icon/logo for the project
-   */
-  projectIcon?: (string | null) | Media;
-  year: number;
-  description: string;
-  role: string;
-  responsibilities?:
-    | {
-        responsibility: string;
-        id?: string | null;
-      }[]
-    | null;
-  team?:
-    | {
-        name: string;
-        role: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Description of the problem this project solves
-   */
-  problemCaption?: string | null;
-  category?: (string | null) | Category;
   thumbnail?: (string | null) | Media;
+  link?: string | null;
   cover?: (string | null) | Media;
+  description: string;
+  role?: (string | null) | Role;
+  team?: (string | Teammate)[] | null;
+  category?: (string | null) | Category;
   company?: (string | null) | Company;
+  layout?: (ImageProps | ExampleProps | ParagraphProps)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -225,6 +210,28 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles".
+ */
+export interface Role {
+  id: string;
+  name: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teammates".
+ */
+export interface Teammate {
+  id: string;
+  name: string;
+  role?: (string | null) | Role;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "companies".
  */
 export interface Company {
@@ -233,6 +240,38 @@ export interface Company {
   logo?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageProps".
+ */
+export interface ImageProps {
+  caption?: string | null;
+  media?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExampleProps".
+ */
+export interface ExampleProps {
+  content: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'example';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ParagraphProps".
+ */
+export interface ParagraphProps {
+  title?: string | null;
+  content: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'paragraph';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -294,6 +333,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'companies';
         value: string | Company;
+      } | null)
+    | ({
+        relationTo: 'roles';
+        value: string | Role;
+      } | null)
+    | ({
+        relationTo: 'teammates';
+        value: string | Teammate;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -376,30 +423,52 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface ProjectsSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
-  projectIcon?: T;
-  year?: T;
+  thumbnail?: T;
+  link?: T;
+  cover?: T;
   description?: T;
   role?: T;
-  responsibilities?:
-    | T
-    | {
-        responsibility?: T;
-        id?: T;
-      };
-  team?:
-    | T
-    | {
-        name?: T;
-        role?: T;
-        id?: T;
-      };
-  problemCaption?: T;
+  team?: T;
   category?: T;
-  thumbnail?: T;
-  cover?: T;
   company?: T;
+  layout?:
+    | T
+    | {
+        image?: T | ImagePropsSelect<T>;
+        example?: T | ExamplePropsSelect<T>;
+        paragraph?: T | ParagraphPropsSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageProps_select".
+ */
+export interface ImagePropsSelect<T extends boolean = true> {
+  caption?: T;
+  media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExampleProps_select".
+ */
+export interface ExamplePropsSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ParagraphProps_select".
+ */
+export interface ParagraphPropsSelect<T extends boolean = true> {
+  title?: T;
+  content?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -451,6 +520,26 @@ export interface InquiriesSelect<T extends boolean = true> {
 export interface CompaniesSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles_select".
+ */
+export interface RolesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teammates_select".
+ */
+export interface TeammatesSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
 }

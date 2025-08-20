@@ -4,7 +4,6 @@ import ProjectsSearch from "./projects-search";
 
 export const metadata = {
 	title: "Projects | Christian Stamati",
-	description: "Here are a few projects that showcase my work and creativity",
 };
 
 export default async function Projects() {

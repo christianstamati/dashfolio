@@ -11,7 +11,6 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 - **Projects** - Showcase of your work and portfolio pieces
 - **Contact** - Easy ways for visitors to get in touch
 - **Writings** - Blog posts, articles, and written content
-- **Stack** - Tools used every day
 - **Themes** - Switch from Light to Dark mode
 
 ## 🛠️ Tech Stack
@@ -67,7 +66,7 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
    - Frontend: [http://localhost:3000](http://localhost:3000)
    - Admin Panel: [http://localhost:3000/admin](http://localhost:3000/admin)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 dashfolio/
@@ -76,8 +75,7 @@ dashfolio/
 │   │   ├── about/
 │   │   ├── contact/
 │   │   ├── projects/
-│   │   ├── stack/
-│   │   └── writing/
+│   │   └── writings/
 │   └── (payload)/            # Payload CMS admin
 │       ├── admin/
 │       └── api/
@@ -89,6 +87,7 @@ dashfolio/
 ├── hooks/               # Custom React hooks
 ├── lib/                 # Utility functions
 ├── env/                 # Environment configuration
+├── public/              # Public assets
 ├── payload.config.ts    # Payload CMS configuration
 ├── next.config.ts       # Next.js configuration
 └── package.json         # Dependencies
@@ -119,8 +118,16 @@ Payload CMS collections are configured in `payload/collections/`:
 - `Inquiries.ts` - Contact Inquiries (read-only)
 - `Projects.ts` - Portfolio projects case studies
 - `Writings.ts` - Writing articles
-- `Campanies.ts` - The companies you worked with
-- `Tools.ts` - The tools you use
+- `Companies.ts` - The companies you worked with
+- `Categories.ts` - Project categories and tags
+- `Roles.ts` - Professional roles and positions
+- `Teammates.ts` - Team members and collaborators
+
+### Globals
+
+Payload CMS globals are configured in `payload/globals/`:
+- `hero.ts` - Hero section content for the homepage
+- `selected-projects.ts` - Featured projects showcase
 
 
 ## 🚀 Deployment

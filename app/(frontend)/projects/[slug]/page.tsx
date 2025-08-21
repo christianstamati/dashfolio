@@ -11,15 +11,23 @@ import { getPayloadClient } from "@/payload/client";
 
 const getProjectBySlug = async (slug: string) => {
 	const payload = await getPayloadClient();
-	const project = await payload.find({
+	const projects = await payload.find({
 		collection: "projects",
 		where: {
 			slug: {
 				equals: slug,
 			},
+			_status: {
+				equals: "published",
+			},
 		},
 	});
-	return project;
+
+	if (projects.docs.length === 0) {
+		return null;
+	}
+
+	return projects.docs[0];
 };
 
 export default async function Project({
@@ -28,9 +36,7 @@ export default async function Project({
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
-	const docs = await getProjectBySlug(slug);
-
-	const project = docs.docs[0];
+	const project = await getProjectBySlug(slug);
 
 	if (!project) {
 		return notFound();
@@ -122,11 +128,7 @@ export default async function Project({
 			</div>
 
 			{/* Project Content */}
-			{project.content && (
-				<div className="prose">
-					<RichText data={project.content} />
-				</div>
-			)}
+			{project.content && <RichText data={project.content} />}
 		</div>
 	);
 }

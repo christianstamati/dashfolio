@@ -3,12 +3,23 @@ import type { CollectionConfig } from "payload";
 export const Writings: CollectionConfig = {
 	slug: "writings",
 	access: {
-		read: () => true,
+		read: ({ req }) => {
+			if (req.user) return true;
+			return {
+				_status: {
+					equals: "published",
+				},
+			};
+		},
 	},
 	admin: {
-		defaultColumns: ["title", "slug"],
 		useAsTitle: "title",
 	},
+
+	versions: {
+		drafts: true,
+	},
+
 	fields: [
 		{
 			name: "slug",
@@ -27,6 +38,17 @@ export const Writings: CollectionConfig = {
 		{
 			name: "description",
 			type: "textarea",
+			required: true,
+		},
+		{
+			name: "cover",
+			type: "relationship",
+			relationTo: "media",
+			hasMany: false,
+		},
+		{
+			name: "content",
+			type: "richText",
 			required: true,
 		},
 	],

@@ -5,6 +5,7 @@ import ImageMedia from "@/components/image-media";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { Category, Project } from "@/payload/payload-types";
+import { NoItemsFound } from "./no-items-found";
 
 function ProjectCategory({
 	category,
@@ -97,7 +98,7 @@ function ProjectCard({ project }: { project: Project }) {
 				</div>
 
 				{/* Desktop Image - Right Section */}
-				<div className="absolute right-0 bottom-0 hidden h-full w-[60%] md:block">
+				<div className="-right-13.5 absolute bottom-0 hidden h-full w-[60%] md:block">
 					<ImageMedia
 						media={project.thumbnail}
 						className="h-full w-full object-contain"
@@ -115,11 +116,7 @@ type ProjectListProps = {
 
 export function ProjectList({ projects, className }: ProjectListProps) {
 	if (projects.length === 0) {
-		return (
-			<Card className="flex flex-col items-center justify-center text-center">
-				<CardTitle className="text-lg">No projects found</CardTitle>
-			</Card>
-		);
+		return <NoItemsFound />;
 	}
 
 	return (

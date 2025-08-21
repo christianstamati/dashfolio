@@ -9,7 +9,7 @@ import { WorkInProgressBanner } from "./banner";
 import { Sidebar } from "./sidebar";
 
 export const metadata: Metadata = {
-	title: "Christian Stamati — Software Developer",
+	title: "Christian Stamati — Software Engineer",
 	description:
 		"Creating interactive and immersive web experiences, combining 3D and web technologies.",
 	icons: {

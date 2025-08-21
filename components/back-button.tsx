@@ -12,7 +12,10 @@ export default function BackButton({ label }: { label?: string }) {
 				variant={"ghost"}
 				size={"icon"}
 				type="button"
-				onClick={() => router.back()}
+				onClick={() => {
+					router.back();
+					console.log("back");
+				}}
 				className="flex items-center gap-3 rounded-full transition-colors"
 			>
 				<ChevronLeftIcon size={16} />

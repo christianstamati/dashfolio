@@ -3,10 +3,20 @@ import type { CollectionConfig } from "payload";
 export const Projects: CollectionConfig = {
 	slug: "projects",
 	access: {
-		read: () => true,
+		read: ({ req }) => {
+			if (req.user) return true;
+			return {
+				_status: {
+					equals: "published",
+				},
+			};
+		},
 	},
 	admin: {
 		useAsTitle: "title",
+	},
+	versions: {
+		drafts: true,
 	},
 	fields: [
 		{

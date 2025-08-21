@@ -114,6 +114,14 @@ type ProjectListProps = {
 };
 
 export function ProjectList({ projects, className }: ProjectListProps) {
+	if (projects.length === 0) {
+		return (
+			<Card className="flex flex-col items-center justify-center text-center">
+				<CardTitle className="text-lg">No projects found</CardTitle>
+			</Card>
+		);
+	}
+
 	return (
 		<div className={cn("flex flex-col gap-4", className)}>
 			{projects.map((project) => (

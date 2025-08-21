@@ -159,7 +159,7 @@
 }
 
 .rich-text-content h6 {
-  @apply text-base font-semibold tracking-tight text-foreground mt-4 mb-2;
+  @apply text-sm font-semibold tracking-widest text-foreground mt-4 mb-2;
 }
 
 .rich-text-content p {

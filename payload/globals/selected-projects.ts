@@ -2,6 +2,9 @@ import type { GlobalConfig } from "payload";
 
 export const SelectedProjects: GlobalConfig = {
 	slug: "selected-projects",
+	access: {
+		read: () => true,
+	},
 	fields: [
 		{
 			name: "projects",

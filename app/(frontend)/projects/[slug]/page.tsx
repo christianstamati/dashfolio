@@ -64,7 +64,7 @@ export default async function Project({
 				<div className="flex flex-col items-center justify-center gap-4">
 					<ImageMedia media={project.cover} className="rounded-lg" />
 					{project.link && (
-						<Button size={"lg"} className="mt-4 w-fit rounded-full" asChild>
+						<Button size={"lg"} className="mt-2 w-fit rounded-full" asChild>
 							<Link href={project.link} target="_blank">
 								<ExternalLink />
 								<span>Live Site</span>
@@ -80,7 +80,7 @@ export default async function Project({
 				<div className="space-y-6">
 					{/* Role */}
 					<div>
-						<h3 className="mb-2 font-semibold text-lg">ROLE</h3>
+						<h3 className="mb-2 font-semibold text-sm tracking-widest">ROLE</h3>
 						<p className="text-muted-foreground">
 							{project.role &&
 								typeof project.role !== "string" &&
@@ -93,7 +93,7 @@ export default async function Project({
 				<div className="space-y-6">
 					{/* Team */}
 					<div>
-						<h3 className="mb-2 font-semibold text-lg">TEAM</h3>
+						<h3 className="mb-2 font-semibold text-sm tracking-widest">TEAM</h3>
 						<ul className="space-y-1">
 							{project.team && project.team.length > 0 ? (
 								project.team.map((teammate) => {

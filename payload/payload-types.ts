@@ -176,15 +176,29 @@ export interface Project {
   id: string;
   slug: string;
   title: string;
+  description: string;
   thumbnail?: (string | null) | Media;
   link?: string | null;
   cover?: (string | null) | Media;
-  description: string;
   role?: (string | null) | Role;
   team?: (string | Teammate)[] | null;
   category?: (string | null) | Category;
   company?: (string | null) | Company;
-  layout?: (ImageProps | ExampleProps | ParagraphProps)[] | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -240,38 +254,6 @@ export interface Company {
   logo?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImageProps".
- */
-export interface ImageProps {
-  caption?: string | null;
-  media?: (string | null) | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'image';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ExampleProps".
- */
-export interface ExampleProps {
-  content: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'example';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ParagraphProps".
- */
-export interface ParagraphProps {
-  title?: string | null;
-  content: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'paragraph';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -423,52 +405,17 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface ProjectsSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
+  description?: T;
   thumbnail?: T;
   link?: T;
   cover?: T;
-  description?: T;
   role?: T;
   team?: T;
   category?: T;
   company?: T;
-  layout?:
-    | T
-    | {
-        image?: T | ImagePropsSelect<T>;
-        example?: T | ExamplePropsSelect<T>;
-        paragraph?: T | ParagraphPropsSelect<T>;
-      };
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImageProps_select".
- */
-export interface ImagePropsSelect<T extends boolean = true> {
-  caption?: T;
-  media?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ExampleProps_select".
- */
-export interface ExamplePropsSelect<T extends boolean = true> {
-  content?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ParagraphProps_select".
- */
-export interface ParagraphPropsSelect<T extends boolean = true> {
-  title?: T;
-  content?: T;
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -620,6 +567,16 @@ export interface SelectedProjectsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExampleProps".
+ */
+export interface ExampleProps {
+  content: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'example';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

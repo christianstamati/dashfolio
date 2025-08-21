@@ -6,7 +6,7 @@ import ImageMedia from "@/components/image-media";
 import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/format-date";
-import RenderBlocks from "@/payload/blocks/render-blocks";
+import { RichText } from "@/payload/blocks/rich-text/component";
 import { getPayloadClient } from "@/payload/client";
 
 const getProjectBySlug = async (slug: string) => {
@@ -121,8 +121,12 @@ export default async function Project({
 				</div>
 			</div>
 
-			{/* Render Blocks */}
-			<RenderBlocks blocks={project.layout} />
+			{/* Project Content */}
+			{project.content && (
+				<div className="prose">
+					<RichText data={project.content} />
+				</div>
+			)}
 		</div>
 	);
 }

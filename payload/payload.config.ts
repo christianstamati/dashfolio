@@ -1,11 +1,16 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import {
+	BlocksFeature,
+	FixedToolbarFeature,
+	lexicalEditor,
+} from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 import { env } from "@/env/server";
+import { example } from "./blocks/example/config";
 import { Categories } from "./collections/Categories";
 import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
@@ -40,7 +45,15 @@ export default buildConfig({
 		Teammates,
 	],
 	globals: [Hero, SelectedProjects],
-	editor: lexicalEditor(),
+	editor: lexicalEditor({
+		features: ({ defaultFeatures }) => {
+			return [
+				...defaultFeatures,
+				FixedToolbarFeature(),
+				BlocksFeature({ blocks: [example] }),
+			];
+		},
+	}),
 	secret: env.PAYLOAD_SECRET,
 	typescript: {
 		outputFile: path.resolve(dirname, "payload-types.ts"),

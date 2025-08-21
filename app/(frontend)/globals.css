@@ -127,3 +127,171 @@
 .card-hover {
   @apply hover:-translate-y-1 relative cursor-pointer transition-all duration-300 ease-in-out hover:shadow-2xl;
 }
+
+/* Rich Text Content Styles */
+.rich-text-content {
+  @apply max-w-none;
+}
+
+.rich-text-content > * + * {
+  @apply mt-6;
+}
+
+/* Typography */
+.rich-text-content h1 {
+  @apply text-4xl font-bold tracking-tight text-foreground mt-8 mb-4 first:mt-0;
+}
+
+.rich-text-content h2 {
+  @apply text-3xl font-semibold tracking-tight text-foreground mt-7 mb-3;
+}
+
+.rich-text-content h3 {
+  @apply text-2xl font-semibold tracking-tight text-foreground mt-6 mb-3;
+}
+
+.rich-text-content h4 {
+  @apply text-xl font-semibold tracking-tight text-foreground mt-5 mb-2;
+}
+
+.rich-text-content h5 {
+  @apply text-lg font-semibold tracking-tight text-foreground mt-4 mb-2;
+}
+
+.rich-text-content h6 {
+  @apply text-base font-semibold tracking-tight text-foreground mt-4 mb-2;
+}
+
+.rich-text-content p {
+  @apply text-base leading-7 text-muted-foreground;
+}
+
+/* Lists */
+.rich-text-content .list-number {
+  @apply list-decimal list-inside space-y-2 ml-4;
+}
+
+.rich-text-content .list-bullet {
+  @apply list-disc list-inside space-y-2 ml-4;
+}
+
+.rich-text-content .list-number li,
+.rich-text-content .list-bullet li {
+  @apply text-base leading-7 text-muted-foreground;
+}
+
+/* Custom Checkbox List */
+.rich-text-content .list-check {
+  @apply space-y-3;
+}
+
+.rich-text-content .list-item-checkbox {
+  @apply flex items-center space-x-3 p-2 rounded-md hover:bg-muted/50 transition-colors;
+}
+
+.rich-text-content .list-item-checkbox input[type="checkbox"] {
+  @apply h-4 w-4 rounded border border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground;
+}
+
+.rich-text-content .list-item-checkbox input[type="checkbox"]:checked {
+  @apply bg-primary border-primary;
+}
+
+.rich-text-content .list-item-checkbox label {
+  @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer;
+}
+
+.rich-text-content .list-item-checkbox-checked label {
+  @apply text-foreground;
+}
+
+.rich-text-content .list-item-checkbox-unchecked label {
+  @apply text-muted-foreground;
+}
+
+/* Blockquotes */
+.rich-text-content blockquote {
+  @apply border-l-4 border-border pl-6 py-2 italic text-muted-foreground bg-muted/30 rounded-r-md;
+}
+
+/* Horizontal Rules */
+.rich-text-content hr {
+  @apply border-0 h-px bg-border my-8;
+}
+
+/* Images */
+.rich-text-content img {
+  @apply rounded-lg border shadow-sm max-w-full h-auto my-6;
+}
+
+/* Text Formatting */
+.rich-text-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.rich-text-content em {
+  @apply italic;
+}
+
+.rich-text-content code {
+  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold text-foreground;
+}
+
+.rich-text-content a {
+  @apply font-medium text-primary underline underline-offset-4 hover:text-primary/80 transition-colors;
+}
+
+.rich-text-content sub {
+  @apply text-xs;
+}
+
+.rich-text-content sup {
+  @apply text-xs;
+}
+
+/* Text Alignment */
+.rich-text-content p[style*="text-align:center"] {
+  @apply text-center;
+}
+
+.rich-text-content p[style*="text-align:right"] {
+  @apply text-right;
+}
+
+.rich-text-content p[style*="text-align:justify"] {
+  @apply text-justify;
+}
+
+/* Indentation */
+.rich-text-content p[style*="padding-inline-start"] {
+  @apply pl-10;
+}
+
+/* Unknown nodes fallback */
+.rich-text-content span {
+  @apply text-muted-foreground text-sm italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .rich-text-content h1 {
+    @apply text-3xl;
+  }
+
+  .rich-text-content h2 {
+    @apply text-2xl;
+  }
+
+  .rich-text-content h3 {
+    @apply text-xl;
+  }
+
+  .rich-text-content .list-number,
+  .rich-text-content .list-bullet {
+    @apply ml-2;
+  }
+
+  .rich-text-content blockquote {
+    @apply pl-4;
+  }
+}

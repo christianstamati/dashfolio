@@ -1,6 +1,8 @@
 import type React from "react";
 import "./globals.css";
 import { Geist, Geist_Mono } from "next/font/google";
+import { draftMode } from "next/headers";
+import { AdminBar } from "@/components/admin-bar";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
 
@@ -19,6 +21,8 @@ export default async function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	const { isEnabled } = await draftMode();
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
@@ -29,6 +33,11 @@ export default async function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} flex h-svh flex-col overflow-auto font-sans antialiased`}
 			>
 				<Providers>
+					<AdminBar
+						adminBarProps={{
+							preview: isEnabled,
+						}}
+					/>
 					<BackgroundGradient />
 					<main className="pt-12 pb-32 sm:pt-24">
 						<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>

@@ -15,6 +15,7 @@ import { Categories } from "./collections/Categories";
 import { Companies } from "./collections/Companies";
 import { Inquiries } from "./collections/Inquiries";
 import { Media } from "./collections/Media";
+import { Pages } from "./collections/Pages";
 import { Projects } from "./collections/Projects";
 import { Roles } from "./collections/Roles";
 import { Teammates } from "./collections/Teammates";
@@ -35,6 +36,7 @@ export default buildConfig({
 	},
 	collections: [
 		Users,
+		Pages,
 		Categories,
 		Projects,
 		Writings,

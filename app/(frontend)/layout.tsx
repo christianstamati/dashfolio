@@ -1,18 +1,8 @@
 import type React from "react";
 import "./globals.css";
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
-
-export const metadata: Metadata = {
-	title: "Christian Stamati — Software Engineer",
-	description:
-		"Creating interactive and immersive web experiences, combining 3D and web technologies.",
-	icons: {
-		icon: "/favicon.svg",
-	},
-};
+import { BackgroundGradient } from "@/components/background-gradient";
+import { Providers } from "@/components/providers";
 
 const geistSans = Geist({
 	variable: "--font-sans",
@@ -24,32 +14,26 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-export default async function RootLayout(props: { children: React.ReactNode }) {
-	const { children } = props;
+export default async function RootLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head>
+				<link href="/favicon.ico" rel="icon" sizes="32x32" />
+				<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex h-svh flex-col overflow-auto font-sans antialiased`}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					enableSystem
-					disableTransitionOnChange
-				>
-					{/* Pearl Mist Background with Top Glow */}
-					<div
-						className="-z-50 absolute inset-0 hidden dark:block"
-						style={{
-							background:
-								"radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226, 232, 240, 0.15), transparent 70%), #0A0A0A",
-						}}
-					/>
+				<Providers>
+					<BackgroundGradient />
 					<main className="pt-12 pb-32 sm:pt-24">
 						<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>
 					</main>
-					<Toaster />
-				</ThemeProvider>
+				</Providers>
 			</body>
 		</html>
 	);

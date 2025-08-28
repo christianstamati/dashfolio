@@ -1,8 +1,11 @@
 import configPromise from "@payload-config";
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { getPayload, type RequiredDataFromCollectionSlug } from "payload";
+import { getPayload } from "payload";
 import { cache } from "react";
-import { LivePreviewListener } from "@/components/LivePreviewListener";
+import { LivePreviewListener } from "@/components/live-preview-listener";
+import { getPayloadClient } from "@/payload/client";
+import { generateMeta } from "@/payload/utils/generateMeta";
 
 export async function generateStaticParams() {
 	const payload = await getPayload({ config: configPromise });
@@ -28,59 +31,19 @@ export async function generateStaticParams() {
 	return params;
 }
 
-type Args = {
-	params: Promise<{
-		slug?: string;
-	}>;
-};
-
-export default async function Page({ params: paramsPromise }: Args) {
-	const { isEnabled: draft } = await draftMode();
+export async function generateMetadata({
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
 	const { slug = "home" } = await paramsPromise;
-	const url = "/" + slug;
-
-	let page: RequiredDataFromCollectionSlug<"pages"> | null;
-
-	page = await queryPageBySlug({
+	const page = await queryPageBySlug({
 		slug,
 	});
-
-	// Remove this code once your website is seeded
-	if (!page && slug === "home") {
-		page = {
-			slug: "home",
-			title: "Home",
-		};
-	}
-
-	// if (!page) {
-	// 	return <PayloadRedirects url={url} />;
-	// }
-
-	return (
-		<article className="pt-16 pb-24">
-			{draft && <LivePreviewListener />}
-			{page?.title}
-		</article>
-	);
+	return generateMeta({ doc: page });
 }
-
-// export async function generateMetadata({
-// 	params: paramsPromise,
-// }: Args): Promise<Metadata> {
-// 	const { slug = "home" } = await paramsPromise;
-// 	const page = await queryPageBySlug({
-// 		slug,
-// 	});
-
-// 	return generateMeta({ doc: page });
-// }
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 	const { isEnabled: draft } = await draftMode();
-
-	const payload = await getPayload({ config: configPromise });
-
+	const payload = await getPayloadClient();
 	const result = await payload.find({
 		collection: "pages",
 		draft,
@@ -93,6 +56,25 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 			},
 		},
 	});
-
 	return result.docs?.[0] || null;
 });
+
+type Args = {
+	params: Promise<{
+		slug?: string;
+	}>;
+};
+
+export default async function Page({ params: paramsPromise }: Args) {
+	const { isEnabled: draft } = await draftMode();
+	const { slug = "home" } = await paramsPromise;
+	const page = await queryPageBySlug({
+		slug,
+	});
+	return (
+		<article className="pt-16 pb-24">
+			{draft && <LivePreviewListener />}
+			{page?.title}
+		</article>
+	);
+}

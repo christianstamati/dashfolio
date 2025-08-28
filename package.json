@@ -9,9 +9,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"generate:importmap": "payload generate:importmap",
-		"generate:types": "payload generate:types",
-		"sitemap": "next-sitemap",
-		"analyze": "set ANALYZE=true && pnpm build"
+		"generate:types": "payload generate:types"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.1",

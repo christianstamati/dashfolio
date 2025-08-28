@@ -1,9 +1,12 @@
 import configPromise from "@payload-config";
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import { cache } from "react";
 import { LivePreviewListener } from "@/components/live-preview-listener";
+import RenderBlocks from "@/payload/blocks/render-blocks";
+import { RichText } from "@/payload/blocks/rich-text/component";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 
@@ -74,7 +77,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 	return (
 		<article className="pt-16 pb-24">
 			{draft && <LivePreviewListener />}
-			{page?.title}
+			<RenderBlocks page={page} />
+			<RichText data={page?.content as SerializedEditorState} />
 		</article>
 	);
 }

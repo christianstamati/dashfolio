@@ -6,6 +6,7 @@ import {
 	PreviewField,
 } from "@payloadcms/plugin-seo/fields";
 import type { CollectionConfig } from "payload";
+import { hero } from "../blocks/hero/config";
 import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Pages: CollectionConfig = {
@@ -68,6 +69,16 @@ export const Pages: CollectionConfig = {
 		{
 			type: "tabs",
 			tabs: [
+				{
+					label: "Layout",
+					fields: [
+						{
+							name: "blocks",
+							type: "blocks",
+							blocks: [hero],
+						},
+					],
+				},
 				{
 					name: "meta",
 					label: "SEO",

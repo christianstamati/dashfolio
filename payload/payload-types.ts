@@ -175,6 +175,7 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
+  blocks?: HeroProps[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -186,6 +187,19 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroProps".
+ */
+export interface HeroProps {
+  title?: string | null;
+  description?: string | null;
+  image?: (string | null) | Media;
+  resume?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -601,6 +615,11 @@ export interface UsersSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
+  blocks?:
+    | T
+    | {
+        hero?: T | HeroPropsSelect<T>;
+      };
   meta?:
     | T
     | {
@@ -611,6 +630,18 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroProps_select".
+ */
+export interface HeroPropsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  resume?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

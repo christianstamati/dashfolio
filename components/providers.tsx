@@ -1,7 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ThemeProvider } from "./theme-provider";
-import { Toaster } from "./ui/sonner";
+
+// Lazy load Toaster to reduce initial bundle
+const Toaster = dynamic(
+	() => import("./ui/sonner").then((mod) => ({ default: mod.Toaster })),
+	{
+		ssr: false,
+		loading: () => null,
+	},
+);
 
 export function Providers({ children }: { children: React.ReactNode }) {
 	return (

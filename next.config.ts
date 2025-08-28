@@ -2,6 +2,11 @@ import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
 import "@/env/server";
 
+const withBundleAnalyzer =
+	process.env.ANALYZE === "true"
+		? require("@next/bundle-analyzer")({ enabled: true })
+		: (config: NextConfig) => config;
+
 const nextConfig: NextConfig = {
 	/* config options here */
 	images: {
@@ -16,6 +21,18 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	// Performance optimizations
+	compress: true,
+	poweredByHeader: false,
+	experimental: {
+		optimizePackageImports: [
+			"@radix-ui/react-dialog",
+			"@radix-ui/react-dropdown-menu",
+			"@radix-ui/react-popover",
+			"@radix-ui/react-select",
+			"@radix-ui/react-tooltip",
+		],
+	},
 };
 
-export default withPayload(nextConfig);
+export default withBundleAnalyzer(withPayload(nextConfig));

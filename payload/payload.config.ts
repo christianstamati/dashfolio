@@ -1,10 +1,12 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
+import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
 import {
 	BlocksFeature,
 	FixedToolbarFeature,
 	lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
+import nodemailer from "nodemailer";
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -28,6 +30,19 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+	email: nodemailerAdapter({
+		defaultFromAddress: "hello@chri.dev",
+		defaultFromName: "Dashfolio Website",
+		// Any Nodemailer transport can be used
+		transport: nodemailer.createTransport({
+			host: env.SMTP_HOST,
+			port: 587,
+			auth: {
+				user: env.SMTP_USER,
+				pass: env.SMTP_PASSWORD,
+			},
+		}),
+	}),
 	admin: {
 		user: Users.slug,
 		importMap: {

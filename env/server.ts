@@ -9,6 +9,10 @@ export const env = createEnv({
 		S3_ACCESS_KEY_ID: z.string().min(1),
 		S3_SECRET_ACCESS_KEY: z.string().min(1),
 		S3_REGION: z.string().min(1),
+		PREVIEW_SECRET: z.string(),
+		SMTP_HOST: z.string().min(1),
+		SMTP_USER: z.string().min(1),
+		SMTP_PASSWORD: z.string().min(1),
 	},
 	experimental__runtimeEnv: process.env,
 });

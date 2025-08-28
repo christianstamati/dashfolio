@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.1",
+		"@payloadcms/admin-bar": "^3.54.0",
 		"@payloadcms/db-mongodb": "^3.53.0",
 		"@payloadcms/live-preview-react": "3.53.0",
 		"@payloadcms/next": "^3.53.0",

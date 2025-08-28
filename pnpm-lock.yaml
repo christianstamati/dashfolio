@@ -11,6 +11,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.2.1
         version: 5.2.1(react-hook-form@7.62.0(react@19.1.0))
+      '@payloadcms/admin-bar':
+        specifier: ^3.54.0
+        version: 3.54.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@payloadcms/db-mongodb':
         specifier: ^3.53.0
         version: 3.53.0(@aws-sdk/credential-providers@3.859.0)(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))
@@ -1168,6 +1171,12 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@payloadcms/admin-bar@3.54.0':
+    resolution: {integrity: sha512-aBwwt2+C19uIaKgfeKd9DgMLQyf0GWKHs1rTkk5xtiNVUzHfazbQoSu54FivgXLTyN+zGr5q44acfNdsTZFPxw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@payloadcms/db-mongodb@3.53.0':
     resolution: {integrity: sha512-Y4YaUE1lJDxlT+1NI7z/HJuPDmnsmgsr1yM01KAJw8s2OeVBICnLRcWTZfSwqN6EzYN5Vxokklcbkef8z4MrEA==}
@@ -5840,6 +5849,11 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@15.4.5':
     optional: true
+
+  '@payloadcms/admin-bar@3.54.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   '@payloadcms/db-mongodb@3.53.0(@aws-sdk/credential-providers@3.859.0)(payload@3.53.0(graphql@16.11.0)(typescript@5.9.2))':
     dependencies:

@@ -114,6 +114,7 @@ The project uses Tailwind CSS for styling. Customize the theme by editing:
 
 Payload CMS collections are configured in `payload/collections/`:
 - `Users.ts` - Users can access the admin
+- `Pages.ts` - Top level pages ex Home, About etc...
 - `Media.ts` - File uploads and images
 - `Inquiries.ts` - Contact Inquiries (read-only)
 - `Projects.ts` - Portfolio projects case studies

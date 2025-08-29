@@ -175,7 +175,7 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
-  blocks?: HeroProps[] | null;
+  blocks?: (HeroProps | SelectedProjectsProps)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -281,14 +281,27 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
+ * via the `definition` "SelectedProjectsProps".
  */
-export interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  updatedAt: string;
-  createdAt: string;
+export interface SelectedProjectsProps {
+  projects?: (string | Project)[] | null;
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'selected-projects';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -344,6 +357,17 @@ export interface Teammate {
   id: string;
   name: string;
   role?: (string | null) | Role;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  name: string;
+  icon: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -619,6 +643,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         hero?: T | HeroPropsSelect<T>;
+        'selected-projects'?: T | SelectedProjectsPropsSelect<T>;
       };
   meta?:
     | T
@@ -640,6 +665,25 @@ export interface HeroPropsSelect<T extends boolean = true> {
   description?: T;
   image?: T;
   resume?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SelectedProjectsProps_select".
+ */
+export interface SelectedProjectsPropsSelect<T extends boolean = true> {
+  projects?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
   id?: T;
   blockName?: T;
 }

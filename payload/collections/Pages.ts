@@ -7,6 +7,7 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import type { CollectionConfig } from "payload";
 import { hero } from "../blocks/hero/config";
+import { selectedProjects } from "../blocks/selected-projects/config";
 import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Pages: CollectionConfig = {
@@ -75,7 +76,7 @@ export const Pages: CollectionConfig = {
 						{
 							name: "blocks",
 							type: "blocks",
-							blocks: [hero],
+							blocks: [hero, selectedProjects],
 						},
 					],
 				},

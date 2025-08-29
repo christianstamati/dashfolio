@@ -1,8 +1,10 @@
 import type { Page } from "../payload-types";
 import Hero from "./hero/component";
+import SelectedProjects from "./selected-projects/component";
 
 const blocks = {
 	hero: Hero,
+	"selected-projects": SelectedProjects,
 };
 
 export default function RenderBlocks({ page }: { page: Page | string }) {
@@ -19,7 +21,7 @@ export default function RenderBlocks({ page }: { page: Page | string }) {
 	return (
 		<div className="space-y-8">
 			{pageBlocks.map((block) => {
-				const BlockComponent = blocks[block.blockType];
+				const BlockComponent = blocks[block.blockType] as any;
 				return BlockComponent ? (
 					<BlockComponent key={block.id} {...block} />
 				) : (

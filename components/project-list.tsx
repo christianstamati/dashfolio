@@ -110,7 +110,7 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 type ProjectListProps = {
-	projects: Project[];
+	projects: (Project | string)[];
 	className?: string;
 };
 
@@ -119,9 +119,13 @@ export function ProjectList({ projects, className }: ProjectListProps) {
 		return <NoItemsFound />;
 	}
 
+	const projectList = projects.filter(
+		(project) => typeof project === "object",
+	) as Project[];
+
 	return (
 		<div className={cn("flex flex-col gap-4", className)}>
-			{projects.map((project) => (
+			{projectList.map((project) => (
 				<ProjectCard key={project.id} project={project} />
 			))}
 		</div>

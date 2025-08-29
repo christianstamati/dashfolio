@@ -90,6 +90,9 @@ importers:
       cmdk:
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      deepmerge:
+        specifier: ^4.3.1
+        version: 4.3.1
       graphql:
         specifier: ^16.11.0
         version: 16.11.0

@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
+import { Sidebar } from "./sidebar";
 
 const geistSans = Geist({
 	variable: "--font-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
 						<AdminBarServer />
 					</Suspense>
 					<BackgroundGradient />
+					<Sidebar />
 					<main className="pt-12 pb-32 sm:pt-24">
 						<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>
 					</main>

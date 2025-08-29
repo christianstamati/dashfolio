@@ -22,6 +22,7 @@ import { Roles } from "./collections/Roles";
 import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
+import { Nav } from "./globals/nav";
 import { plugins } from "./plugins";
 import { getServerSideURL } from "./utils/getURL";
 
@@ -83,6 +84,7 @@ export default buildConfig({
 		Roles,
 		Teammates,
 	],
+	globals: [Nav],
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => {
 			return [

@@ -21,7 +21,7 @@ export default function RenderBlocks({ page }: { page: Page | string }) {
 	}
 
 	return (
-		<div className="space-y-8">
+		<div className="space-y-16">
 			{pageBlocks.map((block) => {
 				const BlockComponent = blocks[block.blockType] as any;
 				return BlockComponent ? (

@@ -2,6 +2,7 @@
 
 import { Folder, Home, PathTool, Profile, Sms } from "iconsax-reactjs";
 import { useIsMobile } from "@/hooks/use-mobile";
+import type { Nav } from "@/payload/payload-types";
 import { DesktopSidebar } from "./desktop-sidebar";
 import { MobileSidebar } from "./mobile-sidebar";
 
@@ -37,8 +38,9 @@ export const sidebarData = {
 	],
 };
 
-export function Sidebar() {
+export function Sidebar({ links }: { links: Nav["links"] }) {
 	const isMobile = useIsMobile();
+
 	if (isMobile) {
 		return <MobileSidebar />;
 	}

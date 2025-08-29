@@ -10,7 +10,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { sidebarData } from ".";
+import type { Nav } from "@/payload/payload-types";
 
 const ThemeToggle = () => {
 	const { theme, setTheme } = useTheme();
@@ -35,8 +35,8 @@ const ThemeToggle = () => {
 	);
 };
 
-export function MobileSidebar() {
-	const items = sidebarData.links;
+export function MobileSidebar({ links }: { links: NonNullable<Nav["links"]> }) {
+	const items = links;
 	// Take first 4 items for the main menu
 	const mainLinks = items.slice(0, 4);
 	// Remaining items go in the dropdown
@@ -53,7 +53,7 @@ export function MobileSidebar() {
 						className="flex flex-col items-center gap-1 rounded-lg p-2 transition-colors hover:bg-muted"
 					>
 						<item.icon variant="Bold" size={20} />
-						<span className="font-medium text-xs">{item.label}</span>
+						<span className="font-medium text-xs">{item.link.label}</span>
 					</Link>
 				))}
 

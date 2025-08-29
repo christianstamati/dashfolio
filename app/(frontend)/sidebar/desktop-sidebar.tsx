@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 import { Card } from "@/components/ui/card";
 import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
-import { sidebarData } from ".";
+import type { Nav } from "@/payload/payload-types";
 
 const ThemeToggle = () => {
 	const { theme, setTheme } = useTheme();
@@ -57,8 +57,8 @@ const SidebarItem = ({
 	);
 };
 
-export function DesktopSidebar() {
-	const items = sidebarData.links;
+export function DesktopSidebar({ links }: { links: Nav["links"] }) {
+	const items = links;
 
 	// Separate visible and collapsed items
 	const visibleLinks = items.filter((link) => !link.collapsed);

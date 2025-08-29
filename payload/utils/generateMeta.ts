@@ -7,7 +7,7 @@ import { mergeOpenGraph } from "./mergeOpenGraph";
 const getImageURL = (image?: Media | null) => {
 	const serverUrl = getServerSideURL();
 
-	let url = serverUrl + "/website-template-OG.webp";
+	let url = serverUrl + "/dashfolio-og.png";
 
 	if (image && typeof image === "object" && "url" in image) {
 		url = image.sizes?.og?.url || image.url || "";

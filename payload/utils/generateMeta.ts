@@ -10,9 +10,7 @@ const getImageURL = (image?: Media | null) => {
 	let url = serverUrl + "/website-template-OG.webp";
 
 	if (image && typeof image === "object" && "url" in image) {
-		const ogUrl = image.sizes?.og?.url;
-
-		url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url;
+		url = image.sizes?.og?.url || image.url || "";
 	}
 
 	return url;

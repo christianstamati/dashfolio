@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-import type { Config, Media, Page } from "../payload-types";
+import type { Media, Page } from "../payload-types";
 import { getServerSideURL } from "./getURL";
 import { mergeOpenGraph } from "./mergeOpenGraph";
 
-const getImageURL = (image?: Media | Config["db"]["defaultIDType"] | null) => {
+const getImageURL = (image?: Media | null) => {
 	const serverUrl = getServerSideURL();
 
 	let url = serverUrl + "/website-template-OG.webp";
@@ -23,7 +23,7 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
 	const { doc } = args;
 
-	const ogImage = getImageURL(doc?.meta?.image);
+	const ogImage = getImageURL(doc?.meta?.image as Media);
 
 	const title = doc?.meta?.title ? doc?.meta?.title : "Dashfolio Website";
 

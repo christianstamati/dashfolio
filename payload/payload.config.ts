@@ -1,12 +1,10 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
-import { seoPlugin } from "@payloadcms/plugin-seo";
 import {
 	BlocksFeature,
 	FixedToolbarFeature,
 	lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import { s3Storage } from "@payloadcms/storage-s3";
 import nodemailer from "nodemailer";
 import path from "path";
 import { buildConfig } from "payload";
@@ -24,6 +22,8 @@ import { Roles } from "./collections/Roles";
 import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
+import { plugins } from "./plugins";
+import { getServerSideURL } from "./utils/getURL";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -47,7 +47,30 @@ export default buildConfig({
 		importMap: {
 			baseDir: path.resolve(dirname),
 		},
+		livePreview: {
+			breakpoints: [
+				{
+					label: "Mobile",
+					name: "mobile",
+					width: 375,
+					height: 667,
+				},
+				{
+					label: "Tablet",
+					name: "tablet",
+					width: 768,
+					height: 1024,
+				},
+				{
+					label: "Desktop",
+					name: "desktop",
+					width: 1440,
+					height: 900,
+				},
+			],
+		},
 	},
+	cors: [getServerSideURL()].filter(Boolean),
 	collections: [
 		Users,
 		Pages,
@@ -77,28 +100,5 @@ export default buildConfig({
 		url: env.DATABASE_URL,
 	}),
 	sharp,
-	plugins: [
-		seoPlugin({
-			collections: ["pages"],
-		}),
-		s3Storage({
-			clientUploads: true,
-			collections: {
-				media: {
-					prefix: "media",
-					generateFileURL: ({ filename, prefix }) => {
-						return `https://${env.S3_BUCKET}.s3.${env.S3_REGION}.amazonaws.com/${prefix}/${filename}`;
-					},
-				},
-			},
-			bucket: env.S3_BUCKET,
-			config: {
-				credentials: {
-					accessKeyId: env.S3_ACCESS_KEY_ID,
-					secretAccessKey: env.S3_SECRET_ACCESS_KEY,
-				},
-				region: env.S3_REGION,
-			},
-		}),
-	],
+	plugins: [...plugins],
 });

@@ -172,6 +172,10 @@ export interface Page {
   blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps)[] | null;
   meta?: {
     title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
     description?: string | null;
   };
   updatedAt: string;
@@ -636,6 +640,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        image?: T;
         description?: T;
       };
   updatedAt?: T;

@@ -1,10 +1,12 @@
 import type { Page } from "../payload-types";
 import Hero from "./hero/component";
+import LatestWritings from "./latest-writings/component";
 import SelectedProjects from "./selected-projects/component";
 
 const blocks = {
 	hero: Hero,
 	"selected-projects": SelectedProjects,
+	"latest-writings": LatestWritings,
 };
 
 export default function RenderBlocks({ page }: { page: Page | string }) {

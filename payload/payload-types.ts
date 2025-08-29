@@ -102,14 +102,8 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {
-    hero: Hero;
-    'selected-projects': SelectedProject;
-  };
-  globalsSelect: {
-    hero: HeroSelect<false> | HeroSelect<true>;
-    'selected-projects': SelectedProjectsSelect<false> | SelectedProjectsSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: null;
   user: User & {
     collection: 'users';
@@ -175,13 +169,9 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
-  blocks?: (HeroProps | SelectedProjectsProps)[] | null;
+  blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps)[] | null;
   meta?: {
     title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
     description?: string | null;
   };
   updatedAt: string;
@@ -285,20 +275,6 @@ export interface Media {
  */
 export interface SelectedProjectsProps {
   projects?: (string | Project)[] | null;
-  link: {
-    type?: ('reference' | 'custom') | null;
-    newTab?: boolean | null;
-    reference?: {
-      relationTo: 'pages';
-      value: string | Page;
-    } | null;
-    url?: string | null;
-    label: string;
-    /**
-     * Choose how the link should be rendered.
-     */
-    appearance?: ('default' | 'outline') | null;
-  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'selected-projects';
@@ -381,6 +357,16 @@ export interface Company {
   logo?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestWritingsProps".
+ */
+export interface LatestWritingsProps {
+  info?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'latest-writings';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -644,12 +630,12 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         hero?: T | HeroPropsSelect<T>;
         'selected-projects'?: T | SelectedProjectsPropsSelect<T>;
+        'latest-writings'?: T | LatestWritingsPropsSelect<T>;
       };
   meta?:
     | T
     | {
         title?: T;
-        image?: T;
         description?: T;
       };
   updatedAt?: T;
@@ -674,16 +660,15 @@ export interface HeroPropsSelect<T extends boolean = true> {
  */
 export interface SelectedProjectsPropsSelect<T extends boolean = true> {
   projects?: T;
-  link?:
-    | T
-    | {
-        type?: T;
-        newTab?: T;
-        reference?: T;
-        url?: T;
-        label?: T;
-        appearance?: T;
-      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestWritingsProps_select".
+ */
+export interface LatestWritingsPropsSelect<T extends boolean = true> {
+  info?: T;
   id?: T;
   blockName?: T;
 }
@@ -929,52 +914,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero".
- */
-export interface Hero {
-  id: string;
-  title?: string | null;
-  description?: string | null;
-  image?: (string | null) | Media;
-  resume?: (string | null) | Media;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "selected-projects".
- */
-export interface SelectedProject {
-  id: string;
-  projects?: (string | Project)[] | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero_select".
- */
-export interface HeroSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  image?: T;
-  resume?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "selected-projects_select".
- */
-export interface SelectedProjectsSelect<T extends boolean = true> {
-  projects?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

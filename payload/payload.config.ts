@@ -1,5 +1,6 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
+import { seoPlugin } from "@payloadcms/plugin-seo";
 import {
 	BlocksFeature,
 	FixedToolbarFeature,
@@ -23,8 +24,6 @@ import { Roles } from "./collections/Roles";
 import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
-import { Hero } from "./globals/hero";
-import { SelectedProjects } from "./globals/selected-projects";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -61,7 +60,6 @@ export default buildConfig({
 		Roles,
 		Teammates,
 	],
-	globals: [Hero, SelectedProjects],
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => {
 			return [
@@ -80,6 +78,9 @@ export default buildConfig({
 	}),
 	sharp,
 	plugins: [
+		seoPlugin({
+			collections: ["pages"],
+		}),
 		s3Storage({
 			clientUploads: true,
 			collections: {

@@ -4,10 +4,7 @@ import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
 import type { SelectedProjectsProps } from "@/payload/payload-types";
 
-export default function SelectedProjects({
-	projects,
-	link,
-}: SelectedProjectsProps) {
+export default function SelectedProjects({ projects }: SelectedProjectsProps) {
 	if (!projects) return null;
 	return (
 		<section>

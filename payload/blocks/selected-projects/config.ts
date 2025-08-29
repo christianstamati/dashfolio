@@ -1,5 +1,4 @@
 import type { Block } from "payload";
-import { link } from "@/payload/fields/link";
 
 export const selectedProjects: Block = {
 	slug: "selected-projects",
@@ -12,6 +11,5 @@ export const selectedProjects: Block = {
 			hasMany: true,
 			maxRows: 3,
 		},
-		link(),
 	],
 };

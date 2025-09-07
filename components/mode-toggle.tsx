@@ -1,8 +1,7 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun1 } from "iconsax-reactjs";
 import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -17,13 +16,19 @@ export function ModeToggle() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="outline" size="icon">
-					<Sun className="dark:-rotate-90 h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:scale-0" />
-					<Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+				<Button variant="ghost" size="icon" className="size-14 rounded-2xl">
+					<Sun1
+						variant="Linear"
+						className="dark:-rotate-90 size-6 rotate-0 scale-100 text-muted-foreground transition-all dark:scale-0"
+					/>
+					<Moon
+						variant="Linear"
+						className="absolute size-6 rotate-90 scale-0 text-muted-foreground transition-all dark:rotate-0 dark:scale-100"
+					/>
 					<span className="sr-only">Toggle theme</span>
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end">
+			<DropdownMenuContent align="start">
 				<DropdownMenuItem onClick={() => setTheme("light")}>
 					Light
 				</DropdownMenuItem>

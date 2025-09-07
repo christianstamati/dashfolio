@@ -16,8 +16,13 @@ export default function RenderBlocks({ page }: { page: Page | string }) {
 
 	const { blocks: pageBlocks } = page;
 
-	if (!pageBlocks) {
-		return <div>No blocks found</div>;
+	if (!pageBlocks || pageBlocks.length === 0) {
+		return (
+			<div>
+				No blocks found for <strong>/{page.slug}</strong> page. Go to admin to
+				add new blocks.
+			</div>
+		);
 	}
 
 	return (

@@ -15,14 +15,8 @@ export function IconsaxIcon({
 	color,
 	className,
 }: IconsaxIconProps) {
-	// Convert name to PascalCase for Iconsax component names
-	const iconName = name
-		.split("-")
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-		.join("");
-
 	// Dynamic import of the icon component
-	const IconComponent = (Iconsax as any)[iconName];
+	const IconComponent = (Iconsax as any)[name];
 
 	if (!IconComponent) {
 		console.warn(`Iconsax icon "${name}" not found`);

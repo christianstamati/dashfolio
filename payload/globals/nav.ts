@@ -11,20 +11,17 @@ export const Nav: GlobalConfig = {
 			name: "links",
 			type: "array",
 			fields: [
-				link({ appearances: false }),
-				{
-					name: "icon",
-					type: "text",
-					required: true,
-				},
-				{
-					name: "collapsed",
-					type: "checkbox",
-					label: "Collapsed",
-					admin: {
-						description: "If true, the link will be collapsed in the sidebar",
+				...link({
+					appearances: false,
+					overrides: {
+						fields: [
+							{
+								name: "icon",
+								type: "text",
+							},
+						],
 					},
-				},
+				}).fields,
 			],
 		},
 	],

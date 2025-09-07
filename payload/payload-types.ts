@@ -932,21 +932,15 @@ export interface Nav {
   id: string;
   links?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: string | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-        };
-        icon: string;
-        /**
-         * If true, the link will be collapsed in the sidebar
-         */
-        collapsed?: boolean | null;
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'pages';
+          value: string | Page;
+        } | null;
+        url?: string | null;
+        label: string;
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -961,17 +955,12 @@ export interface NavSelect<T extends boolean = true> {
   links?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
         icon?: T;
-        collapsed?: T;
         id?: T;
       };
   updatedAt?: T;

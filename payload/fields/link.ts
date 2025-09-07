@@ -21,7 +21,7 @@ type LinkType = (options?: {
 	appearances?: LinkAppearances[] | false;
 	disableLabel?: boolean;
 	overrides?: Partial<GroupField>;
-}) => Field;
+}) => GroupField;
 
 export const link: LinkType = ({
 	appearances,
@@ -29,7 +29,7 @@ export const link: LinkType = ({
 	overrides = {},
 } = {}) => {
 	const linkResult: GroupField = {
-		name: "link",
+		label: "Link",
 		type: "group",
 		admin: {
 			hideGutter: true,

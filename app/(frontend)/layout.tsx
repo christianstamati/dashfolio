@@ -43,7 +43,9 @@ export default function RootLayout({
 					{/* Main content */}
 					<div className="flex h-full min-h-0 w-full">
 						{/* Navbar */}
-						<Navbar />
+						<Suspense fallback={null}>
+							<Navbar />
+						</Suspense>
 
 						{/* Page content */}
 						<main className="min-h-0 w-full overflow-auto pt-12 pb-32 sm:pt-24">

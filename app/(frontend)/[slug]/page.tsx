@@ -1,7 +1,5 @@
-import configPromise from "@payload-config";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { getPayload } from "payload";
 import { cache } from "react";
 import { LivePreviewListener } from "@/components/live-preview-listener";
 import RenderBlocks from "@/payload/blocks/render-blocks";
@@ -9,7 +7,7 @@ import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 
 export async function generateStaticParams() {
-	const payload = await getPayload({ config: configPromise });
+	const payload = await getPayloadClient();
 	const pages = await payload.find({
 		collection: "pages",
 		draft: false,

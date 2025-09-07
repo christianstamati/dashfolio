@@ -25,32 +25,21 @@ const nextConfig: NextConfig = {
 	generateEtags: true,
 	experimental: {
 		scrollRestoration: true,
+		inlineCss: true,
 	},
 	swcMinify: true,
 	compiler: {
 		removeConsole: process.env.NODE_ENV === "production",
 	},
-	async headers() {
-		return [
-			{
-				source: "/media/:path*",
-				headers: [
-					{
-						key: "Cache-Control",
-						value: "public, max-age=31536000, immutable",
-					},
-				],
-			},
-			{
-				source: "/_next/static/:path*",
-				headers: [
-					{
-						key: "Cache-Control",
-						value: "public, max-age=31536000, immutable",
-					},
-				],
-			},
-		];
+	// Configure SWC to target modern browsers only
+	swcMinifyOptions: {
+		compress: {
+			drop_console: process.env.NODE_ENV === "production",
+		},
+	},
+	// Target modern browsers only - excludes IE11 and very old browsers
+	env: {
+		BROWSERSLIST: "> 0.5%, last 2 versions, not dead, not ie 11",
 	},
 };
 

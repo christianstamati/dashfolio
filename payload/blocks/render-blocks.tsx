@@ -1,12 +1,14 @@
 import type { Page } from "../payload-types";
 import Hero from "./hero/component";
 import LatestWritings from "./latest-writings/component";
+import { RichText } from "./rich-text/component";
 import SelectedProjects from "./selected-projects/component";
 
 const blocks = {
 	hero: Hero,
 	"selected-projects": SelectedProjects,
 	"latest-writings": LatestWritings,
+	"rich-text": RichText,
 };
 
 export default function RenderBlocks({ page }: { page: Page | string }) {
@@ -29,6 +31,11 @@ export default function RenderBlocks({ page }: { page: Page | string }) {
 		<div className="space-y-16">
 			{pageBlocks.map((block) => {
 				const BlockComponent = blocks[block.blockType] as any;
+
+				if (block.blockType === "rich-text") {
+					return <BlockComponent key={block.id} data={block.richText} />;
+				}
+
 				return BlockComponent ? (
 					<BlockComponent key={block.id} {...block} />
 				) : (

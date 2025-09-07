@@ -173,7 +173,7 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
-  blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps)[] | null;
+  blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps | RichTextProps)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -375,6 +375,30 @@ export interface LatestWritingsProps {
   id?: string | null;
   blockName?: string | null;
   blockType: 'latest-writings';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextProps".
+ */
+export interface RichTextProps {
+  richText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'rich-text';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -639,6 +663,7 @@ export interface PagesSelect<T extends boolean = true> {
         hero?: T | HeroPropsSelect<T>;
         'selected-projects'?: T | SelectedProjectsPropsSelect<T>;
         'latest-writings'?: T | LatestWritingsPropsSelect<T>;
+        'rich-text'?: T | RichTextPropsSelect<T>;
       };
   meta?:
     | T
@@ -678,6 +703,15 @@ export interface SelectedProjectsPropsSelect<T extends boolean = true> {
  */
 export interface LatestWritingsPropsSelect<T extends boolean = true> {
   info?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextProps_select".
+ */
+export interface RichTextPropsSelect<T extends boolean = true> {
+  richText?: T;
   id?: T;
   blockName?: T;
 }

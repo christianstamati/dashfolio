@@ -40,8 +40,9 @@ export default function RootLayout({
 					crossOrigin="anonymous"
 				/>
 				<link
-					rel="dns-prefetch"
+					rel="preconnect"
 					href="https://dashfolio-prod.s3.eu-central-1.amazonaws.com"
+					crossOrigin="anonymous"
 				/>
 			</head>
 			<body

@@ -5,9 +5,11 @@ import type { Media } from "@/payload/payload-types";
 export default function ImageMedia({
 	media,
 	className,
+	sizes,
 }: {
 	media?: Media | string | null;
 	className?: string;
+	sizes?: string;
 }) {
 	if (!media) {
 		return <div>No media</div>;
@@ -32,6 +34,7 @@ export default function ImageMedia({
 			height={media.height || 100}
 			loading="lazy"
 			placeholder="blur"
+			sizes={sizes}
 			blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
 		/>
 	);

@@ -21,7 +21,14 @@ export default function Hero({ title, description, image, resume }: HeroProps) {
 		<section>
 			<div className="container mx-auto">
 				<Avatar className="mb-6 size-16 items-center justify-center bg-secondary">
-					<AvatarImage className="size-12" src={imageUrl} alt="avatar-image" />
+					<AvatarImage
+						className="size-12"
+						src={imageUrl}
+						alt="avatar-image"
+						width={48}
+						height={48}
+						sizes="48px"
+					/>
 					<AvatarFallback>CS</AvatarFallback>
 				</Avatar>
 				<Title>{title || "Not set"}</Title>

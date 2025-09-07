@@ -12,13 +12,15 @@ const geistSans = Geist({
 	subsets: ["latin"],
 	display: "swap",
 	preload: true,
+	fallback: ["system-ui", "arial"],
 });
 
 const geistMono = Geist_Mono({
 	variable: "--font-mono",
 	subsets: ["latin"],
 	display: "swap",
-	preload: true,
+	preload: false,
+	fallback: ["ui-monospace", "monospace"],
 });
 
 export default function RootLayout({
@@ -28,6 +30,20 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="theme-color" content="#000000" />
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin="anonymous"
+				/>
+				<link
+					rel="dns-prefetch"
+					href="https://dashfolio-prod.s3.eu-central-1.amazonaws.com"
+				/>
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex h-svh flex-col font-sans antialiased`}
 			>

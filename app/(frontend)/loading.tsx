@@ -2,28 +2,55 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
 	return (
-		<article className="space-y-6 pt-16 pb-24">
-			{/* Header skeleton */}
-			<div className="space-y-2">
-				<Skeleton className="h-8 w-3/4" />
-				<Skeleton className="h-4 w-1/2" />
-			</div>
+		<main className="min-h-0 w-full overflow-auto pt-12 pb-32 sm:pt-24">
+			<div className="max-w-2xl">
+				{/* Title skeleton */}
+				<Skeleton className="mb-6 h-8 w-64" />
 
-			{/* Content skeleton */}
-			<div className="space-y-3">
-				<Skeleton className="h-4 w-full" />
-				<Skeleton className="h-4 w-full" />
-				<Skeleton className="h-4 w-5/6" />
-			</div>
+				{/* Content skeleton */}
+				<div className="space-y-4">
+					<Skeleton className="h-4 w-full" />
+					<Skeleton className="h-4 w-5/6" />
+					<Skeleton className="h-4 w-4/5" />
+					<Skeleton className="h-4 w-full" />
+					<Skeleton className="h-4 w-3/4" />
+				</div>
 
-			{/* Card/block skeleton */}
-			<div className="space-y-4">
-				<Skeleton className="h-32 w-full rounded-lg" />
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-					<Skeleton className="h-24 w-full rounded-lg" />
-					<Skeleton className="h-24 w-full rounded-lg" />
+				{/* Subtitle skeleton */}
+				<div className="mt-8">
+					<Skeleton className="mb-4 h-6 w-40" />
+					<div className="space-y-3">
+						<Skeleton className="h-4 w-full" />
+						<Skeleton className="h-4 w-5/6" />
+						<Skeleton className="h-4 w-4/5" />
+					</div>
+				</div>
+
+				{/* Card-like skeleton */}
+				<div className="mt-8 space-y-3">
+					<Skeleton className="h-48 w-full rounded-lg" />
+					<Skeleton className="h-48 w-full rounded-lg" />
+					<Skeleton className="h-48 w-full rounded-lg" />
+				</div>
+
+				{/* List skeleton */}
+				<div className="mt-8 space-y-3">
+					<Skeleton className="h-6 w-32" />
+					<div className="space-y-2">
+						<Skeleton className="h-4 w-full" />
+						<Skeleton className="h-4 w-4/5" />
+						<Skeleton className="h-4 w-3/4" />
+						<Skeleton className="h-4 w-5/6" />
+					</div>
+				</div>
+
+				{/* Additional content */}
+				<div className="mt-8 space-y-4">
+					<Skeleton className="h-4 w-full" />
+					<Skeleton className="h-4 w-5/6" />
+					<Skeleton className="h-4 w-4/5" />
 				</div>
 			</div>
-		</article>
+		</main>
 	);
 }

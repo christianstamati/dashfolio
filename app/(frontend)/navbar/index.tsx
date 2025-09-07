@@ -1,5 +1,6 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { getPayloadClient } from "@/payload/client";
+import { MobileNavbar } from "./mobile-navbar";
 import NavItem from "./nav-item";
 
 const getLinks = async () => {
@@ -13,11 +14,20 @@ const getLinks = async () => {
 export async function Navbar() {
 	const links = await getLinks();
 	return (
-		<div className="hidden items-center justify-center border-r p-2 lg:flex lg:flex-col">
-			{links?.map((link) => (
-				<NavItem key={link.id} link={link} />
-			))}
-			<ModeToggle />
-		</div>
+		<>
+			{/* Desktop Navbar */}
+			<div className="hidden items-center justify-between border-r p-2 lg:flex lg:h-full lg:flex-col">
+				<div className="flex flex-1 flex-col items-center justify-center">
+					{links?.map((link) => (
+						<NavItem key={link.id} link={link} />
+					))}
+				</div>
+
+				<ModeToggle />
+			</div>
+
+			{/* Mobile Navbar */}
+			{links && <MobileNavbar links={links} />}
+		</>
 	);
 }

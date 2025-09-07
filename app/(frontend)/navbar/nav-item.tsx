@@ -11,27 +11,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { Nav } from "@/payload/payload-types";
-
-const getUrl = (link: NonNullable<Nav["links"]>[number]) => {
-	if (link.type === "reference") {
-		const ref = link.reference?.value;
-		if (ref && typeof ref !== "string") {
-			return `/${ref.slug}`;
-		}
-	}
-
-	if (link.url) {
-		return link.url;
-	}
-};
-
-const isActive = (pathname: string, linkUrl: string) => {
-	const isHome = pathname === "/" && linkUrl === "/home";
-	if (isHome) {
-		return true;
-	}
-	return pathname === linkUrl;
-};
+import { getUrl, isActive } from "./utils";
 
 export default function NavItem({
 	link,
@@ -55,8 +35,8 @@ export default function NavItem({
 				>
 					<Link href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}>
 						<IconsaxIcon
-							variant={active ? "Bold" : "Linear"}
-							className={cn("size-6", !active && "text-muted-foreground")}
+							variant={"Bold"}
+							className={cn("size-6", !active && "text-muted-foreground/50")}
 							name={link.icon ?? "Home"}
 						/>
 					</Link>

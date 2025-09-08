@@ -1,6 +1,7 @@
 "use server";
 
 import { getPayloadClient } from "@/payload/client";
+import type { ContactFormData } from "./schema";
 
 export async function createInquiry(data: ContactFormData) {
 	const payload = await getPayloadClient();

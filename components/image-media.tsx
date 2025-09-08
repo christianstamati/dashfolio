@@ -30,9 +30,8 @@ export default function ImageMedia({
 			src={mediaUrl}
 			alt={media.alt}
 			className={cn("h-full w-full", className)}
-			width={media.width || 100}
-			height={media.height || 100}
-			loading="lazy"
+			width={media.width || 640}
+			height={media.height || 360}
 			priority
 			sizes={sizes}
 		/>

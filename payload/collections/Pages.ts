@@ -6,6 +6,7 @@ import {
 	PreviewField,
 } from "@payloadcms/plugin-seo/fields";
 import type { CollectionConfig } from "payload";
+import { contactForm } from "../blocks/contact-form/config";
 import { hero } from "../blocks/hero/config";
 import { latestWritings } from "../blocks/latest-writings/config";
 import { richText } from "../blocks/rich-text/config";
@@ -78,7 +79,13 @@ export const Pages: CollectionConfig = {
 						{
 							name: "blocks",
 							type: "blocks",
-							blocks: [hero, selectedProjects, latestWritings, richText],
+							blocks: [
+								hero,
+								selectedProjects,
+								latestWritings,
+								richText,
+								contactForm,
+							],
 						},
 					],
 				},

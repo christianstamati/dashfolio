@@ -71,7 +71,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 		slug,
 	});
 	return (
-		<article className="pt-16 pb-24">
+		<article>
 			{draft && <LivePreviewListener />}
 			<RenderBlocks page={page} />
 		</article>

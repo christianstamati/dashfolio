@@ -27,15 +27,8 @@ const nextConfig: NextConfig = {
 		scrollRestoration: true,
 		inlineCss: true,
 	},
-	swcMinify: true,
 	compiler: {
 		removeConsole: process.env.NODE_ENV === "production",
-	},
-	// Configure SWC to target modern browsers only
-	swcMinifyOptions: {
-		compress: {
-			drop_console: process.env.NODE_ENV === "production",
-		},
 	},
 	// Target modern browsers only - excludes IE11 and very old browsers
 	env: {

@@ -173,7 +173,7 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
-  blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps | RichTextProps)[] | null;
+  blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps | RichTextProps | ContactFormProps)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -399,6 +399,21 @@ export interface RichTextProps {
   id?: string | null;
   blockName?: string | null;
   blockType: 'rich-text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormProps".
+ */
+export interface ContactFormProps {
+  about?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact-form';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -664,6 +679,7 @@ export interface PagesSelect<T extends boolean = true> {
         'selected-projects'?: T | SelectedProjectsPropsSelect<T>;
         'latest-writings'?: T | LatestWritingsPropsSelect<T>;
         'rich-text'?: T | RichTextPropsSelect<T>;
+        'contact-form'?: T | ContactFormPropsSelect<T>;
       };
   meta?:
     | T
@@ -712,6 +728,20 @@ export interface LatestWritingsPropsSelect<T extends boolean = true> {
  */
 export interface RichTextPropsSelect<T extends boolean = true> {
   richText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormProps_select".
+ */
+export interface ContactFormPropsSelect<T extends boolean = true> {
+  about?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

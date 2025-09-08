@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
 	return (
-		<main className="min-h-0 w-full overflow-auto pt-12 pb-32 sm:pt-24">
+		<main className="min-h-0 w-full overflow-auto">
 			<div className="max-w-2xl">
 				{/* Title skeleton */}
 				<Skeleton className="mb-6 h-8 w-64" />

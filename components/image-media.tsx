@@ -27,15 +27,14 @@ export default function ImageMedia({
 
 	return (
 		<Image
-			src={mediaUrl + "?v=1"}
+			src={mediaUrl}
 			alt={media.alt}
 			className={cn("h-full w-full", className)}
 			width={media.width || 100}
 			height={media.height || 100}
 			loading="lazy"
-			placeholder="blur"
+			priority
 			sizes={sizes}
-			blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
 		/>
 	);
 }

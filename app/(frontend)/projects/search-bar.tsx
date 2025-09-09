@@ -9,7 +9,7 @@ export default function SearchBar() {
 		shallow: false,
 		limitUrlUpdates: {
 			method: "debounce",
-			timeMs: 1000,
+			timeMs: 500,
 		},
 	});
 	return (

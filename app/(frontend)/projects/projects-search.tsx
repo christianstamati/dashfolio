@@ -2,7 +2,6 @@
 
 import { ArrowRightIcon, FilterIcon, SearchIcon } from "lucide-react";
 import { useState } from "react";
-import { useDebounce } from "use-debounce";
 import { ProjectList } from "@/components/project-list";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -87,7 +86,7 @@ function ProjectsInfiniteList({ search, filters }: ProjectsInfiniteListProps) {
 
 export default function ProjectsSearch() {
 	const [searchText, setSearchText] = useState("");
-	const [debouncedSearch] = useDebounce(searchText, 500);
+	const [debouncedSearch] = ["s"];
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [filters, setFilters] = useState<{
 		category?: string[];

@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider } from "./theme-provider";
 
 // Lazy load Toaster to reduce initial bundle
@@ -20,7 +21,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 			enableSystem
 			disableTransitionOnChange
 		>
-			{children}
+			<NuqsAdapter>{children}</NuqsAdapter>
 			<Toaster />
 		</ThemeProvider>
 	);

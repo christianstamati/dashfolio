@@ -45,6 +45,7 @@
 		"next": "15.5.2",
 		"next-themes": "^0.4.6",
 		"nodemailer": "^7.0.5",
+		"nuqs": "^2.6.0",
 		"payload": "^3.54.0",
 		"radix-ui": "^1.4.3",
 		"react": "19.1.1",
@@ -54,12 +55,10 @@
 		"sharp": "^0.34.3",
 		"sonner": "^2.0.6",
 		"tailwind-merge": "^3.3.1",
-		"use-debounce": "^10.0.5",
 		"zod": "^4.0.14"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.1.3",
-		"@next/bundle-analyzer": "^15.5.2",
 		"@tailwindcss/postcss": "^4",
 		"@types/node": "^20",
 		"@types/nodemailer": "^7.0.1",

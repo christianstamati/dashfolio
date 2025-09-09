@@ -49,14 +49,14 @@ export async function generateMetadata({
 		notFound();
 	}
 
-	const page = await queryPageBySlug({
+	const project = await queryProjectBySlug({
 		slug,
 	});
 
-	return generateMeta({ doc: page });
+	return generateMeta({ doc: project });
 }
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
 	const { isEnabled: draft } = await draftMode();
 	const payload = await getPayloadClient();
 	const result = await payload.find({
@@ -181,7 +181,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 		notFound();
 	}
 
-	const project = await queryPageBySlug({
+	const project = await queryProjectBySlug({
 		slug,
 	});
 
@@ -196,7 +196,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 		<article>
 			{draft && <LivePreviewListener />}
 			<BackButton label={"Projects"} />
-
 			<ProjectCover project={project} className="mt-4" />
 			<RichText data={content} />
 		</article>

@@ -2,8 +2,8 @@ import type { Page } from "../payload-types";
 import ContactForm from "./contact-form/component";
 import Hero from "./hero/component";
 import LatestWritings from "./latest-writings/component";
+import SelectedProjects from "./project-list/component";
 import { RichText } from "./rich-text/component";
-import SelectedProjects from "./selected-projects/component";
 
 const blocks = {
 	hero: Hero,

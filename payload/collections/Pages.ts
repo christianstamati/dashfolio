@@ -9,8 +9,8 @@ import type { CollectionConfig } from "payload";
 import { contactForm } from "../blocks/contact-form/config";
 import { hero } from "../blocks/hero/config";
 import { latestWritings } from "../blocks/latest-writings/config";
+import { selectedProjects } from "../blocks/project-list/config";
 import { richText } from "../blocks/rich-text/config";
-import { selectedProjects } from "../blocks/selected-projects/config";
 import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Pages: CollectionConfig = {

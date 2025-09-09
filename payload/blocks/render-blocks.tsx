@@ -2,8 +2,8 @@ import type { Page } from "../payload-types";
 import ContactForm from "./contact-form/component";
 import Hero from "./hero/component";
 import LatestWritings from "./latest-writings/component";
-import SelectedProjects from "./project-list/component";
 import { RichText } from "./rich-text/component";
+import SelectedProjects from "./selected-projects/component";
 
 const blocks = {
 	hero: Hero,
@@ -11,7 +11,7 @@ const blocks = {
 	"latest-writings": LatestWritings,
 	"rich-text": RichText,
 	"contact-form": ContactForm,
-};
+} as const;
 
 export default function RenderBlocks({ page }: { page: Page | string }) {
 	if (!page || typeof page === "string") {

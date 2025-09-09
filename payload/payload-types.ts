@@ -432,7 +432,6 @@ export interface Writing {
   slug: string;
   title: string;
   description: string;
-  cover?: (string | null) | Media;
   content: {
     root: {
       type: string;
@@ -447,6 +446,14 @@ export interface Writing {
       version: number;
     };
     [k: string]: unknown;
+  };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -798,8 +805,14 @@ export interface WritingsSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
   description?: T;
-  cover?: T;
   content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

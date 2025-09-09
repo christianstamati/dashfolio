@@ -22,7 +22,7 @@ import { generateMeta } from "@/payload/utils/generateMeta";
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
-	const pages = await payload.find({
+	const projects = await payload.find({
 		collection: "projects",
 		draft: false,
 		limit: 1000,
@@ -33,7 +33,7 @@ export async function generateStaticParams() {
 		},
 	});
 
-	const params = pages.docs.map(({ slug }) => {
+	const params = projects.docs.map(({ slug }) => {
 		return { slug };
 	});
 

@@ -1,3 +1,10 @@
+import {
+	MetaDescriptionField,
+	MetaImageField,
+	MetaTitleField,
+	OverviewField,
+	PreviewField,
+} from "@payloadcms/plugin-seo/fields";
 import type { CollectionConfig } from "payload";
 
 export const Writings: CollectionConfig = {
@@ -35,21 +42,57 @@ export const Writings: CollectionConfig = {
 			type: "text",
 			required: true,
 		},
+
 		{
-			name: "description",
-			type: "textarea",
-			required: true,
-		},
-		{
-			name: "cover",
-			type: "relationship",
-			relationTo: "media",
-			hasMany: false,
-		},
-		{
-			name: "content",
-			type: "richText",
-			required: true,
+			type: "tabs",
+			tabs: [
+				{
+					label: "Details",
+					fields: [
+						{
+							name: "description",
+							type: "textarea",
+							required: true,
+						},
+					],
+				},
+				{
+					label: "Content",
+					fields: [
+						{
+							name: "content",
+							type: "richText",
+							required: true,
+						},
+					],
+				},
+				{
+					name: "meta",
+					label: "SEO",
+					fields: [
+						OverviewField({
+							titlePath: "meta.title",
+							descriptionPath: "meta.description",
+							imagePath: "meta.image",
+						}),
+						MetaTitleField({
+							hasGenerateFn: true,
+						}),
+						MetaImageField({
+							relationTo: "media",
+						}),
+						MetaDescriptionField({}),
+						PreviewField({
+							// if the `generateUrl` function is configured
+							hasGenerateFn: true,
+
+							// field paths to match the target field for data
+							titlePath: "meta.title",
+							descriptionPath: "meta.description",
+						}),
+					],
+				},
+			],
 		},
 	],
 };

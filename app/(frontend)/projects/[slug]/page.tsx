@@ -96,7 +96,8 @@ function ProjectCover({
 						<Title>{project.title}</Title>
 						{project.company && typeof project.company === "object" && (
 							<p className="text-muted-foreground text-sm">
-								{project.company.name} • {formatDate(project.createdAt)}
+								<strong>{project.company.name}</strong> •{" "}
+								{formatDate(project.createdAt)}
 							</p>
 						)}
 					</div>

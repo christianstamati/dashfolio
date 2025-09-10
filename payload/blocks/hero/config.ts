@@ -14,13 +14,19 @@ export const hero: Block = {
 		},
 		{
 			name: "image",
-			type: "relationship",
+			type: "upload",
 			relationTo: "media",
+			filterOptions: {
+				mimeType: { contains: "image" },
+			},
 		},
 		{
 			name: "resume",
-			type: "relationship",
+			type: "upload",
 			relationTo: "media",
+			filterOptions: {
+				mimeType: { contains: "pdf" },
+			},
 		},
 	],
 };

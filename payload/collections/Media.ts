@@ -12,7 +12,8 @@ export const Media: CollectionConfig = {
 		read: () => true,
 	},
 	admin: {
-		useAsTitle: "alt",
+		useAsTitle: "filename",
+		defaultColumns: ["filename", "alt", "width", "height"],
 	},
 	fields: [
 		{
@@ -27,8 +28,10 @@ export const Media: CollectionConfig = {
 		focalPoint: true,
 		imageSizes: [
 			{
+				height: 400,
+				width: 400,
+				crop: "center",
 				name: "thumbnail",
-				width: 300,
 			},
 			{
 				name: "square",

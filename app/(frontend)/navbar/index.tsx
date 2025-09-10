@@ -1,16 +1,22 @@
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { ModeToggle } from "@/components/mode-toggle";
 import { getPayloadClient } from "@/payload/client";
 import { MobileNavbar } from "./mobile-navbar";
 import NavItem from "./nav-item";
 
-const getLinks = cache(async () => {
-	const payload = await getPayloadClient();
-	const nav = await payload.findGlobal({
-		slug: "nav",
-	});
-	return nav.links;
-});
+const getLinks = unstable_cache(
+	async () => {
+		const payload = await getPayloadClient();
+		const nav = await payload.findGlobal({
+			slug: "nav",
+		});
+		return nav.links;
+	},
+	["navbar-links"],
+	{
+		tags: ["navbar-links"],
+	},
+);
 
 export async function Navbar() {
 	const links = await getLinks();

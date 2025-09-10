@@ -2,7 +2,7 @@
 
 import { getPayloadClient } from "@/payload/client";
 
-export interface GetProjectsParams {
+export interface GetWritingsParams {
 	page?: number;
 	limit?: number;
 	search?: string;
@@ -11,12 +11,12 @@ export interface GetProjectsParams {
 	};
 }
 
-export async function findProjects({
+export async function findWritings({
 	page = 1,
 	limit = 10,
 	search,
 	filters,
-}: GetProjectsParams = {}) {
+}: GetWritingsParams = {}) {
 	const payload = await getPayloadClient();
 
 	// Build query
@@ -27,11 +27,6 @@ export async function findProjects({
 		query.or = [
 			{
 				title: {
-					contains: search,
-				},
-			},
-			{
-				description: {
 					contains: search,
 				},
 			},
@@ -52,7 +47,7 @@ export async function findProjects({
 	}
 
 	const result = await payload.find({
-		collection: "projects",
+		collection: "writings",
 		where: Object.keys(query).length > 0 ? query : undefined,
 		page,
 		limit,

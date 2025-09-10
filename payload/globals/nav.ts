@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import type { GlobalConfig } from "payload";
 import { link } from "../fields/link";
 
@@ -25,4 +26,11 @@ export const Nav: GlobalConfig = {
 			],
 		},
 	],
+	hooks: {
+		afterChange: [
+			() => {
+				revalidateTag("navbar-links");
+			},
+		],
+	},
 };

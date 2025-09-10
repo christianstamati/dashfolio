@@ -1,9 +1,12 @@
+import type { SearchParams } from "@/app/(frontend)/[slug]/page";
 import type { Page } from "../payload-types";
 import ContactForm from "./contact-form/component";
 import Hero from "./hero/component";
 import LatestWritings from "./latest-writings/component";
+import ProjectSearch from "./project-search/component";
 import { RichText } from "./rich-text/component";
 import SelectedProjects from "./selected-projects/component";
+import WritingSearch from "./writing-search/component";
 
 const blocks = {
 	hero: Hero,
@@ -11,9 +14,19 @@ const blocks = {
 	"latest-writings": LatestWritings,
 	"rich-text": RichText,
 	"contact-form": ContactForm,
+	"project-search": ProjectSearch,
+	"writing-search": WritingSearch,
 } as const;
 
-export default function RenderBlocks({ page }: { page: Page | string }) {
+type RenderBlocksProps = {
+	page: Page | string;
+	searchParams?: SearchParams;
+};
+
+export default function RenderBlocks({
+	page,
+	searchParams,
+}: RenderBlocksProps) {
 	if (!page || typeof page === "string") {
 		return <div>Invalid page {page}</div>;
 	}
@@ -39,7 +52,11 @@ export default function RenderBlocks({ page }: { page: Page | string }) {
 				}
 
 				return BlockComponent ? (
-					<BlockComponent key={block.id} {...block} />
+					<BlockComponent
+						key={block.id}
+						{...block}
+						searchParams={searchParams}
+					/>
 				) : (
 					<div key={block.id || block.blockName || block.blockType}>
 						Unknown block type: {block.blockType}

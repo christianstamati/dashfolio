@@ -173,7 +173,17 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
-  blocks?: (HeroProps | SelectedProjectsProps | LatestWritingsProps | RichTextProps | ContactFormProps)[] | null;
+  blocks?:
+    | (
+        | HeroProps
+        | SelectedProjectsProps
+        | LatestWritingsProps
+        | RichTextProps
+        | ContactFormProps
+        | ProjectSearchProps
+        | WritingSearchProps
+      )[]
+    | null;
   meta?: {
     title?: string | null;
     /**
@@ -422,6 +432,26 @@ export interface ContactFormProps {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contact-form';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectSearchProps".
+ */
+export interface ProjectSearchProps {
+  info?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'project-search';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WritingSearchProps".
+ */
+export interface WritingSearchProps {
+  info?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'writing-search';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -695,6 +725,8 @@ export interface PagesSelect<T extends boolean = true> {
         'latest-writings'?: T | LatestWritingsPropsSelect<T>;
         'rich-text'?: T | RichTextPropsSelect<T>;
         'contact-form'?: T | ContactFormPropsSelect<T>;
+        'project-search'?: T | ProjectSearchPropsSelect<T>;
+        'writing-search'?: T | WritingSearchPropsSelect<T>;
       };
   meta?:
     | T
@@ -757,6 +789,24 @@ export interface ContactFormPropsSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProjectSearchProps_select".
+ */
+export interface ProjectSearchPropsSelect<T extends boolean = true> {
+  info?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WritingSearchProps_select".
+ */
+export interface WritingSearchPropsSelect<T extends boolean = true> {
+  info?: T;
   id?: T;
   blockName?: T;
 }

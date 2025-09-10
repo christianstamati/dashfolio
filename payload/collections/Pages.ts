@@ -10,8 +10,10 @@ import type { CollectionConfig } from "payload";
 import { contactForm } from "../blocks/contact-form/config";
 import { hero } from "../blocks/hero/config";
 import { latestWritings } from "../blocks/latest-writings/config";
+import { projectSearch } from "../blocks/project-search/config";
 import { richText } from "../blocks/rich-text/config";
 import { selectedProjects } from "../blocks/selected-projects/config";
+import { writingSearch } from "../blocks/writing-search/config";
 import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Pages: CollectionConfig = {
@@ -80,6 +82,8 @@ export const Pages: CollectionConfig = {
 								latestWritings,
 								richText,
 								contactForm,
+								projectSearch,
+								writingSearch,
 							],
 						},
 					],

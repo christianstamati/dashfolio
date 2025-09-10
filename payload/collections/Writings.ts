@@ -5,6 +5,7 @@ import {
 	OverviewField,
 	PreviewField,
 } from "@payloadcms/plugin-seo/fields";
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 
 export const Writings: CollectionConfig = {
@@ -95,4 +96,14 @@ export const Writings: CollectionConfig = {
 			],
 		},
 	],
+	hooks: {
+		afterChange: [
+			({ doc }) => {
+				const status = doc._status;
+				if (status === "published") {
+					revalidatePath(`/${doc.slug}`);
+				}
+			},
+		],
+	},
 };

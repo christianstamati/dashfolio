@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
+import { SkeletonNavbar } from "@/components/skeleton-navbar";
 import { Navbar } from "./navbar";
 
 const geistSans = Geist({
@@ -60,13 +61,15 @@ export default function RootLayout({
 					{/* Main content */}
 					<div className="flex h-full min-h-0 w-full">
 						{/* Navbar */}
-						<Suspense fallback={null}>
+						<Suspense fallback={<SkeletonNavbar />}>
 							<Navbar />
 						</Suspense>
 
 						{/* Page content */}
 						<main className="min-h-0 w-full overflow-auto pt-12 pb-32 lg:pt-24">
-							<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>
+							<div className="mx-auto h-full max-w-2xl px-4 sm:px-6">
+								{children}
+							</div>
 						</main>
 					</div>
 				</Providers>

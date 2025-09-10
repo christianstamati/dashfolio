@@ -33,11 +33,15 @@ export default function NavItem({
 					variant="ghost"
 					asChild
 				>
-					<Link href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}>
+					<Link
+						href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}
+						aria-label={link.label}
+					>
 						<IconsaxIcon
 							variant={"Bold"}
 							className={cn("size-6", !active && "text-muted-foreground/50")}
 							name={link.icon ?? "Home"}
+							aria-hidden="true"
 						/>
 					</Link>
 				</Button>

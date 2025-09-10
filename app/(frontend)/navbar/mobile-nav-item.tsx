@@ -24,11 +24,15 @@ export default function MobileNavItem({
 			variant="ghost"
 			asChild
 		>
-			<Link href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}>
+			<Link
+				href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}
+				aria-label={link.label}
+			>
 				<IconsaxIcon
 					variant={active ? "Bold" : "Linear"}
 					className={cn("size-5", !active && "text-muted-foreground")}
 					name={link.icon ?? "Home"}
+					aria-hidden="true"
 				/>
 				<span className={cn("text-xs", !active && "text-muted-foreground")}>
 					{link.label}

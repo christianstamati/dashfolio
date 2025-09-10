@@ -35,9 +35,6 @@ export const Pages: CollectionConfig = {
 					collection: "pages",
 					req,
 				});
-
-				console.log("LIVE PREVIEW PATH", path);
-
 				return path;
 			},
 		},

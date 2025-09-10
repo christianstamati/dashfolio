@@ -59,8 +59,5 @@ export async function GET(req: NextRequest): Promise<Response> {
 
 	// You can add additional checks here to see if the user is allowed to preview this page
 	draft.enable();
-
-	console.log("REDIRECT PATH", path);
-
 	redirect(path);
 }

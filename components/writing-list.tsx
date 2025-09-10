@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { formatDate } from "@/lib/format-date";
 import type { Writing } from "@/payload/payload-types";
+import { NoItemsFound } from "./no-items-found";
 
 function WritingCard({ writing }: { writing: Writing }) {
 	return (
@@ -37,9 +38,17 @@ function WritingCard({ writing }: { writing: Writing }) {
 }
 
 export function WritingList({ writings }: { writings: Writing[] }) {
+	if (writings.length === 0) {
+		return <NoItemsFound />;
+	}
+
+	const writingList = writings.filter(
+		(project) => typeof project === "object",
+	) as Writing[];
+
 	return (
 		<div className="mx-auto flex max-w-3xl flex-col gap-4">
-			{writings.map((writing) => (
+			{writingList.map((writing) => (
 				<WritingCard key={writing.id} writing={writing} />
 			))}
 		</div>

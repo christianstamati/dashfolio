@@ -14,6 +14,7 @@ const getLinks = cache(async () => {
 
 export async function Navbar() {
 	const links = await getLinks();
+
 	return (
 		<>
 			{/* Desktop Navbar */}

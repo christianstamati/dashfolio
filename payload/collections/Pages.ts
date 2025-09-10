@@ -5,6 +5,7 @@ import {
 	OverviewField,
 	PreviewField,
 } from "@payloadcms/plugin-seo/fields";
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 import { contactForm } from "../blocks/contact-form/config";
 import { hero } from "../blocks/hero/config";
@@ -118,4 +119,14 @@ export const Pages: CollectionConfig = {
 			],
 		},
 	],
+	hooks: {
+		afterChange: [
+			({ doc }) => {
+				const status = doc._status;
+				if (status === "published") {
+					revalidatePath(`/${doc.slug}`);
+				}
+			},
+		],
+	},
 };

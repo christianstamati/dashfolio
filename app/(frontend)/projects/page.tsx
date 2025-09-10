@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import Description from "@/components/description";
 import { ProjectList } from "@/components/project-list";
-import { ProjectListSkeleton } from "@/components/project-list-skeleton";
+import { SkeletonItems } from "@/components/skeleton-items";
 import Title from "@/components/title";
+import SearchBar from "../../../components/search-bar";
 import { findProjects } from "./actions/find-projects";
-import SearchBar from "./search-bar";
 
 type PageProps = {
 	searchParams?: Promise<{
@@ -32,7 +32,7 @@ export default async function Page(props: PageProps) {
 			<div className="my-4 mb-8">
 				<SearchBar />
 			</div>
-			<Suspense key={query} fallback={<ProjectListSkeleton count={3} />}>
+			<Suspense key={query} fallback={<SkeletonItems count={3} />}>
 				<ProductSearch query={query} />
 			</Suspense>
 		</article>

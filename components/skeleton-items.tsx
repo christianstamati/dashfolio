@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-function ProjectCardSkeleton() {
+function SkeletonItem() {
 	return (
 		<Card className="relative overflow-hidden p-0">
 			{/* Mobile Layout - Vertical */}
@@ -18,19 +18,16 @@ function ProjectCardSkeleton() {
 	);
 }
 
-type ProjectListSkeletonProps = {
+type SkeletonItemsProps = {
 	count?: number;
 	className?: string;
 };
 
-export function ProjectListSkeleton({
-	count = 3,
-	className,
-}: ProjectListSkeletonProps) {
+export function SkeletonItems({ count = 3, className }: SkeletonItemsProps) {
 	return (
 		<div className={cn("flex flex-col gap-4", className)}>
 			{Array.from({ length: count }, () => (
-				<ProjectCardSkeleton key={crypto.randomUUID()} />
+				<SkeletonItem key={crypto.randomUUID()} />
 			))}
 		</div>
 	);

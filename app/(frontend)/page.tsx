@@ -5,3 +5,4 @@ export { generateMetadata };
 // favicon
 // add password for projects
 // add content
+// add live preview for writings and projects

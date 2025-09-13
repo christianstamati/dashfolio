@@ -32,11 +32,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
 	params: paramsPromise,
-}: Args): Promise<Metadata> {
+}: Args): Promise<Metadata | undefined> {
 	const { slug = "home" } = await paramsPromise;
 	const page = await queryPageBySlug({
 		slug,
 	});
+	if (page?.meta?.disabled) {
+		return;
+	}
 	return generateMeta({ doc: page });
 }
 

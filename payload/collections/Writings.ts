@@ -1,12 +1,6 @@
-import {
-	MetaDescriptionField,
-	MetaImageField,
-	MetaTitleField,
-	OverviewField,
-	PreviewField,
-} from "@payloadcms/plugin-seo/fields";
-import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
+import { revalidateAfterChange } from "../hooks/revalidate-after-change";
+import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Writings: CollectionConfig = {
 	slug: "writings",
@@ -22,10 +16,32 @@ export const Writings: CollectionConfig = {
 	},
 	admin: {
 		useAsTitle: "title",
+		livePreview: {
+			url: ({ data, req }) => {
+				const path = generatePreviewPath({
+					slug: typeof data?.slug === "string" ? data.slug : "",
+					collection: "writings",
+					req,
+				});
+				return path;
+			},
+		},
+		preview: (data, { req }) =>
+			generatePreviewPath({
+				slug: typeof data?.slug === "string" ? data.slug : "",
+				collection: "writings",
+				req,
+			}),
 	},
 
 	versions: {
-		drafts: true,
+		drafts: {
+			schedulePublish: true,
+			autosave: {
+				interval: 500, // We set this interval for optimal live preview
+			},
+		},
+		maxPerDoc: 50,
 	},
 
 	fields: [
@@ -67,43 +83,10 @@ export const Writings: CollectionConfig = {
 						},
 					],
 				},
-				{
-					name: "meta",
-					label: "SEO",
-					fields: [
-						OverviewField({
-							titlePath: "meta.title",
-							descriptionPath: "meta.description",
-							imagePath: "meta.image",
-						}),
-						MetaTitleField({
-							hasGenerateFn: true,
-						}),
-						MetaImageField({
-							relationTo: "media",
-						}),
-						MetaDescriptionField({}),
-						PreviewField({
-							// if the `generateUrl` function is configured
-							hasGenerateFn: true,
-
-							// field paths to match the target field for data
-							titlePath: "meta.title",
-							descriptionPath: "meta.description",
-						}),
-					],
-				},
 			],
 		},
 	],
 	hooks: {
-		afterChange: [
-			({ doc }) => {
-				const status = doc._status;
-				if (status === "published") {
-					revalidatePath(`/${doc.slug}`);
-				}
-			},
-		],
+		afterChange: [revalidateAfterChange],
 	},
 };

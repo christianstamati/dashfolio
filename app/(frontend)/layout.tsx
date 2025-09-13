@@ -1,11 +1,14 @@
 import type React from "react";
 import "./globals.css";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Suspense } from "react";
+import { cache, Suspense } from "react";
 import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
 import { SkeletonNavbar } from "@/components/skeleton-navbar";
+import { getPayloadClient } from "@/payload/client";
+import { generateMeta } from "@/payload/utils/generateMeta";
 import { Navbar } from "./navbar";
 
 const geistSans = Geist({
@@ -23,6 +26,22 @@ const geistMono = Geist_Mono({
 	preload: false,
 	fallback: ["ui-monospace", "monospace"],
 });
+
+const getSEO = cache(async () => {
+	const payload = await getPayloadClient();
+	const seo = await payload.findGlobal({
+		slug: "seo",
+	});
+	return seo;
+});
+
+export async function generateMetadata(): Promise<Metadata | undefined> {
+	const seo = await getSEO();
+	if (seo?.meta?.disabled) {
+		return;
+	}
+	return generateMeta({ doc: seo });
+}
 
 export default function RootLayout({
 	children,

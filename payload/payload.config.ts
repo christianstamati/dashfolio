@@ -23,6 +23,7 @@ import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
 import { Nav } from "./globals/nav";
+import { SEO } from "./globals/seo";
 import { plugins } from "./plugins";
 import { getServerSideURL } from "./utils/getURL";
 
@@ -32,7 +33,7 @@ const dirname = path.dirname(filename);
 export default buildConfig({
 	email: nodemailerAdapter({
 		defaultFromAddress: "hello@chri.dev",
-		defaultFromName: "Dashfolio Website",
+		defaultFromName: "Christian Stamati",
 		// Any Nodemailer transport can be used
 		transport: nodemailer.createTransport({
 			host: env.SMTP_HOST,
@@ -84,7 +85,7 @@ export default buildConfig({
 		Roles,
 		Teammates,
 	],
-	globals: [Nav],
+	globals: [Nav, SEO],
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => {
 			return [

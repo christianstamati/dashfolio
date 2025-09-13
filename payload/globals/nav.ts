@@ -4,6 +4,7 @@ import { link } from "../fields/link";
 
 export const Nav: GlobalConfig = {
 	slug: "nav",
+	label: "NAV",
 	access: {
 		read: () => true,
 	},

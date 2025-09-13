@@ -104,9 +104,11 @@ export interface Config {
   };
   globals: {
     nav: Nav;
+    seo: Seo;
   };
   globalsSelect: {
     nav: NavSelect<false> | NavSelect<true>;
+    seo: SeoSelect<false> | SeoSelect<true>;
   };
   locale: null;
   user: User & {
@@ -185,11 +187,15 @@ export interface Page {
       )[]
     | null;
   meta?: {
-    title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Disable SEO for this page
+     */
+    disabled?: boolean | null;
+    title?: string | null;
     description?: string | null;
   };
   updatedAt: string;
@@ -329,11 +335,15 @@ export interface Project {
     [k: string]: unknown;
   } | null;
   meta?: {
-    title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Disable SEO for this page
+     */
+    disabled?: boolean | null;
+    title?: string | null;
     description?: string | null;
   };
   updatedAt: string;
@@ -478,11 +488,15 @@ export interface Writing {
     [k: string]: unknown;
   };
   meta?: {
-    title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    /**
+     * Disable SEO for this page
+     */
+    disabled?: boolean | null;
+    title?: string | null;
     description?: string | null;
   };
   updatedAt: string;
@@ -731,8 +745,9 @@ export interface PagesSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        title?: T;
         image?: T;
+        disabled?: T;
+        title?: T;
         description?: T;
       };
   updatedAt?: T;
@@ -839,8 +854,9 @@ export interface ProjectsSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        title?: T;
         image?: T;
+        disabled?: T;
+        title?: T;
         description?: T;
       };
   updatedAt?: T;
@@ -859,8 +875,9 @@ export interface WritingsSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        title?: T;
         image?: T;
+        disabled?: T;
+        title?: T;
         description?: T;
       };
   updatedAt?: T;
@@ -1091,6 +1108,27 @@ export interface Nav {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo".
+ */
+export interface Seo {
+  id: string;
+  meta?: {
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    /**
+     * Disable SEO for this page
+     */
+    disabled?: boolean | null;
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nav_select".
  */
 export interface NavSelect<T extends boolean = true> {
@@ -1111,16 +1149,42 @@ export interface NavSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo_select".
+ */
+export interface SeoSelect<T extends boolean = true> {
+  meta?:
+    | T
+    | {
+        image?: T;
+        disabled?: T;
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
   input: {
     type?: ('publish' | 'unpublish') | null;
     locale?: string | null;
-    doc?: {
-      relationTo: 'pages';
-      value: string | Page;
-    } | null;
+    doc?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'projects';
+          value: string | Project;
+        } | null)
+      | ({
+          relationTo: 'writings';
+          value: string | Writing;
+        } | null);
     global?: string | null;
     user?: (string | null) | User;
   };

@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 
-import type { Media, Page, Project, Writing } from "../payload-types";
+import type {
+	GlobalSeo,
+	Media,
+	Page,
+	Project,
+	Writing,
+} from "../payload-types";
 import { getServerSideURL } from "./getURL";
 import { mergeOpenGraph } from "./mergeOpenGraph";
 
@@ -17,15 +23,25 @@ const getImageURL = (image?: Media | null) => {
 };
 
 export const generateMeta = async (args: {
-	doc: Partial<Page> | Partial<Project> | Partial<Writing> | null;
+	doc:
+		| Partial<Page>
+		| Partial<Project>
+		| Partial<Writing>
+		| Partial<GlobalSeo>
+		| null;
 }): Promise<Metadata> => {
 	const { doc } = args;
 
 	const ogImage = getImageURL(doc?.meta?.image as Media);
 
-	const title = doc?.meta?.title ? doc?.meta?.title : "Dashfolio Website";
+	const title = doc?.meta?.title ?? undefined;
+
+	const url = Array.isArray((doc as any)?.slug)
+		? (doc as any)?.slug.join("/")
+		: "/";
 
 	return {
+		title,
 		description: doc?.meta?.description,
 		openGraph: mergeOpenGraph({
 			description: doc?.meta?.description || "",
@@ -37,8 +53,7 @@ export const generateMeta = async (args: {
 					]
 				: undefined,
 			title,
-			url: Array.isArray(doc?.slug) ? doc?.slug.join("/") : "/",
+			url,
 		}),
-		title,
 	};
 };

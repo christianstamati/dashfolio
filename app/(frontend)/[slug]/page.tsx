@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
 import { cache } from "react";
 import { LivePreviewListener } from "@/components/live-preview-listener";
 import RenderBlocks from "@/payload/blocks/render-blocks";
@@ -74,29 +75,17 @@ type Args = {
 };
 
 export default async function Page(args: Args) {
-	const startTime = performance.now();
-	console.log(
-		`[Page] Starting render for slug: ${(await args.params).slug || "home"}`,
-	);
-
 	const { isEnabled: draft } = await draftMode();
 	const { slug = "home" } = await args.params;
 
-	const dataFetchStart = performance.now();
 	const page = await queryPageBySlug({
 		slug,
 	});
 	const searchParams = await args.searchParams;
-	const dataFetchEnd = performance.now();
 
-	console.log(
-		`[Page] Data fetch took: ${(dataFetchEnd - dataFetchStart).toFixed(2)}ms`,
-	);
-
-	const endTime = performance.now();
-	console.log(
-		`[Page] Total render time: ${(endTime - startTime).toFixed(2)}ms`,
-	);
+	if (!page || typeof page === "string") {
+		return notFound();
+	}
 
 	return (
 		<main className="space-y-16">

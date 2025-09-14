@@ -1,5 +1,5 @@
 import type React from "react";
-import "./globals.css";
+import "@/styles/globals.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";

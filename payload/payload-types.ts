@@ -78,6 +78,7 @@ export interface Config {
     roles: Role;
     teammates: Teammate;
     socials: Social;
+    subscribers: Subscriber;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +97,7 @@ export interface Config {
     roles: RolesSelect<false> | RolesSelect<true>;
     teammates: TeammatesSelect<false> | TeammatesSelect<true>;
     socials: SocialsSelect<false> | SocialsSelect<true>;
+    subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -186,6 +188,7 @@ export interface Page {
         | ContactFormProps
         | ProjectSearchProps
         | WritingSearchProps
+        | NewsletterProps
       )[]
     | null;
   meta?: {
@@ -467,6 +470,17 @@ export interface WritingSearchProps {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsletterProps".
+ */
+export interface NewsletterProps {
+  title: string;
+  description: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'newsletter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "writings".
  */
 export interface Writing {
@@ -537,6 +551,16 @@ export interface Social {
    * Use the icon name from the Font Awesome library.
    */
   icon: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers".
+ */
+export interface Subscriber {
+  id: string;
+  email: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -684,6 +708,10 @@ export interface PayloadLockedDocument {
         value: string | Social;
       } | null)
     | ({
+        relationTo: 'subscribers';
+        value: string | Subscriber;
+      } | null)
+    | ({
         relationTo: 'payload-jobs';
         value: string | PayloadJob;
       } | null);
@@ -768,6 +796,7 @@ export interface PagesSelect<T extends boolean = true> {
         'contact-form'?: T | ContactFormPropsSelect<T>;
         'project-search'?: T | ProjectSearchPropsSelect<T>;
         'writing-search'?: T | WritingSearchPropsSelect<T>;
+        newsletter?: T | NewsletterPropsSelect<T>;
       };
   meta?:
     | T
@@ -849,6 +878,16 @@ export interface ProjectSearchPropsSelect<T extends boolean = true> {
  */
 export interface WritingSearchPropsSelect<T extends boolean = true> {
   info?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsletterProps_select".
+ */
+export interface NewsletterPropsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }
@@ -1058,6 +1097,15 @@ export interface SocialsSelect<T extends boolean = true> {
   url?: T;
   label?: T;
   icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers_select".
+ */
+export interface SubscribersSelect<T extends boolean = true> {
+  email?: T;
   updatedAt?: T;
   createdAt?: T;
 }

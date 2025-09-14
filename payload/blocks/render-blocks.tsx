@@ -4,6 +4,7 @@ import type { Page } from "../payload-types";
 import ContactForm from "./contact-form/component";
 import Hero from "./hero/component";
 import LatestWritings from "./latest-writings/component";
+import Newsletter from "./newsletter/component";
 import ProjectSearch from "./project-search/component";
 import { RichText } from "./rich-text/component";
 import SelectedProjects from "./selected-projects/component";
@@ -17,6 +18,7 @@ const blocks = {
 	"contact-form": ContactForm,
 	"project-search": ProjectSearch,
 	"writing-search": WritingSearch,
+	newsletter: Newsletter,
 } as const;
 
 type RenderBlocksProps = {

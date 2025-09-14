@@ -2,6 +2,7 @@ import type { CollectionConfig } from "payload";
 import { contactForm } from "../blocks/contact-form/config";
 import { hero } from "../blocks/hero/config";
 import { latestWritings } from "../blocks/latest-writings/config";
+import { newsletter } from "../blocks/newsletter/config";
 import { projectSearch } from "../blocks/project-search/config";
 import { richText } from "../blocks/rich-text/config";
 import { selectedProjects } from "../blocks/selected-projects/config";
@@ -80,6 +81,7 @@ export const Pages: CollectionConfig = {
 								contactForm,
 								projectSearch,
 								writingSearch,
+								newsletter,
 							],
 						},
 					],

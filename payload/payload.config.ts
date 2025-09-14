@@ -20,6 +20,7 @@ import { Pages } from "./collections/Pages";
 import { Projects } from "./collections/Projects";
 import { Roles } from "./collections/Roles";
 import { Socials } from "./collections/Socials";
+import { Subscribers } from "./collections/Subscribers";
 import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
@@ -86,6 +87,7 @@ export default buildConfig({
 		Roles,
 		Teammates,
 		Socials,
+		Subscribers,
 	],
 	globals: [Nav, SEO],
 	editor: lexicalEditor({

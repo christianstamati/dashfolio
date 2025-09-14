@@ -1203,6 +1203,10 @@ export interface Nav {
  */
 export interface Seo {
   id: string;
+  /**
+   * If enabled, the Favicon will be applied to the website.
+   */
+  favicon?: (string | null) | Media;
   meta?: {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
@@ -1243,6 +1247,7 @@ export interface NavSelect<T extends boolean = true> {
  * via the `definition` "seo_select".
  */
 export interface SeoSelect<T extends boolean = true> {
+  favicon?: T;
   meta?:
     | T
     | {

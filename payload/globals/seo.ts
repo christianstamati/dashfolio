@@ -6,5 +6,15 @@ export const SEO: GlobalConfig = {
 	access: {
 		read: () => true,
 	},
-	fields: [],
+	fields: [
+		{
+			name: "favicon",
+			type: "upload",
+			relationTo: "media",
+			label: "Favicon",
+			admin: {
+				description: "If enabled, the Favicon will be applied to the website.",
+			},
+		},
+	],
 };

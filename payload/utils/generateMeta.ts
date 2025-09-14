@@ -16,14 +16,14 @@ const getImageURL = (image?: Media | null) => {
 	return url;
 };
 
-export const generateMeta = async (args: {
+export const generateMeta = (args: {
 	doc:
 		| Partial<Page>
 		| Partial<Project>
 		| Partial<Writing>
 		| Partial<Seo>
 		| null;
-}): Promise<Metadata> => {
+}): Metadata => {
 	const { doc } = args;
 
 	const ogImage = getImageURL(doc?.meta?.image as Media);

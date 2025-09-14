@@ -43,10 +43,25 @@ const getSEO = cache(async () => {
 
 export async function generateMetadata(): Promise<Metadata | undefined> {
 	const seo = await getSEO();
-	if (seo?.meta?.disabled) {
-		return;
-	}
-	return generateMeta({ doc: seo });
+
+	const faviconUrl = seo?.favicon
+		? typeof seo.favicon === "string"
+			? undefined
+			: seo.favicon.url
+		: null;
+
+	console.log("faviconUrl", faviconUrl);
+
+	return {
+		...generateMeta({ doc: seo }),
+		...(faviconUrl && {
+			icons: {
+				icon: faviconUrl,
+				shortcut: faviconUrl,
+				apple: faviconUrl,
+			},
+		}),
+	};
 }
 
 export default function RootLayout({
@@ -90,8 +105,8 @@ export default function RootLayout({
 						</Suspense>
 
 						{/* Page content */}
-						<main className="flex w-full flex-col overflow-auto pt-12 pb-24 lg:pt-24">
-							<div className="mx-auto w-full max-w-2xl flex-1 sm:px-6">
+						<main className="flex w-full flex-col items-center overflow-auto pt-12 pb-24 lg:pt-24">
+							<div className="w-full max-w-2xl flex-1 px-3 sm:px-6">
 								{children}
 							</div>
 						</main>

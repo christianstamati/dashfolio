@@ -90,8 +90,8 @@ export default function RootLayout({
 						</Suspense>
 
 						{/* Page content */}
-						<main className="min-h-0 w-full overflow-auto pt-12 pb-24 lg:pt-24">
-							<div className="mx-auto h-full min-h-0 max-w-2xl px-4 sm:px-6">
+						<main className="flex w-full flex-col overflow-auto pt-12 pb-24 lg:pt-24">
+							<div className="mx-auto w-full max-w-2xl flex-1 sm:px-6">
 								{children}
 							</div>
 						</main>

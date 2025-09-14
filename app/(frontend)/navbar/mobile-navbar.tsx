@@ -1,6 +1,7 @@
 "use client";
 
 import { Moon, Sun1 } from "iconsax-reactjs";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useState } from "react";
 import { IconsaxIcon } from "@/components/iconsax-icon";
@@ -72,14 +73,14 @@ export function MobileNavbar({ links }: MobileNavbarProps) {
 											className="flex h-auto w-full items-center justify-start gap-3 px-3 py-2"
 											asChild
 										>
-											<a href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}>
+											<Link href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}>
 												<IconsaxIcon
 													variant="Linear"
 													className="size-4 text-muted-foreground"
 													name={link.icon ?? "Home"}
 												/>
 												<span className="text-sm">{link.label}</span>
-											</a>
+											</Link>
 										</Button>
 									</DropdownMenuItem>
 								);

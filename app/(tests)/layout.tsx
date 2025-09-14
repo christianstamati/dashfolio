@@ -3,10 +3,9 @@ import "./globals.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { fas } from "@fortawesome/free-solid-svg-icons";
 import { Geist, Geist_Mono } from "next/font/google";
 
-library.add(fas, fab);
+library.add(fab);
 
 const geistSans = Geist({
 	variable: "--font-sans",

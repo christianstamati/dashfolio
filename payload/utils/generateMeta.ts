@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 
-import type {
-	GlobalSeo,
-	Media,
-	Page,
-	Project,
-	Writing,
-} from "../payload-types";
+import type { Media, Page, Project, Seo, Writing } from "../payload-types";
 import { getServerSideURL } from "./getURL";
 import { mergeOpenGraph } from "./mergeOpenGraph";
 
@@ -27,7 +21,7 @@ export const generateMeta = async (args: {
 		| Partial<Page>
 		| Partial<Project>
 		| Partial<Writing>
-		| Partial<GlobalSeo>
+		| Partial<Seo>
 		| null;
 }): Promise<Metadata> => {
 	const { doc } = args;

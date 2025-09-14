@@ -339,6 +339,7 @@ export interface Project {
     };
     [k: string]: unknown;
   } | null;
+  password?: string | null;
   meta?: {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
@@ -917,6 +918,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   category?: T;
   company?: T;
   content?: T;
+  password?: T;
   meta?:
     | T
     | {

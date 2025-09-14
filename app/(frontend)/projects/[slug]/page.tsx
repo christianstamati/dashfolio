@@ -10,9 +10,18 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import BackButton from "@/components/back-button";
 import ImageMedia from "@/components/image-media";
+import InputOTP from "@/components/input-otp";
 import { LivePreviewListener } from "@/components/live-preview-listener";
 import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { formatDate } from "@/lib/format-date";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/payload/blocks/rich-text/component";
@@ -78,6 +87,9 @@ type Args = {
 	params: Promise<{
 		slug?: string;
 	}>;
+	searchParams: Promise<{
+		password?: string;
+	}>;
 };
 
 function ProjectCover({
@@ -88,7 +100,7 @@ function ProjectCover({
 	className?: string;
 }) {
 	return (
-		<div className={cn("flex flex-col gap-8", className)}>
+		<div className={cn("flex flex-col gap-4", className)}>
 			{/* Project Header */}
 			<div className="flex flex-col gap-4">
 				<div className="flex items-start gap-4">
@@ -174,7 +186,10 @@ function ProjectCover({
 	);
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Page({
+	params: paramsPromise,
+	searchParams: searchParamsPromise,
+}: Args) {
 	const { isEnabled: draft } = await draftMode();
 	const { slug } = await paramsPromise;
 
@@ -188,6 +203,50 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 	if (!project || typeof project === "string") {
 		notFound();
+	}
+
+	if (project.password && !draft) {
+		const { password } = await searchParamsPromise;
+		if (password !== project.password) {
+			return (
+				<article className="flex h-full flex-col items-center justify-center gap-8 px-4">
+					<div className="w-full max-w-md space-y-6">
+						<BackButton label={"Projects"} />
+						<form>
+							<Card className="w-full max-w-sm gap-4 shadow-lg">
+								<CardHeader className="space-y-3 pb-0">
+									<CardTitle className="text-xl">
+										🔒 Protected Project
+									</CardTitle>
+									<CardDescription className="text-base leading-relaxed">
+										This project requires a password to view. Enter the access
+										code below to continue.
+									</CardDescription>
+								</CardHeader>
+								<CardContent className="flex flex-col items-center justify-center gap-3">
+									<InputOTP name="password" />
+									{password &&
+										password?.length > 0 &&
+										password !== project?.password && (
+											<p className="text-destructive text-sm">
+												The password is incorrect.
+											</p>
+										)}
+								</CardContent>
+								<CardFooter className="flex flex-col gap-3 pt-3">
+									<Button className="w-full" type="submit">
+										Unlock Project
+									</Button>
+									<Button className="w-full" variant="outline" asChild>
+										<Link href="/contact">Request Access</Link>
+									</Button>
+								</CardFooter>
+							</Card>
+						</form>
+					</div>
+				</article>
+			);
+		}
 	}
 
 	const content =

@@ -22,7 +22,7 @@ const blocks = {
 } as const;
 
 type RenderBlocksProps = {
-	page: Page | string;
+	page: Page;
 	searchParams?: SearchParams;
 };
 
@@ -30,10 +30,6 @@ export default function RenderBlocks({
 	page,
 	searchParams,
 }: RenderBlocksProps) {
-	if (!page || typeof page === "string") {
-		return <div>Invalid page {page}</div>;
-	}
-
 	const { blocks: pageBlocks } = page;
 
 	if (!pageBlocks || pageBlocks.length === 0) {

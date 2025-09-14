@@ -122,6 +122,15 @@ export const Projects: CollectionConfig = {
 				},
 			],
 		},
+		{
+			name: "password",
+			type: "text",
+			admin: {
+				position: "sidebar",
+			},
+			maxLength: 6,
+			minLength: 6,
+		},
 	],
 	hooks: {
 		afterChange: [revalidateAfterChange],

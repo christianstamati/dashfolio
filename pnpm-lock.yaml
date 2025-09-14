@@ -18,9 +18,6 @@ importers:
       '@fortawesome/free-brands-svg-icons':
         specifier: ^7.0.1
         version: 7.0.1
-      '@fortawesome/free-solid-svg-icons':
-        specifier: ^7.0.1
-        version: 7.0.1
       '@fortawesome/react-fontawesome':
         specifier: ^3.0.2
         version: 3.0.2(@fortawesome/fontawesome-svg-core@7.0.1)(react@19.1.1)
@@ -1020,10 +1017,6 @@ packages:
 
   '@fortawesome/free-brands-svg-icons@7.0.1':
     resolution: {integrity: sha512-6xPmn5SrND/GM0+W33E77x05+aDn6RpR02eWd8eLdN0IxY0vXa5yU/ugaAKloOVxiG9w2330TSRsbJYL6c57Ow==}
-    engines: {node: '>=6'}
-
-  '@fortawesome/free-solid-svg-icons@7.0.1':
-    resolution: {integrity: sha512-esKuSrl1WMOTMDLNt38i16VfLe/gRZt2ZAJ3Yw7slfs7sj583MKqNFqO57zmhknk1Sya6f9Wys89aCzIJkcqlg==}
     engines: {node: '>=6'}
 
   '@fortawesome/react-fontawesome@3.0.2':
@@ -6081,10 +6074,6 @@ snapshots:
       '@fortawesome/fontawesome-common-types': 7.0.1
 
   '@fortawesome/free-brands-svg-icons@7.0.1':
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 7.0.1
-
-  '@fortawesome/free-solid-svg-icons@7.0.1':
     dependencies:
       '@fortawesome/fontawesome-common-types': 7.0.1
 

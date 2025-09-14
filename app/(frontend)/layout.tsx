@@ -44,21 +44,19 @@ const getSEO = cache(async () => {
 export async function generateMetadata(): Promise<Metadata | undefined> {
 	const seo = await getSEO();
 
-	const faviconUrl = seo?.favicon
+	const customFaviconUrl = seo?.favicon
 		? typeof seo.favicon === "string"
 			? undefined
 			: seo.favicon.url
 		: null;
 
-	console.log("faviconUrl", faviconUrl);
-
 	return {
 		...generateMeta({ doc: seo }),
-		...(faviconUrl && {
+		...(customFaviconUrl && {
 			icons: {
-				icon: faviconUrl,
-				shortcut: faviconUrl,
-				apple: faviconUrl,
+				icon: customFaviconUrl,
+				shortcut: customFaviconUrl,
+				apple: customFaviconUrl,
 			},
 		}),
 	};

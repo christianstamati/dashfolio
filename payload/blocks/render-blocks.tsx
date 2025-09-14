@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
 import type { SearchParams } from "@/app/(frontend)/[slug]/page";
 import type { Page } from "../payload-types";
 import ContactForm from "./contact-form/component";
@@ -43,7 +44,7 @@ export default function RenderBlocks({
 	}
 
 	return (
-		<div className="space-y-16">
+		<>
 			{pageBlocks.map((block) => {
 				const BlockComponent = blocks[block.blockType] as any;
 
@@ -63,6 +64,6 @@ export default function RenderBlocks({
 					</div>
 				);
 			})}
-		</div>
+		</>
 	);
 }

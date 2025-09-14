@@ -1,5 +1,8 @@
 import type React from "react";
 import "./globals.css";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cache, Suspense } from "react";
@@ -10,6 +13,9 @@ import { SkeletonNavbar } from "@/components/skeleton-navbar";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import { Navbar } from "./navbar";
+
+// Add all brand icons to the library
+library.add(fab);
 
 const geistSans = Geist({
 	variable: "--font-sans",
@@ -52,7 +58,6 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<meta name="theme-color" content="#000000" />
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link
 					rel="preconnect"
@@ -85,7 +90,7 @@ export default function RootLayout({
 						</Suspense>
 
 						{/* Page content */}
-						<main className="min-h-0 w-full overflow-auto pt-12 pb-32 lg:pt-24">
+						<main className="min-h-0 w-full overflow-auto pt-12 pb-24 lg:pt-24">
 							<div className="mx-auto max-w-2xl px-4 sm:px-6">{children}</div>
 						</main>
 					</div>

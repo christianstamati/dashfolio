@@ -77,6 +77,7 @@ export interface Config {
     companies: Company;
     roles: Role;
     teammates: Teammate;
+    socials: Social;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     companies: CompaniesSelect<false> | CompaniesSelect<true>;
     roles: RolesSelect<false> | RolesSelect<true>;
     teammates: TeammatesSelect<false> | TeammatesSelect<true>;
+    socials: SocialsSelect<false> | SocialsSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -519,6 +521,27 @@ export interface Inquiry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials".
+ */
+export interface Social {
+  id: string;
+  type?: ('reference' | 'custom') | null;
+  newTab?: boolean | null;
+  reference?: {
+    relationTo: 'pages';
+    value: string | Page;
+  } | null;
+  url?: string | null;
+  label: string;
+  /**
+   * Use the icon name from the Font Awesome library.
+   */
+  icon: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
@@ -655,6 +678,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'teammates';
         value: string | Teammate;
+      } | null)
+    | ({
+        relationTo: 'socials';
+        value: string | Social;
       } | null)
     | ({
         relationTo: 'payload-jobs';
@@ -1017,6 +1044,20 @@ export interface RolesSelect<T extends boolean = true> {
 export interface TeammatesSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials_select".
+ */
+export interface SocialsSelect<T extends boolean = true> {
+  type?: T;
+  newTab?: T;
+  reference?: T;
+  url?: T;
+  label?: T;
+  icon?: T;
   updatedAt?: T;
   createdAt?: T;
 }

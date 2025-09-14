@@ -5,6 +5,7 @@ import { LivePreviewListener } from "@/components/live-preview-listener";
 import RenderBlocks from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
+import Footer from "../footer";
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -98,9 +99,10 @@ export default async function Page(args: Args) {
 	);
 
 	return (
-		<article>
+		<main className="space-y-16">
 			{draft && <LivePreviewListener />}
 			<RenderBlocks page={page} searchParams={searchParams} />
-		</article>
+			<Footer />
+		</main>
 	);
 }

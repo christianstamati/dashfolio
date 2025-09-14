@@ -19,6 +19,7 @@ import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Projects } from "./collections/Projects";
 import { Roles } from "./collections/Roles";
+import { Socials } from "./collections/Socials";
 import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
@@ -84,6 +85,7 @@ export default buildConfig({
 		Companies,
 		Roles,
 		Teammates,
+		Socials,
 	],
 	globals: [Nav, SEO],
 	editor: lexicalEditor({

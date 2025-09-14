@@ -12,6 +12,9 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 - **Contact** - Easy ways for visitors to get in touch
 - **Writings** - Blog posts, articles, and written content
 - **Themes** - Switch from Light to Dark mode
+- **Live Preview** - Real-time page updates during content editing
+- **Newsletter** - Subscribe and manage newsletter subscriptions
+- **SEO** - Built-in SEO optimization tools and meta management
 
 ## 🛠️ Tech Stack
 
@@ -20,6 +23,27 @@ A modern, dashboard-style portfolio website built with Next.js and Payload CMS. 
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - **Database**: MongoDB
 - **Deployment**: Vercel/Netlify ready
+
+## 🔥 Key Features
+
+### Live Preview
+Real-time content editing with instant page updates. When editing content in the admin panel, changes are reflected immediately on the frontend without requiring page refreshes. This provides a seamless editing experience and helps you see exactly how your content will look to visitors.
+
+### Newsletter Management
+Built-in newsletter subscription system that allows visitors to:
+- Subscribe to your newsletter directly from the website
+- Manage their subscription preferences
+- Unsubscribe easily when needed
+- View subscription analytics in the admin panel
+
+### SEO Optimization
+Comprehensive SEO tools built into the platform:
+- Dynamic meta tags and Open Graph optimization
+- Automatic sitemap generation
+- Structured data markup
+- Image optimization for better performance
+- URL slug management
+- Meta descriptions and keyword optimization
 
 ## 🚀 Quick Start
 

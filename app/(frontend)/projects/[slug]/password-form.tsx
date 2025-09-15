@@ -27,7 +27,7 @@ export default function PasswordForm({
 		e.preventDefault();
 		const formData = new FormData(e.currentTarget);
 		const enteredPassword = formData.get("password") as string;
-		router.push(`/projects/${project.slug}?password=${enteredPassword}`);
+		router.replace(`/projects/${project.slug}?password=${enteredPassword}`);
 	};
 
 	return (

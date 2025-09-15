@@ -1,41 +1,30 @@
 import type { Metadata } from "next";
-import { unstable_cache } from "next/cache";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { LivePreviewListener } from "@/components/live-preview-listener";
 import RenderBlocks from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import Footer from "../footer";
 
-export const dynamicParams = false;
-
-const queryPageBySlugCached = async ({ slug }: { slug: string }) => {
-	return unstable_cache(
-		async () => {
-			const { isEnabled: draft } = await draftMode();
-			const payload = await getPayloadClient();
-			const result = await payload.find({
-				collection: "pages",
-				draft,
-				limit: 1,
-				pagination: false,
-				overrideAccess: draft,
-				where: {
-					slug: {
-						equals: slug,
-					},
-				},
-			});
-			return result.docs?.[0] || null;
+const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+	const { isEnabled: draft } = await draftMode();
+	const payload = await getPayloadClient();
+	const result = await payload.find({
+		collection: "pages",
+		draft,
+		limit: 1,
+		pagination: false,
+		overrideAccess: draft,
+		where: {
+			slug: {
+				equals: slug,
+			},
 		},
-		[slug],
-		{
-			tags: ["pages"],
-			revalidate: 60,
-		},
-	)();
-};
+	});
+	return result.docs?.[0] || null;
+});
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -50,13 +39,9 @@ export async function generateStaticParams() {
 		},
 	});
 
-	const params = pages.docs
-		?.filter((doc) => {
-			return doc.slug !== "home";
-		})
-		.map(({ slug }) => {
-			return { slug };
-		});
+	const params = pages.docs.map(({ slug }) => {
+		return { slug };
+	});
 
 	return params;
 }
@@ -65,7 +50,7 @@ export async function generateMetadata({
 	params: paramsPromise,
 }: Args): Promise<Metadata | undefined> {
 	const { slug = "home" } = await paramsPromise;
-	const page = await queryPageBySlugCached({
+	const page = await queryPageBySlug({
 		slug,
 	});
 	if (page?.meta?.disabled) {
@@ -86,13 +71,17 @@ type Args = {
 };
 
 export default async function Page(args: Args) {
-	const { isEnabled: draft } = await draftMode();
-	const { slug = "home" } = await args.params;
+	const [params, searchParams, { isEnabled: draft }] = await Promise.all([
+		args.params,
+		args.searchParams,
+		draftMode(),
+	]);
 
-	const page = await queryPageBySlugCached({
+	const { slug = "home" } = params;
+
+	const page = await queryPageBySlug({
 		slug,
 	});
-	const searchParams = await args.searchParams;
 
 	if (!page || typeof page === "string") {
 		return notFound();

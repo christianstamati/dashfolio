@@ -8,6 +8,8 @@ import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import Footer from "../footer";
 
+export const dynamicParams = false;
+
 const queryPageBySlugCached = async ({ slug }: { slug: string }) => {
 	return unstable_cache(
 		async () => {

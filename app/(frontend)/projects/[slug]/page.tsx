@@ -186,12 +186,11 @@ function ProjectCover({
 	);
 }
 
-export default async function Page({
-	params: paramsPromise,
-	searchParams: searchParamsPromise,
-}: Args) {
-	const { isEnabled: draft } = await draftMode();
-	const { slug } = await paramsPromise;
+export default async function Page({ params, searchParams }: Args) {
+	const [{ slug }, { isEnabled: draft }] = await Promise.all([
+		params,
+		draftMode(),
+	]);
 
 	if (!slug) {
 		notFound();
@@ -206,7 +205,7 @@ export default async function Page({
 	}
 
 	if (project.password && !draft) {
-		const { password } = await searchParamsPromise;
+		const { password } = await searchParams;
 		if (password !== project.password) {
 			return (
 				<article className="flex h-full flex-col items-center justify-center gap-8 px-4">

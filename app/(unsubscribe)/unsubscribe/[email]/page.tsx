@@ -19,9 +19,6 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
 	const { email } = await params;
 	const decodedEmail = decodeURIComponent(email);
-
-	await new Promise((resolve) => setTimeout(resolve, 1000));
-
 	const payload = await getPayloadClient();
 	const subscriber = await payload.find({
 		collection: "subscribers",

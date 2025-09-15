@@ -1,5 +1,7 @@
 import type React from "react";
 import "@/styles/globals.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cache, Suspense } from "react";
@@ -10,6 +12,8 @@ import { SkeletonNavbar } from "@/components/skeleton-navbar";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import { Navbar } from "./navbar";
+
+library.add(fab);
 
 const geistSans = Geist({
 	variable: "--font-sans",

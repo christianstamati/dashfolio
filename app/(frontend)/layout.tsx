@@ -3,9 +3,16 @@ import "@/styles/globals.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cache, Suspense } from "react";
+import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
+import { SkeletonNavbar } from "@/components/skeleton-navbar";
+import { getPayloadClient } from "@/payload/client";
+import { generateMeta } from "@/payload/utils/generateMeta";
+import { Navbar } from "./navbar";
 
 // Add all brand icons to the library
 library.add(fab);
@@ -20,34 +27,34 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-// const getSEO = cache(async () => {
-// 	const payload = await getPayloadClient();
-// 	const seo = await payload.findGlobal({
-// 		slug: "seo",
-// 	});
-// 	return seo;
-// });
+const getSEO = cache(async () => {
+	const payload = await getPayloadClient();
+	const seo = await payload.findGlobal({
+		slug: "seo",
+	});
+	return seo;
+});
 
-// export async function generateMetadata(): Promise<Metadata | undefined> {
-// 	const seo = await getSEO();
+export async function generateMetadata(): Promise<Metadata | undefined> {
+	const seo = await getSEO();
 
-// 	const customFaviconUrl = seo?.favicon
-// 		? typeof seo.favicon === "string"
-// 			? undefined
-// 			: seo.favicon.url
-// 		: null;
+	const customFaviconUrl = seo?.favicon
+		? typeof seo.favicon === "string"
+			? undefined
+			: seo.favicon.url
+		: null;
 
-// 	return {
-// 		...generateMeta({ doc: seo }),
-// 		...(customFaviconUrl && {
-// 			icons: {
-// 				icon: customFaviconUrl,
-// 				shortcut: customFaviconUrl,
-// 				apple: customFaviconUrl,
-// 			},
-// 		}),
-// 	};
-// }
+	return {
+		...generateMeta({ doc: seo }),
+		...(customFaviconUrl && {
+			icons: {
+				icon: customFaviconUrl,
+				shortcut: customFaviconUrl,
+				apple: customFaviconUrl,
+			},
+		}),
+	};
+}
 
 export default function RootLayout({
 	children,
@@ -61,9 +68,9 @@ export default function RootLayout({
 			>
 				<Providers>
 					{/* Admin bar */}
-					{/* <Suspense fallback={null}>
+					<Suspense fallback={null}>
 						<AdminBarServer />
-					</Suspense> */}
+					</Suspense>
 
 					{/* Fixed background gradient  */}
 					<BackgroundGradient />
@@ -71,9 +78,9 @@ export default function RootLayout({
 					{/* Main content */}
 					<div className="flex h-full min-h-0 w-full">
 						{/* Navbar */}
-						{/* <Suspense fallback={<SkeletonNavbar />}>
+						<Suspense fallback={<SkeletonNavbar />}>
 							<Navbar />
-						</Suspense> */}
+						</Suspense>
 
 						{/* Page content */}
 						<main className="flex w-full flex-col items-center overflow-auto pt-12 pb-24 lg:pt-24">

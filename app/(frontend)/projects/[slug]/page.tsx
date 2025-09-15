@@ -30,7 +30,6 @@ import { generateMeta } from "@/payload/utils/generateMeta";
 import { isDraftMode } from "../../is-draft-mode";
 
 export const dynamic = "force-static";
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();

@@ -22,10 +22,12 @@ export default function PasswordForm({
 	project: Project;
 }) {
 	const router = useRouter();
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		router.reload();
 	};
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<Card className="w-full max-w-sm gap-4 shadow-lg">

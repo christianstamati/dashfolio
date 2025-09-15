@@ -9,18 +9,9 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import BackButton from "@/components/back-button";
 import ImageMedia from "@/components/image-media";
-import InputOTP from "@/components/input-otp";
 import { LivePreviewListener } from "@/components/live-preview-listener";
 import Title from "@/components/title";
 import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
 import { formatDate } from "@/lib/format-date";
 import { cn } from "@/lib/utils";
 import { RichText } from "@/payload/blocks/rich-text/component";
@@ -28,6 +19,7 @@ import { getPayloadClient } from "@/payload/client";
 import type { Project } from "@/payload/payload-types";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import { isDraftMode } from "../../is-draft-mode";
+import PasswordForm from "./password-form";
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -208,37 +200,7 @@ export default async function Page({ params, searchParams }: Args) {
 				<article className="flex h-full flex-col items-center justify-center gap-8 px-4">
 					<div className="w-full max-w-md space-y-6">
 						<BackButton label={"Projects"} />
-						<form>
-							<Card className="w-full max-w-sm gap-4 shadow-lg">
-								<CardHeader className="space-y-3 pb-0">
-									<CardTitle className="text-xl">
-										🔒 Protected Project
-									</CardTitle>
-									<CardDescription className="text-base leading-relaxed">
-										This project requires a password to view. Enter the access
-										code below to continue.
-									</CardDescription>
-								</CardHeader>
-								<CardContent className="flex flex-col items-center justify-center gap-3">
-									<InputOTP name="password" />
-									{password &&
-										password?.length > 0 &&
-										password !== project?.password && (
-											<p className="text-destructive text-sm">
-												The password is incorrect.
-											</p>
-										)}
-								</CardContent>
-								<CardFooter className="flex flex-col gap-3 pt-3">
-									<Button className="w-full" type="submit">
-										Unlock Project
-									</Button>
-									<Button className="w-full" variant="outline" asChild>
-										<Link href="/contact">Request Access</Link>
-									</Button>
-								</CardFooter>
-							</Card>
-						</form>
+						<PasswordForm password={password ?? ""} project={project} />
 					</div>
 				</article>
 			);

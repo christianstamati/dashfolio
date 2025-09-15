@@ -1,14 +1,19 @@
+import { cache } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { getPayloadClient } from "@/payload/client";
 import { MobileNavbar } from "./mobile-navbar";
 import NavItem from "./nav-item";
 
-export async function Navbar() {
+const getNavbarLinks = cache(async () => {
 	const payload = await getPayloadClient();
 	const nav = await payload.findGlobal({
 		slug: "nav",
 	});
-	const links = nav.links;
+	return nav.links;
+});
+
+export async function Navbar() {
+	const links = await getNavbarLinks();
 	return (
 		<>
 			{/* Desktop Navbar */}

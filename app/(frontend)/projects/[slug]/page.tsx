@@ -29,8 +29,6 @@ import type { Project } from "@/payload/payload-types";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import { isDraftMode } from "../../is-draft-mode";
 
-export const dynamic = "force-static";
-
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
 	const projects = await payload.find({

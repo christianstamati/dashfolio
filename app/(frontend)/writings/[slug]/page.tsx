@@ -76,6 +76,8 @@ type Args = {
 };
 
 export default async function Page({ params: paramsPromise }: Args) {
+	"use memo";
+
 	const { isEnabled: draft } = await draftMode();
 	const { slug } = await paramsPromise;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import InputOTP from "@/components/input-otp";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,7 +25,9 @@ export default function PasswordForm({
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		router.reload();
+		const formData = new FormData(e.currentTarget);
+		const enteredPassword = formData.get("password") as string;
+		router.push(`/projects/${project.slug}?password=${enteredPassword}`);
 	};
 
 	return (
@@ -34,8 +36,9 @@ export default function PasswordForm({
 				<CardHeader className="space-y-3 pb-0">
 					<CardTitle className="text-xl">🔒 Protected Project</CardTitle>
 					<CardDescription className="text-base leading-relaxed">
-						This project {project.title} requires a password to view. Enter the
-						access code below to continue.
+						The project <strong className="uppercase">{project.title}</strong>{" "}
+						requires a password to view. Enter the access code below to
+						continue.
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col items-center justify-center gap-3">

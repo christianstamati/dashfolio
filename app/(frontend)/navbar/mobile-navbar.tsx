@@ -73,7 +73,10 @@ export function MobileNavbar({ links }: MobileNavbarProps) {
 											className="flex h-auto w-full items-center justify-start gap-3 px-3 py-2"
 											asChild
 										>
-											<Link href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}>
+											<Link
+												href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}
+												prefetch={true}
+											>
 												<IconsaxIcon
 													variant="Linear"
 													className="size-4 text-muted-foreground"

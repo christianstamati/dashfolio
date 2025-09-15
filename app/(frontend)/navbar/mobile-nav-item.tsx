@@ -27,6 +27,7 @@ export default function MobileNavItem({
 			<Link
 				href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}
 				aria-label={link.label}
+				prefetch={true}
 			>
 				<IconsaxIcon
 					variant={active ? "Bold" : "Linear"}

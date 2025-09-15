@@ -4,6 +4,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
+import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
 import { getPayloadClient } from "@/payload/client";
@@ -74,9 +76,9 @@ export default function RootLayout({
 			>
 				<Providers>
 					{/* Admin bar */}
-					{/* <Suspense fallback={null}>
+					<Suspense fallback={null}>
 						<AdminBarServer />
-					</Suspense> */}
+					</Suspense>
 
 					{/* Fixed background gradient  */}
 					<BackgroundGradient />

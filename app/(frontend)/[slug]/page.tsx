@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { LivePreviewListener } from "@/components/live-preview-listener";
@@ -7,9 +6,10 @@ import RenderBlocks from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import Footer from "../footer";
+import { isDraftMode } from "../is-draft-mode";
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = await draftMode();
+	const draft = await isDraftMode();
 	const payload = await getPayloadClient();
 	const result = await payload.find({
 		collection: "pages",
@@ -71,10 +71,10 @@ type Args = {
 };
 
 export default async function Page(args: Args) {
-	const [params, searchParams, { isEnabled: draft }] = await Promise.all([
+	const [params, searchParams, draft] = await Promise.all([
 		args.params,
 		args.searchParams,
-		draftMode(),
+		isDraftMode(),
 	]);
 
 	const { slug = "home" } = params;

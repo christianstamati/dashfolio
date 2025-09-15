@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import type { CollectionConfig } from "payload";
 import { contactForm } from "../blocks/contact-form/config";
 import { hero } from "../blocks/hero/config";
@@ -7,7 +8,6 @@ import { projectSearch } from "../blocks/project-search/config";
 import { richText } from "../blocks/rich-text/config";
 import { selectedProjects } from "../blocks/selected-projects/config";
 import { writingSearch } from "../blocks/writing-search/config";
-import { revalidateAfterChange } from "../hooks/revalidate-after-change";
 import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Pages: CollectionConfig = {
@@ -90,6 +90,13 @@ export const Pages: CollectionConfig = {
 		},
 	],
 	hooks: {
-		afterChange: [revalidateAfterChange],
+		afterChange: [
+			({ doc }) => {
+				const status = doc._status;
+				if (status === "published") {
+					revalidateTag(`pages`);
+				}
+			},
+		],
 	},
 };

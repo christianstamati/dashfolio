@@ -21,7 +21,6 @@ const nextConfig: NextConfig = {
 	generateEtags: true,
 
 	experimental: {
-		optimizeCss: true,
 		optimizePackageImports: [
 			"@fortawesome/react-fontawesome",
 			"lucide-react",

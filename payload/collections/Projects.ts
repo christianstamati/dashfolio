@@ -1,5 +1,5 @@
+import { revalidateTag } from "next/cache";
 import type { CollectionConfig } from "payload";
-import { revalidateAfterChange } from "../hooks/revalidate-after-change";
 import { generatePreviewPath } from "../utils/generate-preview-path";
 
 export const Projects: CollectionConfig = {
@@ -133,6 +133,13 @@ export const Projects: CollectionConfig = {
 		},
 	],
 	hooks: {
-		afterChange: [revalidateAfterChange],
+		afterChange: [
+			({ doc }) => {
+				const status = doc._status;
+				if (status === "published") {
+					revalidateTag(`projects-${doc.slug}`);
+				}
+			},
+		],
 	},
 };

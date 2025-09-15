@@ -4,6 +4,7 @@ import type {
 } from "@payloadcms/richtext-lexical/lexical";
 import { ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
@@ -57,22 +58,36 @@ export async function generateMetadata({
 	return generateMeta({ doc: project });
 }
 
+// Layer 1: Cross-request caching with unstable_cache
+const getCachedProject = (slug: string) =>
+	unstable_cache(
+		async (draft: boolean) => {
+			const payload = await getPayloadClient();
+			const result = await payload.find({
+				collection: "projects",
+				draft,
+				limit: 1,
+				pagination: false,
+				overrideAccess: draft,
+				where: {
+					slug: {
+						equals: slug,
+					},
+				},
+			});
+			return result.docs?.[0] || null;
+		},
+		["projects", slug], // cache key includes actual slug value
+		{
+			revalidate: 3600, // 1 hour cache
+			tags: [`projects-${slug}`], // for cache invalidation
+		},
+	);
+
+// Layer 2: Single-render deduplication with React cache
 const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
 	const draft = await isDraftMode();
-	const payload = await getPayloadClient();
-	const result = await payload.find({
-		collection: "projects",
-		draft,
-		limit: 1,
-		pagination: false,
-		overrideAccess: draft,
-		where: {
-			slug: {
-				equals: slug,
-			},
-		},
-	});
-	return result.docs?.[0] || null;
+	return await getCachedProject(slug)(draft);
 });
 
 type Args = {

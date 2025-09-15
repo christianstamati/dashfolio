@@ -14,6 +14,10 @@ const Toaster = dynamic(
 	},
 );
 
+const FontAwesomeProvider = dynamic(() => import("./fontawesome-provider"), {
+	ssr: false,
+});
+
 export function Providers({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeProvider
@@ -22,6 +26,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 			enableSystem
 			disableTransitionOnChange
 		>
+			<FontAwesomeProvider />
 			<NuqsAdapter>{children}</NuqsAdapter>
 			<Toaster />
 			<Analytics />

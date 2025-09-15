@@ -1,8 +1,5 @@
 import type React from "react";
 import "@/styles/globals.css";
-
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cache, Suspense } from "react";
@@ -14,17 +11,18 @@ import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import { Navbar } from "./navbar";
 
-// Add all brand icons to the library
-library.add(fab);
-
 const geistSans = Geist({
 	variable: "--font-sans",
 	subsets: ["latin"],
+	display: "swap",
+	preload: true,
 });
 
 const geistMono = Geist_Mono({
 	variable: "--font-mono",
 	subsets: ["latin"],
+	display: "swap",
+	preload: false,
 });
 
 const getSEO = cache(async () => {
@@ -63,6 +61,19 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head>
+				{/* Preconnect to external domains */}
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin="anonymous"
+				/>
+				<link
+					rel="dns-prefetch"
+					href="https://dashfolio-prod.s3.eu-central-1.amazonaws.com"
+				/>
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} flex h-svh flex-col font-sans antialiased`}
 			>

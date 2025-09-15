@@ -36,6 +36,7 @@ export default function NavItem({
 					<Link
 						href={linkUrl === "/home" ? "/" : (linkUrl ?? "/")}
 						aria-label={link.label}
+						prefetch={true}
 					>
 						<IconsaxIcon
 							variant={"Bold"}

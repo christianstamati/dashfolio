@@ -4,7 +4,6 @@ import type {
 } from "@payloadcms/richtext-lexical/lexical";
 import { ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
-import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
@@ -28,6 +27,10 @@ import { RichText } from "@/payload/blocks/rich-text/component";
 import { getPayloadClient } from "@/payload/client";
 import type { Project } from "@/payload/payload-types";
 import { generateMeta } from "@/payload/utils/generateMeta";
+import { isDraftMode } from "../../is-draft-mode";
+
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -66,7 +69,7 @@ export async function generateMetadata({
 }
 
 const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = await draftMode();
+	const draft = await isDraftMode();
 	const payload = await getPayloadClient();
 	const result = await payload.find({
 		collection: "projects",
@@ -187,10 +190,7 @@ function ProjectCover({
 }
 
 export default async function Page({ params, searchParams }: Args) {
-	const [{ slug }, { isEnabled: draft }] = await Promise.all([
-		params,
-		draftMode(),
-	]);
+	const [{ slug }, draft] = await Promise.all([params, isDraftMode()]);
 
 	if (!slug) {
 		notFound();

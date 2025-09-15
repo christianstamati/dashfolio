@@ -8,8 +8,10 @@ import { Suspense } from "react";
 import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
+import { SkeletonNavbar } from "@/components/skeleton-navbar";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
+import { Navbar } from "./navbar";
 
 library.add(fab);
 
@@ -86,9 +88,9 @@ export default function RootLayout({
 					{/* Main content */}
 					<div className="flex h-full min-h-0 w-full">
 						{/* Navbar */}
-						{/* <Suspense fallback={<SkeletonNavbar />}>
+						<Suspense fallback={<SkeletonNavbar />}>
 							<Navbar />
-						</Suspense> */}
+						</Suspense>
 
 						{/* Page content */}
 						<main className="flex w-full flex-col items-center overflow-auto pt-12 pb-24 lg:pt-24">

@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	experimental: {
+		reactCompiler: true,
+	},
 	compress: true,
 	poweredByHeader: false,
 };

@@ -4,7 +4,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { cache, Suspense } from "react";
+import { Suspense } from "react";
 import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
@@ -29,16 +29,11 @@ const geistMono = Geist_Mono({
 	preload: false,
 });
 
-const getSEO = cache(async () => {
+export async function generateMetadata(): Promise<Metadata | undefined> {
 	const payload = await getPayloadClient();
 	const seo = await payload.findGlobal({
 		slug: "seo",
 	});
-	return seo;
-});
-
-export async function generateMetadata(): Promise<Metadata | undefined> {
-	const seo = await getSEO();
 
 	const customFaviconUrl = seo?.favicon
 		? typeof seo.favicon === "string"

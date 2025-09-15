@@ -18,14 +18,6 @@ const nextConfig: NextConfig = {
 	},
 	compress: true,
 	poweredByHeader: false,
-	generateEtags: true,
-	compiler: {
-		removeConsole: process.env.NODE_ENV === "production",
-	},
-	// Target modern browsers only - excludes IE11 and very old browsers
-	env: {
-		BROWSERSLIST: "> 0.5%, last 2 versions, not dead, not ie 11",
-	},
 };
 
 export default withPayload(nextConfig);

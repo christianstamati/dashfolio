@@ -18,9 +18,9 @@ const nextConfig: NextConfig = {
 	},
 	compress: true,
 	poweredByHeader: false,
-	// experimental: {
-	// 	ppr: true,
-	// },
+	experimental: {
+		ppr: "incremental",
+	},
 };
 
 export default withPayload(nextConfig);

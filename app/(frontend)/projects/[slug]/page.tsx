@@ -179,8 +179,6 @@ function ProjectCover({
 }
 
 export default async function Page({ params, searchParams }: Args) {
-	"use memo";
-
 	const [{ slug }, draft] = await Promise.all([params, isDraftMode()]);
 
 	if (!slug) {

@@ -71,7 +71,6 @@ type Args = {
 };
 
 export default async function Page(args: Args) {
-	"use memo";
 	const [params, searchParams, draft] = await Promise.all([
 		args.params,
 		args.searchParams,

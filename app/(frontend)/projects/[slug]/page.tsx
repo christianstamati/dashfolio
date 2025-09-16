@@ -4,9 +4,9 @@ import type {
 } from "@payloadcms/richtext-lexical/lexical";
 import { ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 import BackButton from "@/components/back-button";
 import ImageMedia from "@/components/image-media";
 import { LivePreviewListener } from "@/components/live-preview-listener";
@@ -20,6 +20,33 @@ import type { Project } from "@/payload/payload-types";
 import { generateMeta } from "@/payload/utils/generateMeta";
 import { isDraftMode } from "../../../../lib/is-draft-mode";
 import PasswordForm from "./password-form";
+
+export const experimental_ppr = true;
+
+const queryProjectBySlug = (slug: string) =>
+	unstable_cache(
+		async () => {
+			const draft = await isDraftMode();
+			const payload = await getPayloadClient();
+			const result = await payload.find({
+				collection: "projects",
+				draft,
+				limit: 1,
+				pagination: false,
+				overrideAccess: draft,
+				where: {
+					slug: {
+						equals: slug,
+					},
+				},
+			});
+			return result.docs?.[0] || null;
+		},
+		[`projects-${slug}`],
+		{
+			tags: [`projects-${slug}`],
+		},
+	);
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -50,30 +77,10 @@ export async function generateMetadata({
 		notFound();
 	}
 
-	const project = await queryProjectBySlug({
-		slug,
-	});
+	const project = await queryProjectBySlug(slug)();
 
 	return generateMeta({ doc: project });
 }
-
-const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
-	const draft = await isDraftMode();
-	const payload = await getPayloadClient();
-	const result = await payload.find({
-		collection: "projects",
-		draft,
-		limit: 1,
-		pagination: false,
-		overrideAccess: draft,
-		where: {
-			slug: {
-				equals: slug,
-			},
-		},
-	});
-	return result.docs?.[0] || null;
-});
 
 type Args = {
 	params: Promise<{
@@ -185,9 +192,7 @@ export default async function Page({ params, searchParams }: Args) {
 		notFound();
 	}
 
-	const project = await queryProjectBySlug({
-		slug,
-	});
+	const project = await queryProjectBySlug(slug)();
 
 	if (!project || typeof project === "string") {
 		notFound();

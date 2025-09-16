@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
 	compress: true,
 	poweredByHeader: false,
 	experimental: {
-		ppr: "incremental",
+		ppr: true,
 	},
 };
 

@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import type { GlobalConfig } from "payload";
 
 export const SEO: GlobalConfig = {
@@ -17,4 +18,7 @@ export const SEO: GlobalConfig = {
 			},
 		},
 	],
+	hooks: {
+		afterChange: [() => revalidateTag("global-seo")],
+	},
 };

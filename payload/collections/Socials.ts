@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import type { CollectionConfig } from "payload";
 import { link } from "../fields/link";
 
@@ -26,4 +27,7 @@ export const Socials: CollectionConfig = {
 			},
 		}),
 	],
+	hooks: {
+		afterChange: [() => revalidateTag("social-links")],
+	},
 };

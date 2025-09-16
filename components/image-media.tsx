@@ -33,6 +33,7 @@ export default function ImageMedia({
 			width={media.width || 640}
 			height={media.height || 360}
 			priority
+			fetchPriority="high"
 			sizes={sizes}
 		/>
 	);

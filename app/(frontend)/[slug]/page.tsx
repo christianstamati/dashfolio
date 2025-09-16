@@ -17,8 +17,6 @@ type Props = {
 	}>;
 };
 
-export const experimental_ppr = true;
-
 const queryPageBySlug = (slug: string) =>
 	unstable_cache(
 		async () => {

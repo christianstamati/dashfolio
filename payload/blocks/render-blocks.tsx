@@ -1,5 +1,3 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
-import type { SearchParams } from "@/app/(frontend)/[slug]/page";
 import type { Page } from "../payload-types";
 import ContactForm from "./contact-form/component";
 import Hero from "./hero/component";
@@ -23,7 +21,9 @@ const blocks = {
 
 type RenderBlocksProps = {
 	page: Page;
-	searchParams?: SearchParams;
+	searchParams?: {
+		query?: string;
+	};
 };
 
 export default function RenderBlocks({

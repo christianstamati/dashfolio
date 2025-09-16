@@ -1,5 +1,5 @@
-import { isDraftMode } from "@/app/(frontend)/is-draft-mode";
 import { AdminBar } from "@/components/admin-bar";
+import { isDraftMode } from "@/lib/is-draft-mode";
 
 export default async function AdminBarServer() {
 	const isEnabled = await isDraftMode();

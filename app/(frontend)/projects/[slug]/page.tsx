@@ -18,7 +18,7 @@ import { RichText } from "@/payload/blocks/rich-text/component";
 import { getPayloadClient } from "@/payload/client";
 import type { Project } from "@/payload/payload-types";
 import { generateMeta } from "@/payload/utils/generateMeta";
-import { isDraftMode } from "../../is-draft-mode";
+import { isDraftMode } from "../../../../lib/is-draft-mode";
 import PasswordForm from "./password-form";
 
 export async function generateStaticParams() {

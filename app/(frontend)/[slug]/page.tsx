@@ -5,8 +5,20 @@ import { LivePreviewListener } from "@/components/live-preview-listener";
 import RenderBlocks from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
+import { isDraftMode } from "../../../lib/is-draft-mode";
 import Footer from "../footer";
-import { isDraftMode } from "../is-draft-mode";
+
+type Props = {
+	params: Promise<{
+		slug?: string;
+	}>;
+	searchParams?: Promise<{
+		query?: string;
+	}>;
+};
+
+export const dynamic = "force-static";
+export const dynamicParams = true;
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 	const draft = await isDraftMode();
@@ -38,18 +50,15 @@ export async function generateStaticParams() {
 			slug: true,
 		},
 	});
-
-	const params = pages.docs.map(({ slug }) => {
+	return pages.docs.map(({ slug }) => {
 		return { slug };
 	});
-
-	return params;
 }
 
 export async function generateMetadata({
-	params: paramsPromise,
-}: Args): Promise<Metadata | undefined> {
-	const { slug = "home" } = await paramsPromise;
+	params,
+}: Props): Promise<Metadata | undefined> {
+	const { slug = "home" } = await params;
 	const page = await queryPageBySlug({
 		slug,
 	});
@@ -59,21 +68,10 @@ export async function generateMetadata({
 	return generateMeta({ doc: page });
 }
 
-export type SearchParams = {
-	query?: string;
-};
-
-type Args = {
-	params: Promise<{
-		slug?: string;
-	}>;
-	searchParams?: Promise<SearchParams>;
-};
-
-export default async function Page(args: Args) {
+export default async function Page(props: Props) {
 	const [params, searchParams, draft] = await Promise.all([
-		args.params,
-		args.searchParams,
+		props.params,
+		props.searchParams,
 		isDraftMode(),
 	]);
 

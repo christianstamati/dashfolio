@@ -18,10 +18,10 @@ async function getSocials() {
 const getSocialsCached = cache(getSocials);
 
 export default async function SocialMedia() {
-	const socials = await getSocialsCached();
+	const socials = { docs: [] as any };
 	return (
 		<div className="flex justify-center gap-4">
-			{socials.docs.map((social) => (
+			{socials.docs.map((social: any) => (
 				<Button
 					className="size-12 rounded-full p-4"
 					key={social.label}

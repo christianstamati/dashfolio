@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 import { LivePreviewListener } from "@/components/live-preview-listener";
 import RenderBlocks from "@/payload/blocks/render-blocks";
 import { getPayloadClient } from "@/payload/client";
@@ -19,23 +19,30 @@ type Props = {
 
 export const experimental_ppr = true;
 
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-	const draft = await isDraftMode();
-	const payload = await getPayloadClient();
-	const result = await payload.find({
-		collection: "pages",
-		draft,
-		limit: 1,
-		pagination: false,
-		overrideAccess: draft,
-		where: {
-			slug: {
-				equals: slug,
-			},
+const queryPageBySlug = (slug: string) =>
+	unstable_cache(
+		async () => {
+			const draft = await isDraftMode();
+			const payload = await getPayloadClient();
+			const result = await payload.find({
+				collection: "pages",
+				draft,
+				limit: 1,
+				pagination: false,
+				overrideAccess: draft,
+				where: {
+					slug: {
+						equals: slug,
+					},
+				},
+			});
+			return result.docs?.[0] || null;
 		},
-	});
-	return result.docs?.[0] || null;
-});
+		[`pages-${slug}`],
+		{
+			tags: [`pages-${slug}`],
+		},
+	);
 
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
@@ -58,9 +65,7 @@ export async function generateMetadata({
 	params,
 }: Props): Promise<Metadata | undefined> {
 	const { slug = "home" } = await params;
-	const page = await queryPageBySlug({
-		slug,
-	});
+	const page = await queryPageBySlug(slug)();
 	if (page?.meta?.disabled) {
 		return;
 	}
@@ -76,9 +81,7 @@ export default async function Page(props: Props) {
 
 	const { slug = "home" } = params;
 
-	const page = await queryPageBySlug({
-		slug,
-	});
+	const page = await queryPageBySlug(slug)();
 
 	if (!page || typeof page === "string") {
 		return notFound();

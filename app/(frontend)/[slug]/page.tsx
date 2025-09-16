@@ -17,8 +17,7 @@ type Props = {
 	}>;
 };
 
-export const dynamic = "force-static";
-export const dynamicParams = true;
+export const experimental_ppr = true;
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 	const draft = await isDraftMode();

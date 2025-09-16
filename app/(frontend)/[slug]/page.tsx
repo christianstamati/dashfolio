@@ -56,9 +56,11 @@ export async function generateStaticParams() {
 			slug: true,
 		},
 	});
-	return pages.docs.map(({ slug }) => {
-		return { slug };
-	});
+	return pages.docs
+		.filter(({ slug }) => slug !== "home")
+		.map(({ slug }) => {
+			return { slug };
+		});
 }
 
 export async function generateMetadata({

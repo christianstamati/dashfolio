@@ -65,7 +65,6 @@ function ProjectCard({ project }: { project: Project }) {
 						<ImageMedia
 							media={project.thumbnail}
 							className="h-full w-full object-contain"
-							sizes="(max-width: 768px) 100vw, 50vw"
 						/>
 					</div>
 				</div>
@@ -103,7 +102,6 @@ function ProjectCard({ project }: { project: Project }) {
 					<ImageMedia
 						media={project.thumbnail}
 						className="h-full w-full object-contain"
-						sizes="(min-width: 768px) 60vw, 100vw"
 					/>
 				</div>
 			</Card>

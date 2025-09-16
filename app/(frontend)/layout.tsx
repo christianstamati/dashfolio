@@ -68,6 +68,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
+				{/* IMPORTANT: This is the Google Site Verification for the website, update this if you change the domain */}
 				<meta
 					name="google-site-verification"
 					content="e4ZpS-5OXCNGIJyrxgp05TZovlUdjyxNeO4yxYlSt24"

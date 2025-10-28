@@ -8,8 +8,6 @@ import { PayloadAdminBar } from "@payloadcms/admin-bar";
 import { useRouter, useSelectedLayoutSegments } from "next/navigation";
 import React, { useState } from "react";
 
-import "./index.scss";
-
 import { cn } from "@/lib/utils";
 import { getClientSideURL } from "@/payload/utils/getURL";
 

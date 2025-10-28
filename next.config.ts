@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
 	},
 	compress: true,
 	poweredByHeader: false,
+	reactCompiler: true,
 };
 
 export default withPayload(nextConfig);

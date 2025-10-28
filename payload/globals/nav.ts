@@ -30,7 +30,7 @@ export const Nav: GlobalConfig = {
 	hooks: {
 		afterChange: [
 			() => {
-				revalidateTag("navbar-links");
+				revalidateTag("navbar-links", "max");
 			},
 		],
 	},

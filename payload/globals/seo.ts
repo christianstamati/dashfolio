@@ -19,6 +19,6 @@ export const SEO: GlobalConfig = {
 		},
 	],
 	hooks: {
-		afterChange: [() => revalidateTag("global-seo")],
+		afterChange: [() => revalidateTag("global-seo", "max")],
 	},
 };

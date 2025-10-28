@@ -94,7 +94,7 @@ export const Pages: CollectionConfig = {
 			({ doc }) => {
 				const status = doc._status;
 				if (status === "published") {
-					revalidateTag(`pages-${doc.slug}`);
+					revalidateTag(`pages-${doc.slug}`, "max");
 				}
 			},
 		],

@@ -28,6 +28,6 @@ export const Socials: CollectionConfig = {
 		}),
 	],
 	hooks: {
-		afterChange: [() => revalidateTag("social-links")],
+		afterChange: [() => revalidateTag("social-links", "max")],
 	},
 };

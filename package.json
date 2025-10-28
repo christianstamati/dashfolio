@@ -5,8 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "next build",
-		"start": "next start",
+		"build": "next build --turbopack",
+		"start": "next start --turbopack",
 		"lint": "next lint",
 		"generate:importmap": "payload generate:importmap",
 		"generate:types": "payload generate:types"

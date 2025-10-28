@@ -137,7 +137,7 @@ export const Projects: CollectionConfig = {
 			({ doc }) => {
 				const status = doc._status;
 				if (status === "published") {
-					revalidateTag(`projects-${doc.slug}`);
+					revalidateTag(`projects-${doc.slug}`, "max");
 				}
 			},
 		],

@@ -12,8 +12,6 @@ import { RichText } from "@/payload/blocks/rich-text/component";
 import { getPayloadClient } from "@/payload/client";
 import { generateMeta } from "@/payload/utils/generateMeta";
 
-export const experimental_ppr = true;
-
 export async function generateStaticParams() {
 	const payload = await getPayloadClient();
 	const writings = await payload.find({

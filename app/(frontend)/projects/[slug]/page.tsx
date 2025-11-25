@@ -21,8 +21,6 @@ import { generateMeta } from "@/payload/utils/generateMeta";
 import { isDraftMode } from "../../../../lib/is-draft-mode";
 import PasswordForm from "./password-form";
 
-export const experimental_ppr = true;
-
 const queryProjectBySlug = (slug: string) =>
 	unstable_cache(
 		async () => {

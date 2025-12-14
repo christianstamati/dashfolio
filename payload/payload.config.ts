@@ -25,7 +25,6 @@ import { Teammates } from "./collections/Teammates";
 import { Users } from "./collections/Users";
 import { Writings } from "./collections/Writings";
 import { Nav } from "./globals/nav";
-import { SEO } from "./globals/seo";
 import { plugins } from "./plugins";
 import { getServerSideURL } from "./utils/getURL";
 
@@ -89,7 +88,7 @@ export default buildConfig({
 		Socials,
 		Subscribers,
 	],
-	globals: [Nav, SEO],
+	globals: [Nav],
 	editor: lexicalEditor({
 		features: ({ defaultFeatures }) => {
 			return [

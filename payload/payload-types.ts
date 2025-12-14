@@ -111,11 +111,9 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     nav: Nav;
-    seo: Seo;
   };
   globalsSelect: {
     nav: NavSelect<false> | NavSelect<true>;
-    seo: SeoSelect<false> | SeoSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1223,31 +1221,6 @@ export interface Nav {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "seo".
- */
-export interface Seo {
-  id: string;
-  /**
-   * If enabled, the Favicon will be applied to the website.
-   */
-  favicon?: (string | null) | Media;
-  meta?: {
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    /**
-     * Disable SEO for this page
-     */
-    disabled?: boolean | null;
-    title?: string | null;
-    description?: string | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nav_select".
  */
 export interface NavSelect<T extends boolean = true> {
@@ -1261,24 +1234,6 @@ export interface NavSelect<T extends boolean = true> {
         label?: T;
         icon?: T;
         id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "seo_select".
- */
-export interface SeoSelect<T extends boolean = true> {
-  favicon?: T;
-  meta?:
-    | T
-    | {
-        image?: T;
-        disabled?: T;
-        title?: T;
-        description?: T;
       };
   updatedAt?: T;
   createdAt?: T;

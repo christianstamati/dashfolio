@@ -2,16 +2,12 @@ import type React from "react";
 import "@/styles/globals.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import type { Metadata } from "next";
-import { unstable_cache } from "next/cache";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Suspense } from "react";
 import AdminBarServer from "@/components/admin-bar/index.server";
 import { BackgroundGradient } from "@/components/background-gradient";
 import { Providers } from "@/components/providers";
 import { SkeletonNavbar } from "@/components/skeleton-navbar";
-import { getPayloadClient } from "@/payload/client";
-import { generateMeta } from "@/payload/utils/generateMeta";
 import { Navbar } from "./navbar";
 
 library.add(fab);
@@ -29,36 +25,6 @@ const geistMono = Geist_Mono({
 	display: "swap",
 	preload: false,
 });
-
-export const generateMetadata = unstable_cache(
-	async (): Promise<Metadata | undefined> => {
-		const payload = await getPayloadClient();
-		const seo = await payload.findGlobal({
-			slug: "seo",
-		});
-
-		const customFaviconUrl = seo?.favicon
-			? typeof seo.favicon === "string"
-				? undefined
-				: seo.favicon.url
-			: null;
-
-		return {
-			...generateMeta({ doc: seo }),
-			...(customFaviconUrl && {
-				icons: {
-					icon: customFaviconUrl,
-					shortcut: customFaviconUrl,
-					apple: customFaviconUrl,
-				},
-			}),
-		};
-	},
-	["global-seo"],
-	{
-		tags: ["global-seo"],
-	},
-);
 
 export default function RootLayout({
 	children,
